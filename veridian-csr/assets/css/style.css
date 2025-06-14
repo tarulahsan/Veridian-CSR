@@ -1,3 +1,52 @@
+/*
+==========================================================================
+VERIDIAN CSR - WHITE-LABELING & EASY REBRANDING GUIDE
+==========================================================================
+
+To quickly rebrand this theme, you can primarily edit the CSS Custom
+Properties defined below in the :root {} selector.
+
+Key variables for quick edits:
+
+1.  PRIMARY BRAND COLORS:
+    --primary-color:       Your main brand color (e.g., #RRGGBB)
+    --primary-color-rgb:   R, G, B version of your primary color (for rgba use)
+    --primary-color-dark:  A darker shade for hovers/borders
+    --primary-color-light: A lighter shade for highlights
+    --primary-text-color:  Text color that contrasts well with --primary-color (e.g., #FFFFFF or #000000)
+
+2.  SECONDARY BRAND COLORS (Optional, for accents or complementary elements):
+    --secondary-color:     Your secondary brand color
+    --secondary-color-rgb: R, G, B version
+    --secondary-text-color:Text color for secondary backgrounds
+
+3.  ACCENT COLORS (For call-to-actions, highlights, etc.):
+    --accent-color:        Your accent color
+    --accent-color-rgb:    R, G, B version
+    --accent-text-color:   Text color for accent backgrounds
+
+4.  TYPOGRAPHY:
+    --font-family-sans-serif: Main body font (e.g., 'Open Sans', sans-serif).
+                             Ensure the font is imported below or loaded via other means.
+    --font-family-headings:   Main headings font (e.g., 'Montserrat', sans-serif).
+                             Ensure the font is imported.
+
+5.  BODY & GENERAL UI:
+    --body-bg:             Default page background color
+    --body-color:          Default page text color
+    --card-bg:             Background color for cards/panels
+    --border-radius:       Default border radius for elements (e.g., 0.25rem, 0.5rem)
+
+By changing these variables, you can significantly alter the theme's
+appearance to match a specific brand identity without needing to
+modify deeper CSS rules. Other variables in the :root section offer
+finer control.
+
+Remember to update theme-specific files in /assets/css/themes/ if you
+want to adjust the pre-built theme variations or create new ones based
+on your new brand.
+==========================================================================
+*/
 /* Veridian CSR - Base Stylesheet */
 
 /* Import Google Fonts: Inter and Poppins */

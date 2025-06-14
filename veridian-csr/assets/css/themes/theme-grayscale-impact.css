@@ -1,0 +1,64 @@
+/* Veridian CSR - Grayscale Impact Theme */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@400;700&display=swap');
+:root {
+    --primary-color: #212529; /* Nearly Black */
+    --primary-color-rgb: 33, 37, 41;
+    --primary-color-dark: #000000; /* Black */
+    --primary-color-light: #495057; /* Dark Gray */
+    --primary-text-color: #FFFFFF;
+
+    --secondary-color: #6C757D; /* Mid Gray */
+    --secondary-color-rgb: 108, 117, 125;
+    --secondary-text-color: #FFFFFF;
+
+    --accent-color: #FFFFFF; /* White as accent on dark backgrounds */
+    --accent-color-rgb: 255, 255, 255;
+    --accent-text-color: #000000; /* Black text on white accent */
+
+    --body-bg: #FFFFFF; /* White */
+    --body-color: #212529; /* Nearly Black text */
+    --card-bg: #F8F9FA; /* Very Light Gray */
+    --card-border-color: #DEE2E6; /* Light Gray border */
+    --card-box-shadow: 0 2px 4px rgba(0,0,0,0.075);
+    --link-color: #000000; /* Black links */
+    --link-hover-color: #555555; /* Dark gray hover */
+
+    --font-family-sans-serif: 'Roboto', sans-serif;
+    --font-family-headings: 'Archivo Black', sans-serif; /* Bold, impactful heading font */
+    --h1-font-size: calc(1.5rem + 2vw); /* Larger headings for impact */
+    --h2-font-size: calc(1.4rem + 1.2vw);
+}
+.navbar.bg-light { /* Keep navbar light to contrast with dark text/primary */
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid #DDDDDD;
+}
+.navbar.bg-light .navbar-brand,
+.navbar.bg-light .nav-link {
+    color: var(--primary-color) !important; /* Dark text on light navbar */
+}
+.navbar.bg-light .nav-link:hover,
+.navbar.bg-light .nav-link.active {
+    color: #000000 !important;
+}
+.navbar.bg-light .navbar-toggler {
+    border-color: var(--primary-color);
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.btn-primary { /* Primary buttons are dark */
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-text-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+}
+.btn-secondary { /* Secondary buttons are mid-gray */
+     background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--secondary-text-color);
+}
+.btn-secondary:hover {
+    background-color: #5A6268; /* Darken mid-gray */
+    border-color: #545B62;
+}

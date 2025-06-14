@@ -1,0 +1,39 @@
+/* Veridian CSR - Solar Flare Theme */
+:root {
+    --primary-color: #FF6F00; /* Bright Orange */
+    --primary-color-rgb: 255, 111, 0;
+    --primary-color-dark: #E65100; /* Darker Orange */
+    --primary-color-light: #FF8F00; /* Lighter Orange */
+    --primary-text-color: #FFFFFF;
+
+    --secondary-color: #FFD600; /* Bright Yellow */
+    --secondary-color-rgb: 255, 214, 0;
+    --secondary-text-color: #000000;
+
+    --accent-color: #D32F2F; /* Red Accent */
+    --accent-color-rgb: 211, 47, 47;
+    --accent-text-color: #FFFFFF;
+
+    --body-bg: #FFF8E1; /* Pale Yellow / Cream */
+    --body-color: #4E342E; /* Dark Brown for text */
+    --card-bg: #FFFFFF;
+    --card-border-color: #FFECB3; /* Light yellow border */
+    --card-box-shadow: 0 2px 8px rgba(255, 111, 0, 0.15);
+    --link-color: var(--primary-color-dark);
+    --link-hover-color: var(--accent-color);
+}
+/* Specific navbar for Solar Flare */
+.navbar.bg-light {
+    background-color: var(--primary-color) !important;
+}
+.navbar.bg-light .navbar-brand,
+.navbar.bg-light .nav-link {
+    color: var(--primary-text-color) !important;
+}
+.navbar.bg-light .nav-link:hover {
+    color: rgba(255,255,255,0.85) !important;
+}
+.navbar.bg-light .navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}

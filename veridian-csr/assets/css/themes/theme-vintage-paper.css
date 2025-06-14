@@ -1,0 +1,45 @@
+/* Veridian CSR - Vintage Paper Theme */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@400;600&display=swap');
+:root {
+    --primary-color: #A1887F; /* Brown Grey */
+    --primary-color-rgb: 161, 136, 127;
+    --primary-color-dark: #6D4C41; /* Darker Brown */
+    --primary-color-light: #BCAAA4; /* Lighter Brown */
+    --primary-text-color: #FFFFFF;
+
+    --secondary-color: #D7CCC8; /* Light Brownish Grey */
+    --secondary-color-rgb: 215, 204, 200;
+    --secondary-text-color: #3E2723; /* Dark Brown text */
+
+    --accent-color: #546E7A; /* Blue Grey Darken-1 */
+    --accent-color-rgb: 84, 110, 122;
+    --accent-text-color: #FFFFFF;
+
+    --body-bg: #F5F5F0; /* Creamy off-white, like old paper */
+    --body-color: #424242; /* Dark Gray for text */
+    --card-bg: #EFEBE9; /* Slightly darker cream for cards */
+    --card-border-color: #D7CCC8;
+    --card-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    --link-color: var(--primary-color-dark);
+    --link-hover-color: var(--accent-color);
+
+    --font-family-sans-serif: 'Open Sans', sans-serif;
+    --font-family-headings: 'Lora', serif; /* Serif for headings */
+    --border-radius: 0.2rem; /* Sharper edges */
+}
+/* Navbar for Vintage Paper */
+.navbar.bg-light {
+    background-color: var(--primary-color-dark) !important;
+}
+.navbar.bg-light .navbar-brand,
+.navbar.bg-light .nav-link {
+    color: var(--primary-text-color) !important;
+    font-family: var(--font-family-sans-serif); /* Use sans-serif for nav */
+}
+.navbar.bg-light .nav-link:hover {
+    color: rgba(255,255,255,0.85) !important;
+}
+.navbar.bg-light .navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}

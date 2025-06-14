@@ -1,0 +1,278 @@
+/*
+==========================================================================
+VERIDIAN CSR - WHITE-LABELING & EASY REBRANDING GUIDE
+==========================================================================
+
+To quickly rebrand this theme, you can primarily edit the CSS Custom
+Properties defined below in the :root {} selector.
+
+Key variables for quick edits:
+
+1.  PRIMARY BRAND COLORS:
+    --primary-color:       Your main brand color (e.g., #RRGGBB)
+    --primary-color-rgb:   R, G, B version of your primary color (for rgba use)
+    --primary-color-dark:  A darker shade for hovers/borders
+    --primary-color-light: A lighter shade for highlights
+    --primary-text-color:  Text color that contrasts well with --primary-color (e.g., #FFFFFF or #000000)
+
+2.  SECONDARY BRAND COLORS (Optional, for accents or complementary elements):
+    --secondary-color:     Your secondary brand color
+    --secondary-color-rgb: R, G, B version
+    --secondary-text-color:Text color for secondary backgrounds
+
+3.  ACCENT COLORS (For call-to-actions, highlights, etc.):
+    --accent-color:        Your accent color
+    --accent-color-rgb:    R, G, B version
+    --accent-text-color:   Text color for accent backgrounds
+
+4.  TYPOGRAPHY:
+    --font-family-sans-serif: Main body font (e.g., 'Open Sans', sans-serif).
+                             Ensure the font is imported below or loaded via other means.
+    --font-family-headings:   Main headings font (e.g., 'Montserrat', sans-serif).
+                             Ensure the font is imported.
+
+5.  BODY & GENERAL UI:
+    --body-bg:             Default page background color
+    --body-color:          Default page text color
+    --card-bg:             Background color for cards/panels
+    --border-radius:       Default border radius for elements (e.g., 0.25rem, 0.5rem)
+
+By changing these variables, you can significantly alter the theme's
+appearance to match a specific brand identity without needing to
+modify deeper CSS rules. Other variables in the :root section offer
+finer control.
+
+Remember to update theme-specific files in /assets/css/themes/ if you
+want to adjust the pre-built theme variations or create new ones based
+on your new brand.
+==========================================================================
+*/
+/* Veridian CSR - Base Stylesheet */
+
+/* Import Google Fonts: Inter and Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* -------------------------------------------------------------------------- */
+/*                            CSS Custom Properties (Defaults for White-Labeling) */
+/* -------------------------------------------------------------------------- */
+:root {
+    /* Primary Color Palette */
+    --primary-color: #0D6EFD; /* Bootstrap Blue as a starting point */
+    --primary-color-rgb: 13, 110, 253;
+    --primary-color-dark: #0A58CA;
+    --primary-color-light: #408cfd;
+    --primary-text-color: #FFFFFF; /* Text color on primary backgrounds */
+
+    /* Secondary Color Palette */
+    --secondary-color: #6C757D; /* Bootstrap Secondary */
+    --secondary-color-rgb: 108, 117, 125;
+    --secondary-text-color: #FFFFFF;
+
+    /* Accent Color Palette */
+    --accent-color: #FFC107; /* Bootstrap Warning Yellow as an accent */
+    --accent-color-rgb: 255, 193, 7;
+    --accent-text-color: #000000;
+
+    /* General UI Colors */
+    --body-bg: #FFFFFF;
+    --body-color: #212529; /* Bootstrap default body color */
+    --card-bg: #FFFFFF;
+    --card-border-color: rgba(0, 0, 0, 0.125);
+    --card-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --link-color: var(--primary-color);
+    --link-hover-color: var(--primary-color-dark);
+    --border-radius: 0.375rem; /* Bootstrap default border-radius */
+    --border-radius-sm: 0.25rem;
+    --border-radius-lg: 0.5rem;
+
+    /* Typography */
+    --font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-family-headings: 'Poppins', var(--font-family-sans-serif);
+    --font-size-base: 1rem;
+    --font-weight-base: 400;
+    --line-height-base: 1.6;
+    --h1-font-size: calc(1.375rem + 1.5vw); /* Responsive H1 */
+    --h2-font-size: calc(1.325rem + 0.9vw);
+    --h3-font-size: calc(1.275rem + 0.3vw);
+    --h4-font-size: 1.25rem;
+    --h5-font-size: 1.1rem;
+    --h6-font-size: 1rem;
+
+    /* Spacing */
+    --spacer: 1rem; /* Base spacer unit */
+
+    /* Transitions */
+    --transition-base: all 0.2s ease-in-out;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Global Resets & Base Styles                */
+/* -------------------------------------------------------------------------- */
+body {
+    font-family: var(--font-family-sans-serif);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-base);
+    line-height: var(--line-height-base);
+    color: var(--body-color);
+    background-color: var(--body-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease; /* For theme switching */
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-family-headings);
+    font-weight: 600; /* Slightly bolder headings */
+    line-height: 1.3;
+    margin-top: 0;
+    margin-bottom: calc(var(--spacer) * 0.5);
+}
+
+h1, .h1 { font-size: var(--h1-font-size); }
+h2, .h2 { font-size: var(--h2-font-size); }
+h3, .h3 { font-size: var(--h3-font-size); }
+h4, .h4 { font-size: var(--h4-font-size); }
+h5, .h5 { font-size: var(--h5-font-size); }
+h6, .h6 { font-size: var(--h6-font-size); }
+
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacer);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none; /* Cleaner look */
+    transition: var(--transition-base);
+}
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Common Components Styling                  */
+/* -------------------------------------------------------------------------- */
+
+/* Navbar Styling (Basic - Bootstrap's is quite good) */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    /* Custom properties can be used to override Bootstrap variables if Sass isn't used */
+}
+.navbar-brand {
+    font-family: var(--font-family-headings);
+    font-weight: 700;
+    font-size: 1.5rem; /* Slightly larger brand */
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-box-shadow);
+    margin-bottom: calc(var(--spacer) * 1.5);
+    transition: var(--transition-base);
+}
+.card:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1); /* Subtle hover effect */
+}
+.card-header {
+    background-color: transparent; /* Cleaner look */
+    border-bottom: 1px solid var(--card-border-color);
+    padding: calc(var(--spacer) * 0.75) var(--spacer);
+    font-family: var(--font-family-headings);
+    font-weight: 500;
+}
+.card-title {
+     font-family: var(--font-family-headings);
+}
+
+/* Button Styling (Leveraging Bootstrap's structure but allowing for theme overrides) */
+.btn {
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+    padding: 0.5rem 1rem;
+    transition: var(--transition-base);
+    text-transform: none; /* Default to sentence case */
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-text-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+    color: var(--primary-text-color);
+}
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--secondary-text-color);
+}
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--secondary-color) 90%, black);
+    border-color: color-mix(in srgb, var(--secondary-color) 90%, black);
+    color: var(--secondary-text-color);
+}
+/* Add more button types (success, info, warning, danger) if needed, using CSS vars */
+
+/* Forms Styling */
+.form-control, .form-select {
+    border-radius: var(--border-radius-sm);
+    border-color: #ced4da; /* Bootstrap default */
+    transition: var(--transition-base);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color-light);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.25);
+}
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Tables */
+.table {
+    /* General table styling can go here if Bootstrap defaults need overrides */
+    /* Example: more spacing, custom borders */
+}
+.table a { /* Make links in tables more prominent if needed */
+    font-weight: 500;
+}
+
+/* Alerts */
+.alert {
+    border-radius: var(--border-radius-sm);
+}
+.alert-primary {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    border-color: rgba(var(--primary-color-rgb), 0.2);
+    color: var(--primary-color-dark);
+}
+/* Add other alert variations (success, info etc.) based on custom properties */
+
+/* Utilities */
+.display-4, .display-5, .display-6 { /* For KPI cards etc. */
+    font-family: var(--font-family-headings);
+    font-weight: 700; /* Make display numbers stand out */
+}
+
+/* Accessibility: Focus visible */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.25);
+}
+/* Remove default outline when :focus-visible is supported and used */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* Add more base styles as the theme develops */

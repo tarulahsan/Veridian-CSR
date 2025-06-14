@@ -1,0 +1,45 @@
+/* Veridian CSR - Neon Noir Theme */
+:root {
+    --primary-color: #00FFFF; /* Cyan Neon */
+    --primary-color-rgb: 0, 255, 255;
+    --primary-color-dark: #00E0E0;
+    --primary-color-light: #33FFFF;
+    --primary-text-color: #000000; /* Black text on bright cyan */
+
+    --secondary-color: #FF00FF; /* Magenta Neon */
+    --secondary-color-rgb: 255, 0, 255;
+    --secondary-text-color: #FFFFFF;
+
+    --accent-color: #FFFF00; /* Yellow Neon */
+    --accent-color-rgb: 255, 255, 0;
+    --accent-text-color: #000000;
+
+    --body-bg: #1A1A1A; /* Very Dark Grey/Black */
+    --body-color: #E0E0E0; /* Light Grey text */
+    --card-bg: #2C2C2C; /* Darker Grey for cards */
+    --card-border-color: var(--primary-color); /* Cyan border */
+    --card-box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
+    --link-color: var(--primary-color);
+    --link-hover-color: var(--secondary-color);
+    --border-radius: 0.125rem; /* Sharp edges */
+}
+.navbar.bg-light {
+    background-color: #000000 !important; /* Black navbar */
+    border-bottom: 1px solid var(--primary-color);
+}
+.navbar.bg-light .navbar-brand,
+.navbar.bg-light .nav-link {
+    color: var(--primary-color) !important;
+    text-shadow: 0 0 5px rgba(var(--primary-color-rgb),0.7);
+}
+.navbar.bg-light .nav-link:hover {
+    color: var(--secondary-color) !important;
+    text-shadow: 0 0 5px rgba(var(--secondary-color-rgb),0.7);
+}
+.navbar.bg-light .navbar-toggler {
+    border-color: var(--primary-color);
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%280,255,255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.btn-primary {
+    text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
