@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Add any theme-specific CSS files here later, e.g., assets/css/themes/theme-corporate-dark.css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -128,35 +129,93 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        AOS.init(); // Initialize Animate on Scroll
+        // AOS.init(); // Initialize Animate on Scroll - will be handled in DOMContentLoaded
 
-        // Placeholder for Chart.js initialization
-        var ctxTimeSeries = document.getElementById('timeSeriesChart')?.getContext('2d');
-        if (ctxTimeSeries) {
-            // Basic placeholder chart
-            new Chart(ctxTimeSeries, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Sample Metric',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
+        // --- Dashboard Widget Layout Persistence (Placeholder) ---
+        const WIDGET_LAYOUT_KEY = 'veridianCSR_dashboardWidgetLayout';
+
+        /**
+         * Saves the widget layout to secure storage.
+         * @param {object} layoutObject - An object representing the widget layout
+         *                              (e.g., an array of widget IDs in order).
+         */
+        function saveWidgetLayout(layoutObject) {
+            if (typeof SecureStorage !== 'undefined') {
+                SecureStorage.saveData(WIDGET_LAYOUT_KEY, layoutObject);
+                console.log("Dashboard widget layout saved (placeholder).", layoutObject);
+            } else {
+                console.error("SecureStorage not available to save widget layout.");
+            }
+        }
+
+        /**
+         * Loads the widget layout from secure storage.
+         * @returns {object|null} The saved layout object or null if not found.
+         */
+        function loadWidgetLayout() {
+            if (typeof SecureStorage !== 'undefined') {
+                const layout = SecureStorage.loadData(WIDGET_LAYOUT_KEY);
+                if (layout) {
+                    console.log("Dashboard widget layout loaded (placeholder).", layout);
+                    // In the future, apply this layout to the DOM.
+                    // For now, just return it.
+                    return layout;
+                } else {
+                    console.log("No saved dashboard widget layout found (placeholder).");
+                    return null; // Or return a default layout
                 }
-            });
+            } else {
+                console.error("SecureStorage not available to load widget layout.");
+                return null;
+            }
         }
 
-        // Placeholder for D3.js Sankey diagram
-        var sankeyContainer = document.getElementById('sankeyDiagram');
-        if (sankeyContainer) {
-            // You would initialize D3.js Sankey here
-            // For now, just a message
-            d3.select(sankeyContainer).append('p').text('D3.js Sankey Diagram will render here.');
-        }
+        // Example: Load layout when the page is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLayout = loadWidgetLayout();
+            if (savedLayout) {
+                // applyWidgetLayout(savedLayout); // Placeholder for function that would reorder widgets
+            } else {
+                // applyDefaultWidgetLayout(); // Placeholder for applying a default order
+                // And maybe save a default layout for the first time:
+                // saveWidgetLayout(['kpi-carbon', 'kpi-social', 'kpi-compliance', 'kpi-resource']); // Example default
+            }
+
+            // Initialize AOS (if not already done elsewhere, e.g. Alpine component)
+            if (typeof AOS !== 'undefined' && !document.body.classList.contains('aos-initialized')) {
+                 AOS.init();
+            }
+
+            // Existing Chart.js and D3.js placeholder initializations should remain...
+            var ctxTimeSeries = document.getElementById('timeSeriesChart')?.getContext('2d');
+            if (ctxTimeSeries) {
+                // Basic placeholder chart
+                new Chart(ctxTimeSeries, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sample Metric',
+                            data: [12, 19, 3, 5, 2, 3],
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    }
+                });
+            }
+
+            // Placeholder for D3.js Sankey diagram
+            var sankeyContainer = document.getElementById('sankeyDiagram');
+            if (sankeyContainer) {
+                // You would initialize D3.js Sankey here
+                // For now, just a message
+                d3.select(sankeyContainer).append('p').text('D3.js Sankey Diagram will render here.');
+            }
+        });
     </script>
 </body>
 </html>

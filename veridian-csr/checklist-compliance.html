@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Potential theme CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .checklist-section .progress { height: 10px; margin-bottom: 0.5rem; }
         .nested-checklist { padding-left: 2rem; }
@@ -153,6 +154,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         AOS.init();
@@ -177,11 +180,15 @@
                             subItems: item.subItems ? item.subItems.map(sub => ({ label: sub.label, checked: sub.checked })) : []
                         }));
                     });
-                    localStorage.setItem('complianceChecklistProgress', JSON.stringify(progressData));
-                    alert('Progress saved to localStorage!');
+                    const success = SecureStorage.saveData('complianceChecklistProgress', progressData);
+                    if (success) {
+                        alert('Progress saved successfully!');
+                    } else {
+                        alert('Error saving progress. See console.');
+                    }
                 },
                 loadProgress() {
-                    const savedData = JSON.parse(localStorage.getItem('complianceChecklistProgress'));
+                    const savedData = SecureStorage.loadData('complianceChecklistProgress');
                     if (savedData) {
                         this.sections.forEach(section => {
                             if (savedData[section.id]) {
@@ -200,7 +207,7 @@
                                 section.updateProgress(); // Recalculate progress for the section
                             }
                         });
-                        alert('Progress loaded from localStorage!');
+                        alert('Progress loaded successfully!');
                     } else {
                         alert('No saved progress found.');
                     }
@@ -216,7 +223,7 @@
                             });
                             section.updateProgress();
                         });
-                        localStorage.removeItem('complianceChecklistProgress');
+                        SecureStorage.removeData('complianceChecklistProgress');
                         alert('All progress has been reset.');
                     }
                 },

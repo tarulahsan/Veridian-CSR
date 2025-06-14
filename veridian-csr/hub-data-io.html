@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Potential theme CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .drop-zone {
             border: 2px dashed #007bff;
@@ -125,10 +126,13 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        AOS.init();
+        // AOS.init(); // Will be called in DOMContentLoaded
 
+        const FULL_DATA_SET_KEY = 'veridianCSR_fullDataSet';
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
         const importButton = document.getElementById('importButton');
@@ -246,15 +250,19 @@
 
                     // If validation passes:
                     // This is where you'd take 'data' and update your application's localStorage.
-                    // For now, just a success message.
-                    // The actual encryption and saving to localStorage is a separate step.
-                    localStorage.setItem('veridianCSR_importedData_temp', JSON.stringify(data)); // Store temporarily
-                    console.log('Imported data:', data);
-                    importSuccessMessage.textContent = 'Data parsed and validated successfully! (Placeholder - data not yet fully integrated into app storage)';
-                    importSuccessMessage.classList.remove('d-none');
-                    importValidationMessages.classList.add('d-none');
-                    alert('Data imported successfully (placeholder)! It would now be processed and stored.');
-                    // Next step would be to encrypt and save this 'data' to the main localStorage key.
+                    const success = SecureStorage.saveData(FULL_DATA_SET_KEY, data);
+                    if (success) {
+                        importSuccessMessage.textContent = 'Data imported and saved securely!';
+                        importSuccessMessage.classList.remove('d-none');
+                        importValidationMessages.classList.add('d-none');
+                        alert('Data imported and saved securely! The application will now use this dataset.');
+                        // Optionally, trigger a page reload or a function to re-initialize parts of the app
+                        // that depend on this global data. For now, an alert suffices.
+                    } else {
+                        importValidationMessages.classList.remove('d-none');
+                        importValidationMessages.querySelector('ul').innerHTML = '<li>Error saving imported data to secure storage.</li>';
+                        importSuccessMessage.classList.add('d-none');
+                    }
 
                 } catch (error) {
                     console.error('Error importing data:', error);
@@ -273,24 +281,36 @@
 
         // --- Export Functionality ---
         function getCurrentApplicationData() {
-            // Placeholder: In a real app, this function would gather all relevant data
-            // from localStorage (after decryption if necessary), various Alpine.js stores, etc.
-            // It should construct a single large JSON object.
-            const dummyData = {
-                veridianCSRVersion: "1.0.0",
-                exportTimestamp: new Date().toISOString(),
-                userPreferences: JSON.parse(localStorage.getItem('userPreferences')) || { theme: 'theme-corporate-dark.css', language: 'en' },
-                dashboardLayout: JSON.parse(localStorage.getItem('dashboardWidgetLayout')) || [],
-                carbonData: JSON.parse(localStorage.getItem('carbonFootprintData')) || { scope1: [], scope2: [], scope3: [] },
-                environmentalMetrics: JSON.parse(localStorage.getItem('environmentalMetricsData')) || { energy: [], waste: [], water: [] },
-                socialImpactData: JSON.parse(localStorage.getItem('socialImpactData')) || {},
-                governancePolicies: JSON.parse(localStorage.getItem('governancePolicies')) || [],
-                complianceChecklist: JSON.parse(localStorage.getItem('complianceChecklistProgress')) || {},
-                // ... add other data modules
-            };
-            // Simulate removing sensitive or large unencrypted items if needed before export
-            // For this placeholder, we assume the data is ready.
-            return dummyData;
+            let fullData = null;
+            if (typeof SecureStorage !== 'undefined') {
+                fullData = SecureStorage.loadData(FULL_DATA_SET_KEY);
+            }
+
+            if (fullData) {
+                console.log("Exporting data from the securely stored full dataset.");
+                return fullData;
+            } else {
+                // Fallback: If no single full dataset is found, try to construct it from individual pieces
+                // (This part remains similar to the original placeholder, but should ideally load
+                // individual pieces also via SecureStorage if they were saved that way).
+                console.warn("No full dataset found in secure storage. Exporting constructed data from individual known keys (placeholder).");
+                // The user should be informed that this is not a complete backup if the full dataset was expected.
+                // For now, this fallback will use the existing placeholder logic for individual items.
+                // In a mature app, these individual items would also be loaded via SecureStorage.
+                return {
+                    veridianCSRVersion: "1.0.1", // Updated version
+                    exportTimestamp: new Date().toISOString(),
+                    userPreferences: SecureStorage.loadData('veridianUserPreferences') || { theme: 'assets/css/style.css', language: 'en', apiHooks: {} },
+                    dashboardLayout: SecureStorage.loadData('veridianCSR_dashboardWidgetLayout') || [],
+                    carbonTrackerData: SecureStorage.loadData('veridianCSR_carbonTrackerData') || {},
+                    complianceChecklist: SecureStorage.loadData('complianceChecklistProgress') || {},
+                    // ... any other individual data modules would be loaded here ...
+                    // This fallback assumes other modules are saving their data with SecureStorage under known keys.
+                    // If they are not, then this data will be missing from the export.
+                    // The primary expectation is that a full dataset was imported and is being re-exported.
+                    _fallbackExport: true // Indicate this is a constructed/fallback export
+                };
+            }
         }
 
         document.getElementById('exportXlsxButton').addEventListener('click', () => {
@@ -330,6 +350,11 @@
             alert('Data exported as CSV! (JSON string in the cell)');
         });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined' && !document.body.classList.contains('aos-initialized')) {
+                 AOS.init();
+            }
+        });
     </script>
 </body>
 </html>

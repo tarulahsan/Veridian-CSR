@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Potential theme CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tgwf/co2@latest/dist/iife/index.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -131,27 +133,139 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <!-- Placeholder for CO2.js/Carbon.js - to be sourced and added to assets/js/ or via CDN if available -->
-    <!-- <script src="assets/js/co2.js"></script> -->
-    <!-- <script src="assets/js/carbon.js"></script> -->
+
+    <!-- Veridian CSR Custom Scripts -->
+    <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/modules/emissionFactors.js"></script>
     <script src="assets/js/modules/carbonCalculator.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         AOS.init();
 
-        // Placeholder for D3.js map initialization
-        var carbonMapContainer = document.getElementById('carbonMap');
-        if (carbonMapContainer) {
-            // D3.js map logic will go here
+        // DOM Elements for Carbon Tracker
+        const naturalGasInput = document.getElementById('naturalGas');
+        const purchasedElectricityInput = document.getElementById('purchasedElectricity');
+        const businessTravelInput = document.getElementById('businessTravel');
+
+        const calculateScope1Button = document.querySelector('#emission-controls .card:nth-child(1) button');
+        const calculateScope2Button = document.querySelector('#emission-controls .card:nth-child(2) button');
+        const calculateScope3Button = document.querySelector('#emission-controls .card:nth-child(3) button');
+
+        const scope1CO2eEl = document.getElementById('scope1CO2e');
+        const scope2CO2eEl = document.getElementById('scope2CO2e');
+        const scope3CO2eEl = document.getElementById('scope3CO2e');
+        const totalCO2eEl = document.getElementById('totalCO2e');
+
+        const TRACKER_DATA_KEY = 'veridianCSR_carbonTrackerData';
+
+        let trackerData = {
+            scope1: { input: null, co2e: null },
+            scope2: { input: null, co2e: null },
+            scope3: { input: null, co2e: null }
+        };
+
+        function updateTotalCO2e() {
+            const total = (trackerData.scope1.co2e || 0) +
+                          (trackerData.scope2.co2e || 0) +
+                          (trackerData.scope3.co2e || 0);
+            totalCO2eEl.textContent = total.toFixed(2);
         }
 
-        // Placeholder for CO2.js/Carbon.js calculations
-        // Example: function calculateEmissions() {
-        // const naturalGas = document.getElementById('naturalGas').value;
-        // Call CO2.js/Carbon.js functions here
-        // Update #totalCO2e, #scope1CO2e etc.
-        // }
+        function saveTrackerData() {
+            SecureStorage.saveData(TRACKER_DATA_KEY, trackerData);
+        }
+
+        function loadTrackerData() {
+            const loadedData = SecureStorage.loadData(TRACKER_DATA_KEY);
+            if (loadedData) {
+                trackerData = loadedData;
+
+                if (trackerData.scope1 && trackerData.scope1.input !== null) naturalGasInput.value = trackerData.scope1.input;
+                if (trackerData.scope1 && trackerData.scope1.co2e !== null) scope1CO2eEl.textContent = trackerData.scope1.co2e.toFixed(2);
+
+                if (trackerData.scope2 && trackerData.scope2.input !== null) purchasedElectricityInput.value = trackerData.scope2.input;
+                if (trackerData.scope2 && trackerData.scope2.co2e !== null) scope2CO2eEl.textContent = trackerData.scope2.co2e.toFixed(2);
+
+                if (trackerData.scope3 && trackerData.scope3.input !== null) businessTravelInput.value = trackerData.scope3.input;
+                if (trackerData.scope3 && trackerData.scope3.co2e !== null) scope3CO2eEl.textContent = trackerData.scope3.co2e.toFixed(2);
+
+                updateTotalCO2e();
+            }
+        }
+
+        calculateScope1Button.addEventListener('click', () => {
+            const usage = parseFloat(naturalGasInput.value);
+            if (isNaN(usage) || usage < 0) {
+                alert('Please enter a valid non-negative value for Natural Gas usage.');
+                return;
+            }
+            // Assuming 'us_average' for electricity, but natural gas factor is 'standard'
+            // Ensure correct factors are used. For this example, 'standard' from emissionFactors.js
+            const co2e = CarbonCalculator.getNaturalGasEmissions(usage); // Uses custom calculator
+            if (co2e !== null) {
+                scope1CO2eEl.textContent = co2e.toFixed(2);
+                trackerData.scope1 = { input: usage, co2e: co2e };
+                updateTotalCO2e();
+                saveTrackerData();
+            } else {
+                scope1CO2eEl.textContent = 'Error';
+            }
+        });
+
+        calculateScope2Button.addEventListener('click', () => {
+            const usage = parseFloat(purchasedElectricityInput.value);
+            if (isNaN(usage) || usage < 0) {
+                alert('Please enter a valid non-negative value for Purchased Electricity usage.');
+                return;
+            }
+            // Using 'us_average' as a default placeholder factor region for electricity
+            const co2e = CarbonCalculator.getElectricityEmissions(usage, 'us_average'); // Uses custom calculator
+            if (co2e !== null) {
+                scope2CO2eEl.textContent = co2e.toFixed(2);
+                trackerData.scope2 = { input: usage, co2e: co2e };
+                updateTotalCO2e();
+                saveTrackerData();
+            } else {
+                scope2CO2eEl.textContent = 'Error';
+            }
+        });
+
+        calculateScope3Button.addEventListener('click', () => {
+            const distance = parseFloat(businessTravelInput.value);
+            if (isNaN(distance) || distance < 0) {
+                alert('Please enter a valid non-negative value for Business Travel distance.');
+                return;
+            }
+            // Using 'passenger_car_gasoline_average' as a default placeholder factor
+            const co2e = CarbonCalculator.getTransportEmissions(distance, 'passenger_car_gasoline_average'); // Uses custom calculator
+            if (co2e !== null) {
+                scope3CO2eEl.textContent = co2e.toFixed(2);
+                trackerData.scope3 = { input: distance, co2e: co2e };
+                updateTotalCO2e();
+                saveTrackerData();
+            } else {
+                scope3CO2eEl.textContent = 'Error';
+            }
+        });
+
+        // Initial load of saved data
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure SecureStorage is available
+            if (typeof SecureStorage === 'undefined') {
+                console.error('SecureStorage is not loaded. Cannot load carbon tracker data.');
+                // Fallback: try to load unencrypted if needed for dev, or show error
+                // For now, we just won't load if SecureStorage is missing.
+            } else {
+                 loadTrackerData();
+            }
+
+            // Placeholder for D3.js map initialization
+            var carbonMapContainer = document.getElementById('carbonMap');
+            if (carbonMapContainer) {
+                // D3.js map logic will go here
+            }
+        });
+
     </script>
 </body>
 </html>
