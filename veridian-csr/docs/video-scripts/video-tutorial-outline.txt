@@ -1,0 +1,119 @@
+# Veridian CSR - Video Tutorial Script Outlines
+
+This document outlines potential topics for video tutorials to accompany the Veridian CSR theme.
+
+## Series 1: Getting Started & Overview
+
+### Video 1.1: Veridian CSR Theme - Grand Tour (5-7 minutes)
+    *   Introduction: What is Veridian CSR? Who is it for?
+    *   Quick showcase of key dashboards and features (Executive Dashboard, Carbon Tracker, Report Builder).
+    *   Highlight unique selling points (client-side, customizable, comprehensive).
+    *   Brief look at theme variations.
+    *   Call to action: Where to get the theme, explore documentation.
+
+### Video 1.2: Installation & Initial Setup (3-5 minutes)
+    *   Downloading and unzipping the theme package.
+    *   Brief overview of the file structure.
+    *   How to open the theme in a browser.
+    *   Recommendation for using a local web server and simple examples (Python http.server, Live Server for VS Code).
+    *   Navigating to the Configuration Panel to set initial preferences (theme, language).
+
+## Series 2: Core Features Deep Dive
+
+### Video 2.1: Executive Dashboard Explained (4-6 minutes)
+    *   Understanding the KPI cards.
+    *   Interacting with the main time-series chart.
+    *   Overview of the Sankey diagram for energy flow.
+    *   Gamification: Viewing earned badges.
+    *   (Future: Showcasing widget customization once implemented).
+
+### Video 2.2: Mastering the Carbon Footprint Tracker (6-8 minutes)
+    *   Entering data for Scope 1, Scope 2, and Scope 3 emissions.
+    *   Understanding how calculations are performed (mention of custom factors and potential for co2.js for digital).
+    *   Viewing results and totals.
+    *   (Future: Interacting with the map visualization).
+    *   How data is saved securely.
+
+### Video 2.3: Environmental Metrics Deep Dive (Energy, Waste, Water) (5-7 minutes)
+    *   Navigating the tabbed interface.
+    *   Inputting data for energy, waste, and water (if manual input sections are added, or explaining data sources).
+    *   Interpreting the charts and tables for each metric.
+
+### Video 2.4: Tracking Social Impact (4-6 minutes)
+    *   Understanding the gauges (Diversity, Safety, Training).
+    *   Inputting data for community volunteer hours and other social KPIs.
+
+### Video 2.5: Using the Governance Center (3-5 minutes)
+    *   Overview of the policy management table.
+    *   Adding new policies/documents (metadata).
+    *   Tracking policy status and review dates.
+
+### Video 2.6: Building CSR Reports with the Report Builder (5-7 minutes)
+    *   Step-by-step walkthrough of the wizard:
+        *   Selecting data range.
+        *   Choosing sections to include.
+        *   Customizing branding (logo, colors).
+        *   Previewing and downloading the PDF report.
+
+### Video 2.7: Interactive Compliance Checklists (4-6 minutes)
+    *   Navigating different compliance standards sections.
+    *   Checking/unchecking items.
+    *   Understanding progress bars.
+    *   Saving and loading checklist progress.
+
+### Video 2.8: Data Import & Export Hub (5-7 minutes)
+    *   Preparing your data for import (using sample files as a guide).
+    *   Importing from Excel (.xlsx) - JSON in A1.
+    *   Importing from CSV - JSON string.
+    *   Understanding data validation messages.
+    *   Exporting your entire application dataset to Excel and CSV.
+    *   Importance of backups.
+
+### Video 2.9: Analytics & Insights - Forecasting & Scenarios (4-6 minutes)
+    *   Using the predictive analytics for emissions forecasting (inputting historical data).
+    *   Running "what-if" scenarios (e.g., impact of energy reduction).
+
+## Series 3: Customization & Advanced Usage
+
+### Video 3.1: Customizing Appearance - Themes & White-Labeling (6-8 minutes)
+    *   Using the Configuration Panel to switch between the 10 pre-built themes.
+    *   Detailed guide on white-labeling:
+        *   Locating `style.css`.
+        *   Identifying and modifying key CSS Custom Properties (colors, fonts, etc.) for rebranding.
+        *   Quick demo of changing primary color and font.
+    *   Briefly touching on modifying individual theme CSS files for deeper changes.
+
+### Video 3.2: Language Settings & Adding New Languages (3-5 minutes)
+    *   Selecting a language in the Configuration Panel.
+    *   How to add a new language:
+        *   Creating a new `xx.json` file in `assets/lang/`.
+        *   Copying keys from `en.json` and translating values.
+        *   (Future: How to update the language selector if done manually, or if it auto-detects).
+
+### Video 3.3: Understanding Data Storage & Security (3-4 minutes)
+    *   Explanation of client-side localStorage.
+    *   Overview of AES encryption using `SecureStorage.js`.
+    *   Note on the fixed encryption key and its implications for this type of theme.
+
+### Video 3.4: Using API Hooks (Developer Focus) (4-6 minutes)
+    *   Configuring API keys/URLs in the Configuration Panel.
+    *   Walking through the commented-out example functions (`postToSlack`, `createTrelloCard`) in `panel-configuration.html`.
+    *   Tips for developers on how to make these functions live.
+
+### Video 3.5: Gamification - How it Works (2-3 minutes)
+    *   Brief overview of the achievement system.
+    *   How achievements are triggered (conceptual).
+
+### Video 3.6: Voice Commands - Quick Guide (2-3 minutes)
+    *   Activating voice commands from the dashboard.
+    *   Examples of commands to try.
+    *   Mentioning it's an experimental feature and browser compatibility.
+
+## Series 4: Development & Contribution (Optional)
+
+### Video 4.1: Code Structure Overview (For Developers)
+    *   Brief walkthrough of HTML, CSS, and JS file organization.
+    *   Introduction to key JavaScript modules.
+
+### Video 4.2: Contributing to Veridian CSR (If applicable for an open-source version or community)
+    *   How to report bugs or suggest features.

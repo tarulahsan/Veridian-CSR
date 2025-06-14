@@ -1,0 +1,95 @@
+{
+  "veridianCSRVersion": "1.0.0",
+  "exportTimestamp": "2024-03-15T10:00:00Z",
+  "userPreferences": {
+    "theme": "assets/css/themes/theme-corporate-dark.css",
+    "language": "en",
+    "apiHooks": {
+      "slackWebhookUrl": "https://hooks.slack.com/services/YOUR/SLACK/CODE",
+      "trelloApiKey": "YOUR_TRELLO_API_KEY",
+      "trelloToken": "YOUR_TRELLO_TOKEN"
+    }
+  },
+  "dashboardWidgetLayout": [
+    "widget-carbon-footprint",
+    "widget-social-impact",
+    "widget-compliance-status",
+    "widget-resource-efficiency"
+  ],
+  "carbonTrackerData": {
+    "scope1": { "input": 1200, "co2e": 222 },
+    "scope2": { "input": 5000, "co2e": 1165 },
+    "scope3": { "input": 1500, "co2e": 375 }
+  },
+  "environmentalMetricsData": {
+    "energy": [
+      { "month": "January", "usage": 1200, "source": "Grid", "units": "kWh" },
+      { "month": "February", "usage": 1150, "source": "Grid", "units": "kWh" }
+    ],
+    "waste": [
+      { "month": "January", "recycled": 500, "landfill": 150, "units": "kg" },
+      { "month": "February", "recycled": 520, "landfill": 140, "units": "kg" }
+    ],
+    "water": [
+      { "month": "January", "usage": 30000, "source": "Municipal", "units": "Liters" },
+      { "month": "February", "usage": 28000, "source": "Municipal", "units": "Liters" }
+    ]
+  },
+  "socialImpactData": {
+    "diversityInclusionPercentage": 65,
+    "employeeSafetyIncidents": 5,
+    "trainingCompletionRate": 80,
+    "communityVolunteerHours": 1240,
+    "ethicalSourcingScore": 85,
+    "wellnessProgramParticipation": 60
+  },
+  "governancePolicies": [
+    {
+      "policyName": "Code of Conduct",
+      "category": "Ethics",
+      "status": "Active",
+      "version": "2.1",
+      "reviewDate": "2024-12-31",
+      "owner": "Legal Department",
+      "documentLink": "https://example.com/docs/code_of_conduct.pdf",
+      "description": "Company wide code of conduct."
+    },
+    {
+      "policyName": "Data Privacy Policy",
+      "category": "Security",
+      "status": "Pending Review",
+      "version": "1.5",
+      "reviewDate": "2024-08-15",
+      "owner": "IT Department",
+      "documentLink": "",
+      "description": "Policy regarding customer and employee data privacy."
+    }
+  ],
+  "complianceChecklistProgress": {
+    "csrd": [
+      { "label": "Double Materiality Assessment Conducted", "checked": true, "subItems": [
+          { "label": "Impact Materiality Assessed", "checked": true },
+          { "label": "Financial Materiality Assessed", "checked": true }
+      ]},
+      { "label": "ESRS E1 (Climate Change) Disclosures Prepared", "checked": true },
+      { "label": "ESRS S1 (Own Workforce) Disclosures Prepared", "checked": false },
+      { "label": "Independent Assurance Obtained", "checked": false }
+    ],
+    "sec": [
+      { "label": "Climate-Related Risks Identified and Assessed", "checked": true },
+      { "label": "GHG Emissions (Scope 1 & 2) Disclosed", "checked": true },
+      { "label": "Board Oversight of Climate Risks Described", "checked": false }
+    ]
+  },
+  "analyticsInsightsData": {
+    "historicalEmissions": [
+        { "period": 1, "value": 1000 },
+        { "period": 2, "value": 980 },
+        { "period": 3, "value": 950 }
+    ],
+    "forecastParameters": { "periodsToForecast": 6 }
+  },
+  "gamification": {
+    "earnedAchievements": ["FIRST_LOGIN", "CARBON_TRACKER_FIRST_ENTRY"]
+  }
+}

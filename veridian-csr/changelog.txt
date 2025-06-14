@@ -7,3 +7,33 @@
 - Basic HTML templates for core pages.
 - Placeholder content for `index.html` and `dashboard-executive.html`.
 - Initial `README.md` and `changelog.txt`.
+- Populated HTML structure for all 10 core pages and `index.html` with sections, placeholders, and CDN links for libraries like Bootstrap, Alpine.js, Chart.js, D3.js, AOS, Swiper, SheetJS, and CryptoJS.
+- Base CSS stylesheet (`style.css`) with Google Fonts (Inter, Poppins) and extensive CSS Custom Properties for theming and white-labeling.
+- Detailed white-labeling guide comments at the top of `style.css`.
+- Ten unique theme variations (CSS files in `assets/css/themes/`): Default Light (base style.css), Corporate Dark, Oceanic, Forest, High Contrast, Solar Flare, Arctic Dawn, Vintage Paper, Neon Noir, Spring Bloom, Grayscale Impact.
+- Basic SEO meta tags (title, description, keywords, Open Graph, Twitter cards) on all 11 HTML pages.
+- JSON-LD Organization schema in `dashboard-executive.html` for enhanced SEO.
+- Placeholder minified CSS (`style.min.css` mirroring `style.css`) and JavaScript (`main.min.js` mirroring empty `main.js`).
+- Placeholder demo image files (as text files with image extensions) in `assets/images/` with an instructional `README.md` on image optimization requirements (WebP, compression).
+- `SecureStorage.js` module (`assets/js/modules/`) for AES encryption of localStorage data using CryptoJS (loaded via CDN).
+- Initial `emissionFactors.js` (with placeholder data) and `carbonCalculator.js` (with custom calculation logic) modules in `assets/js/modules/`.
+- Integration of `co2.js` (from The Green Web Foundation via CDN) into `tracker-carbon-footprint.html` for potential future digital footprint features.
+- `gamification.js` module (`assets/js/modules/`) with achievement structure definition, SecureStorage persistence for earned badges, and placeholder criteria functions.
+- `toastNotifications.js` placeholder module (`assets/js/modules/`) for displaying user feedback (currently logs to console).
+- `voiceCommands.js` module (`assets/js/modules/`) using Web Speech API for basic voice command recognition and handling (experimental).
+- Placeholder functions for dashboard widget layout persistence (`saveWidgetLayout`, `loadWidgetLayout`, `applyWidgetOrderToDOM`, `handleWidgetDrop`) in `dashboard-executive.html`, using `SecureStorage.js`.
+- Unique IDs assigned to KPI widget containers in `dashboard-executive.html` to support layout customization.
+- Commented-out API hook example functions (`postToSlack`, `createTrelloCard`) in `panel-configuration.html` as guidance for developers.
+- Initial JSON language files (`assets/lang/en.json`, `assets/lang/de.json`) for UI localization.
+- Comprehensive documentation outline in `docs/tutorial.md` with initial content for key sections like Introduction, Installation, Page Overviews, Configuration Panel, and White-Labeling.
+
+### Changed
+- Integrated `SecureStorage.js` into `panel-configuration.html` for saving and loading user preferences (theme, language, API hooks).
+- Implemented carbon calculations (using `carbonCalculator.js`) and secure data persistence (using `SecureStorage.js`) in `tracker-carbon-footprint.html` for Scope 1, 2, and 3 emissions.
+- Implemented secure data persistence (using `SecureStorage.js`) for checklist progress in `checklist-compliance.html`.
+- Refined `hub-data-io.html` to use `SecureStorage.js` for the import of a full application dataset (`FULL_DATA_SET_KEY`) and an improved fallback export mechanism for individual securely stored data pieces.
+- Integrated `gamification.js` module into `dashboard-executive.html` (for badge display and initialization) and `tracker-carbon-footprint.html` (for triggering `onDataUpdated` after calculations).
+- Integrated `voiceCommands.js` module into `dashboard-executive.html` with UI elements (buttons, status display) and initialization logic.
+- `carbonCalculator.js` main calculation function renamed to `calculateCO2eWithCustomFactors` for clarity and to distinguish from potential `co2.js` direct usage. Added comments clarifying its role and an example of how `co2.js` might be used.
+- `panel-configuration.html` language loading mechanism updated from a hardcoded JavaScript object to dynamically fetch JSON language files from `assets/lang/`, with the hardcoded object serving as a fallback.
+- Updated `panel-configuration.html` to include selection options for all 10 new themes.
