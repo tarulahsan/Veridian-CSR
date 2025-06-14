@@ -1,0 +1,57 @@
+/* Veridian CSR - Oceanic Theme */
+:root {
+    /* Primary Color Palette - Oceanic Blues */
+    --primary-color: #0B7285; /* Deep Teal */
+    --primary-color-rgb: 11, 114, 133;
+    --primary-color-dark: #085C6A;
+    --primary-color-light: #1193AB;
+    --primary-text-color: #FFFFFF;
+
+    /* Secondary Color Palette - Sandy Beige / Light Gray */
+    --secondary-color: #A9A9A9; /* Light Gray - was #E0F7FA (Light Cyan) but too light for text */
+    --secondary-color-rgb: 169, 169, 169;
+    --secondary-text-color: #000000; /* Black text on light gray */
+
+    /* Accent Color Palette - Coral */
+    --accent-color: #FF7F50; /* Coral */
+    --accent-color-rgb: 255, 127, 80;
+    --accent-text-color: #FFFFFF;
+
+    /* General UI Colors */
+    --body-bg: #F0F8FF; /* Alice Blue - very light blue */
+    --body-color: #2A3B47; /* Dark Slate Gray */
+    --card-bg: #FFFFFF;
+    --card-border-color: #CDE8EF; /* Lighter blue-gray border */
+    --card-box-shadow: 0 2px 5px rgba(11, 114, 133, 0.1); /* Subtle shadow with primary color tint */
+    --link-color: var(--primary-color);
+    --link-hover-color: var(--primary-color-dark);
+
+    /* Typography (can be adjusted for themes, but keeping defaults for now) */
+    /* --font-family-sans-serif: 'Lato', sans-serif; /* Example: Different font */
+    /* --font-family-headings: 'Merriweather', serif; */
+
+    /* Specific component adjustments for Oceanic theme */
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Example of a more specific override if needed beyond root variables */
+.navbar {
+    background-color: var(--primary-color); /* Make navbar use primary color */
+    color: var(--primary-text-color);
+}
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: var(--primary-text-color) !important; /* Important to override Bootstrap specificity if needed */
+}
+.navbar .nav-link:hover {
+    color: rgba(255,255,255,0.85) !important;
+}
+.navbar .navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* Card header specific for this theme */
+.card-header {
+    background-color: rgba(var(--primary-color-rgb), 0.05); /* Light tint of primary for card headers */
+    color: var(--primary-color-dark);
+}

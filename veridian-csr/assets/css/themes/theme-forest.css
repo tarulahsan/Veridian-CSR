@@ -1,0 +1,59 @@
+/* Veridian CSR - Forest Theme */
+:root {
+    /* Primary Color Palette - Deep Greens */
+    --primary-color: #2F633F; /* Forest Green */
+    --primary-color-rgb: 47, 99, 63;
+    --primary-color-dark: #1E4229;
+    --primary-color-light: #4A855B;
+    --primary-text-color: #FFFFFF;
+
+    /* Secondary Color Palette - Earthy Brown */
+    --secondary-color: #795548; /* Brown */
+    --secondary-color-rgb: 121, 85, 72;
+    --secondary-text-color: #FFFFFF;
+
+    /* Accent Color Palette - Amber/Gold */
+    --accent-color: #FFB300; /* Amber */
+    --accent-color-rgb: 255, 179, 0;
+    --accent-text-color: #000000;
+
+    /* General UI Colors */
+    --body-bg: #F5F5F5; /* Light Gray, almost white */
+    --body-color: #333333; /* Dark Gray */
+    --card-bg: #FFFFFF;
+    --card-border-color: #D4CCC5; /* Light brownish gray border */
+    --card-box-shadow: 0 2px 5px rgba(47, 99, 63, 0.1); /* Subtle shadow with primary green tint */
+    --link-color: var(--primary-color);
+    --link-hover-color: var(--primary-color-dark);
+
+    /* Typography (keeping defaults for now) */
+
+    /* Specific component adjustments for Forest theme */
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+}
+
+.navbar {
+    background-color: var(--primary-color); /* Navbar uses primary green */
+    color: var(--primary-text-color);
+}
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: var(--primary-text-color) !important;
+}
+ .navbar .nav-link:hover {
+    color: rgba(255,255,255,0.85) !important;
+}
+.navbar .navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.btn-primary {
+    box-shadow: 0 2px 3px rgba(0,0,0,0.15); /* Add a little depth to buttons */
+}
+
+.card-header {
+    background-color: rgba(var(--primary-color-rgb), 0.07); /* Light tint of primary for card headers */
+    color: var(--primary-color-dark);
+    border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.2);
+}

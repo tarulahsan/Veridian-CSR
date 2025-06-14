@@ -1,0 +1,66 @@
+/* Veridian CSR - Corporate Dark Theme */
+:root {
+    --primary-color: #007bff; /* Bootstrap Blue */
+    --primary-color-rgb: 0, 123, 255;
+    --primary-color-dark: #0069d9;
+    --primary-color-light: #3395ff;
+    --primary-text-color: #FFFFFF;
+
+    --secondary-color: #495057; /* Darker Gray */
+    --secondary-color-rgb: 73, 80, 87;
+    --secondary-text-color: #FFFFFF;
+
+    --accent-color: #ffc107; /* Yellow */
+    --accent-color-rgb: 255, 193, 7;
+    --accent-text-color: #212529;
+
+    --body-bg: #212529; /* Dark Background */
+    --body-color: #dee2e6; /* Light Text */
+
+    --card-bg: #2c3034; /* Slightly Lighter Dark for Cards */
+    --card-border-color: #3e444a;
+    --card-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+
+    --link-color: var(--primary-color-light);
+    --link-hover-color: #66b0ff;
+
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar.bg-light { /* Override default light navbar for dark theme */
+    background-color: #343a40 !important; /* Bootstrap dark color */
+}
+.navbar.bg-light .navbar-brand,
+.navbar.bg-light .nav-link {
+    color: var(--primary-text-color) !important;
+}
+.navbar.bg-light .nav-link:hover {
+    color: rgba(255,255,255,0.85) !important;
+}
+.navbar.bg-light .navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.table {
+    color: var(--body-color); /* Ensure table text is readable */
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.03); /* Subtle striping for dark theme */
+}
+
+/* Ensure form inputs are styled for dark mode */
+.form-control, .form-select {
+    background-color: #343a40;
+    color: var(--body-color);
+    border-color: #495057;
+}
+.form-control:focus, .form-select:focus {
+    background-color: #343a40;
+    color: var(--body-color);
+    border-color: var(--primary-color-light);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.35);
+}
+/* Adjust progress bar for dark theme */
+.progress {
+    background-color: #495057; /* Darker background for progress track */
+}
