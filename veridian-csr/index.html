@@ -89,13 +89,9 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(var(--primary-color-dark-rgb, 0,0,0), 0.8); backdrop-filter: blur(5px);">
-        <!-- Using primary-color-dark-rgb from a potential dark theme, or fallback to blackish transparent -->
-        <!-- Note: For corporate-dark theme, primary-color-dark-rgb might not be defined in style.css's :root by default -->
-        <!-- For simplicity, let's ensure the navbar has a fixed dark style for this landing page -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="landingNavbar" style="background-color: #212529; /* Fallback for corporate-dark */">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="landingNavbar" style="background-color: #212529; /* Explicit dark color, ensure text/links contrast */">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="font-weight: 700; font-size: 1.75rem;">
+            <a class="navbar-brand" href="index.html" style="font-weight: 700; font-size: 1.75rem; color: var(--primary-text-color, #FFF);">
                 <i class="fas fa-leaf me-2"></i>Veridian CSR
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#landingNavMenu" aria-controls="landingNavMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -220,14 +216,19 @@
         // Navbar style change on scroll
         const landingNavbar = document.getElementById('landingNavbar');
         if (landingNavbar) {
-            // Use --body-bg for scrolled background, and a specific dark color for top
-            const initialNavbarBg = '#212529'; // Matching fallback in inline style
-            const scrolledNavbarBg = getComputedStyle(document.documentElement).getPropertyValue('--body-bg').trim() || '#2c3034'; // Theme's card bg or similar for dark theme
+            const initialNavbarBg = '#212529'; // Dark, slightly transparent or solid
+            const scrolledNavbarBg = '#2c3034'; // A slightly different dark shade for the scrolled state, e.g., card background from corporate dark
+
+            // Set initial style explicitly
+            landingNavbar.style.backgroundColor = initialNavbarBg;
+            // Remove box-shadow when at top, add when scrolled for better definition
+            landingNavbar.classList.remove('shadow-sm');
+
 
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     landingNavbar.style.backgroundColor = scrolledNavbarBg;
-                    landingNavbar.classList.add('shadow-sm');
+                    landingNavbar.classList.add('shadow-sm'); // Add a subtle shadow when scrolled
                 } else {
                     landingNavbar.style.backgroundColor = initialNavbarBg;
                     landingNavbar.classList.remove('shadow-sm');

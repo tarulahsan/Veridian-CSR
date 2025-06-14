@@ -21,40 +21,70 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Potential theme CSS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         .wizard-step { display: none; }
         .wizard-step.active { display: block; }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <header class="top-navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Veridian CSR</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-leaf me-2"></i>Veridian CSR
+            </a>
+            <button class="navbar-toggler-btn" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+            <nav class="main-navigation">
+                <ul class="navbar-nav-pills">
+                    <li><a href="index.html" class="nav-link-pills"><i class="fas fa-home me-1"></i>Home</a></li>
+                    <li class="nav-item-pills has-submenu">
+                        <a href="#" class="nav-link-pills toggle-submenu">Overview <i class="fas fa-chevron-down Msubmenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="dashboard-executive.html" class="submenu-link">Executive Dashboard</a></li>
+                        </ul>
                     </li>
-                    <!-- Other nav links -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="center-governance.html">Governance Center</a>
+                    <li class="nav-item-pills has-submenu">
+                        <a href="#" class="nav-link-pills toggle-submenu">Track & Analyze <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="tracker-carbon-footprint.html" class="submenu-link">Carbon Tracker</a></li>
+                            <li><a href="metrics-environmental.html" class="submenu-link">Environmental Metrics</a></li>
+                            <li><a href="hub-social-impact.html" class="submenu-link">Social Impact Hub</a></li>
+                            <li><a href="analytics-insights.html" class="submenu-link">Analytics & Insights</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="builder-csr-report.html">Report Builder</a>
+                    <li class="nav-item-pills has-submenu">
+                        <a href="#" class="nav-link-pills toggle-submenu">Report & Comply <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="builder-csr-report.html" class="submenu-link active">Report Builder</a></li>
+                            <li><a href="checklist-compliance.html" class="submenu-link">Compliance Checklist</a></li>
+                            <li><a href="center-governance.html" class="submenu-link">Governance Center</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="checklist-compliance.html">Compliance Checklist</a>
+                    <li class="nav-item-pills has-submenu">
+                        <a href="#" class="nav-link-pills toggle-submenu">Settings & Data <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="panel-configuration.html" class="submenu-link">Configuration</a></li>
+                            <li><a href="hub-data-io.html" class="submenu-link">Data I/O Hub</a></li>
+                        </ul>
                     </li>
-                    <!-- Add other nav links here later -->
+                    <li class="nav-item-pills has-submenu">
+                        <a href="#" class="nav-link-pills toggle-submenu">Help <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="docs/tutorial.html" class="submenu-link">Documentation</a></li>
+                        </ul>
+                    </li>
                 </ul>
+            </nav>
+            <div class="navbar-actions">
+                <a href="panel-configuration.html" class="action-icon" title="Settings"><i class="fas fa-cog"></i></a>
             </div>
         </div>
-    </nav>
+    </header>
+    <div class="mobile-menu-overlay"></div>
 
-    <main class="container mt-4">
+    <main class="container mt-5 pt-4"> <!-- Adjusted spacing -->
         <header class="mb-4">
             <h1 class="display-5">CSR Report Builder</h1>
             <p class="lead">Generate professional, board-ready CSR reports.</p>
@@ -256,6 +286,42 @@
         });
 
         showStep(currentStep); // Initialize the first step
+
+    // --- New Global Navigation JS ---
+    const navbarTogglerBtn = document.querySelector('.navbar-toggler-btn');
+    const mainNavigation = document.querySelector('.main-navigation');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    const submenuToggles = document.querySelectorAll('.toggle-submenu');
+
+    if (navbarTogglerBtn && mainNavigation && mobileMenuOverlay) {
+        navbarTogglerBtn.addEventListener('click', () => {
+            mainNavigation.classList.toggle('open');
+            mobileMenuOverlay.classList.toggle('open');
+        });
+
+        mobileMenuOverlay.addEventListener('click', () => {
+            mainNavigation.classList.remove('open');
+            mobileMenuOverlay.classList.remove('open');
+        });
+    }
+
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const parentNavItem = toggle.closest('.nav-item-pills');
+            if (parentNavItem) {
+                parentNavItem.classList.toggle('open');
+                if (window.innerWidth < 992) {
+                    submenuToggles.forEach(otherToggle => {
+                        const otherParent = otherToggle.closest('.nav-item-pills');
+                        if (otherParent && otherParent !== parentNavItem && otherParent.classList.contains('open')) {
+                            otherParent.classList.remove('open');
+                        }
+                    });
+                }
+            }
+        });
+    });
     </script>
 </body>
 </html>
