@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Current theme will be dynamically linked here based on user preference -->
     <link id="themeStylesheet" rel="stylesheet" href="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body x-data="configurationPanel()" x-init="loadPreferences()">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -162,6 +163,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         AOS.init();
@@ -226,18 +228,40 @@
                 currentStrings: languages.en, // Default to English strings
 
                 loadPreferences() {
-                    const savedPrefs = localStorage.getItem('veridianUserPreferences');
+                    // Use SecureStorage to load preferences
+                    const savedPrefs = SecureStorage.loadData('veridianUserPreferences');
                     if (savedPrefs) {
-                        this.preferences = JSON.parse(savedPrefs);
+                        // Deep merge saved preferences onto defaults to handle new/missing keys gracefully
+                        Object.keys(this.preferences).forEach(key => {
+                            if (savedPrefs.hasOwnProperty(key)) {
+                                if (typeof this.preferences[key] === 'object' && this.preferences[key] !== null && !Array.isArray(this.preferences[key])) {
+                                    // Deep merge for nested objects like apiHooks
+                                    this.preferences[key] = { ...this.preferences[key], ...savedPrefs[key] };
+                                } else {
+                                    this.preferences[key] = savedPrefs[key];
+                                }
+                            }
+                        });
                         console.log(this.getLocalizedText('preferencesLoaded', 'Preferences loaded.'));
+                    } else {
+                        // If no saved preferences, ensure default apiHooks object exists
+                        if (!this.preferences.apiHooks) {
+                            this.preferences.apiHooks = { slackWebhookUrl: '', trelloApiKey: '', trelloToken: '' };
+                        }
                     }
-                    this.applyTheme();
-                    this.loadLanguage(); // Load language based on saved or default preference
+                    this.applyTheme(); // Apply theme based on loaded or default preferences
+                    this.loadLanguage(); // Load language based on loaded or default preferences
                 },
                 savePreferences() {
-                    localStorage.setItem('veridianUserPreferences', JSON.stringify(this.preferences));
-                    alert(this.getLocalizedText('preferencesSaved', 'Preferences saved successfully!'));
-                    // Potentially trigger other updates if needed, e.g., re-render parts of UI
+                    // Use SecureStorage to save preferences
+                    const success = SecureStorage.saveData('veridianUserPreferences', this.preferences);
+                    if (success) {
+                        alert(this.getLocalizedText('preferencesSaved', 'Preferences saved successfully!'));
+                    } else {
+                        alert("Error saving preferences. See console for details."); // Or a more user-friendly error
+                    }
+                    // The theme and language are already applied reactively by Alpine.js through x-model and @change.
+                    // No need to call applyTheme() or loadLanguage() explicitly here unless there are non-reactive updates needed.
                 },
                 applyTheme() {
                     document.getElementById('themeStylesheet').setAttribute('href', this.preferences.theme);
