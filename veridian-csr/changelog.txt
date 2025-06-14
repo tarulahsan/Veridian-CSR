@@ -1,0 +1,9 @@
+# Changelog
+
+## [Unreleased]
+
+### Added
+- Initial project structure setup.
+- Basic HTML templates for core pages.
+- Placeholder content for `index.html` and `dashboard-executive.html`.
+- Initial `README.md` and `changelog.txt`.
