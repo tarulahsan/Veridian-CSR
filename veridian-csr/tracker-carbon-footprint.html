@@ -136,11 +136,13 @@
 
     <!-- Veridian CSR Custom Scripts -->
     <script src="assets/js/modules/secureStorage.js"></script>
+    <script src="assets/js/modules/toastNotifications.js"></script>
+    <script src="assets/js/modules/gamification.js"></script>
     <script src="assets/js/modules/emissionFactors.js"></script>
     <script src="assets/js/modules/carbonCalculator.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        AOS.init();
+        // AOS.init(); // Will be handled in DOMContentLoaded
 
         // DOM Elements for Carbon Tracker
         const naturalGasInput = document.getElementById('naturalGas');
@@ -207,6 +209,9 @@
                 trackerData.scope1 = { input: usage, co2e: co2e };
                 updateTotalCO2e();
                 saveTrackerData();
+                if (typeof Gamification !== 'undefined') {
+                   Gamification.onDataUpdated({ carbonTracker: { entries: Object.values(trackerData).filter(s => s.co2e !== null).length } });
+                }
             } else {
                 scope1CO2eEl.textContent = 'Error';
             }
@@ -225,6 +230,9 @@
                 trackerData.scope2 = { input: usage, co2e: co2e };
                 updateTotalCO2e();
                 saveTrackerData();
+                if (typeof Gamification !== 'undefined') {
+                   Gamification.onDataUpdated({ carbonTracker: { entries: Object.values(trackerData).filter(s => s.co2e !== null).length } });
+                }
             } else {
                 scope2CO2eEl.textContent = 'Error';
             }
@@ -243,6 +251,9 @@
                 trackerData.scope3 = { input: distance, co2e: co2e };
                 updateTotalCO2e();
                 saveTrackerData();
+                if (typeof Gamification !== 'undefined') {
+                   Gamification.onDataUpdated({ carbonTracker: { entries: Object.values(trackerData).filter(s => s.co2e !== null).length } });
+                }
             } else {
                 scope3CO2eEl.textContent = 'Error';
             }
@@ -253,10 +264,17 @@
             // Ensure SecureStorage is available
             if (typeof SecureStorage === 'undefined') {
                 console.error('SecureStorage is not loaded. Cannot load carbon tracker data.');
-                // Fallback: try to load unencrypted if needed for dev, or show error
-                // For now, we just won't load if SecureStorage is missing.
             } else {
                  loadTrackerData();
+            }
+
+            if (typeof AOS !== 'undefined' && !document.body.classList.contains('aos-initialized')) {
+                 AOS.init();
+            }
+
+            if (typeof Gamification !== 'undefined') {
+                Gamification.init();
+                // Gamification.updateBadgesDisplay(); // No badge display area on this page currently
             }
 
             // Placeholder for D3.js map initialization

@@ -39,9 +39,17 @@
             <h1 class="display-5">Executive Dashboard</h1>
         </header>
 
+        <section id="voice-command-controls" class="mb-3 p-2 bg-light rounded border">
+            <h5 class="mb-2">Voice Commands <small class="text-muted">(Experimental)</small></h5>
+            <button id="activateVoiceButton" class="btn btn-primary btn-sm me-2">Activate Voice Commands</button>
+            <button id="deactivateVoiceButton" class="btn btn-secondary btn-sm">Deactivate Voice Commands</button>
+            <span id="voiceCommandStatus" class="ms-2 fst-italic">Status: Inactive</span>
+        </section>
+
         <section id="kpi-widgets" class="row mb-4">
-            <!-- KPI Cards: 2x2 Grid -->
-            <div class="col-md-6 mb-3">
+            <!-- Placeholder comment for drag-and-drop library initialization -->
+            <!-- e.g., <script> Sortable.create(document.getElementById('kpi-widgets'), { onEnd: handleWidgetDrop }); </script> -->
+            <div class="col-md-6 mb-3" id="widget-carbon-footprint">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Overall Carbon Footprint</h5>
@@ -50,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3" id="widget-social-impact">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Social Impact Score</h5>
@@ -59,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3" id="widget-compliance-status">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Compliance Status</h5>
@@ -68,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3" id="widget-resource-efficiency">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Resource Efficiency</h5>
@@ -111,7 +119,9 @@
                     Achievements & Badges
                 </div>
                 <div class="card-body">
-                    <p><em>Badges will appear here...</em></p>
+                    <div id="gamification-badges-list">
+                        <p class="text-muted"><em>Loading achievements...</em></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -130,43 +140,48 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-    <script src="assets/js/modules/secureStorage.js"></script>
+    <script src="assets/js/modules/secureStorage.js"></script> <!-- Should already be there -->
+    <script src="assets/js/modules/toastNotifications.js"></script>
+    <script src="assets/js/modules/gamification.js"></script>
+    <script src="assets/js/modules/voiceCommands.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         // AOS.init(); // Initialize Animate on Scroll - will be handled in DOMContentLoaded
 
         // --- Dashboard Widget Layout Persistence (Placeholder) ---
         const WIDGET_LAYOUT_KEY = 'veridianCSR_dashboardWidgetLayout';
+        const kpiWidgetsContainer = document.getElementById('kpi-widgets');
 
         /**
          * Saves the widget layout to secure storage.
-         * @param {object} layoutObject - An object representing the widget layout
-         *                              (e.g., an array of widget IDs in order).
+         * @param {Array<string>} layoutArray - An array of widget IDs in their new order.
          */
-        function saveWidgetLayout(layoutObject) {
+        function saveWidgetLayout(layoutArray) {
             if (typeof SecureStorage !== 'undefined') {
-                SecureStorage.saveData(WIDGET_LAYOUT_KEY, layoutObject);
-                console.log("Dashboard widget layout saved (placeholder).", layoutObject);
+                SecureStorage.saveData(WIDGET_LAYOUT_KEY, layoutArray);
+                console.log("Dashboard widget layout saved:", layoutArray);
+                ToastNotifications.showToast("Widget layout saved!", "success"); // Optional feedback
             } else {
                 console.error("SecureStorage not available to save widget layout.");
+                ToastNotifications.showToast("Error saving widget layout.", "error");
             }
         }
 
         /**
          * Loads the widget layout from secure storage.
-         * @returns {object|null} The saved layout object or null if not found.
+         * @returns {Array<string>|null} The saved layout array or null if not found.
          */
         function loadWidgetLayout() {
             if (typeof SecureStorage !== 'undefined') {
                 const layout = SecureStorage.loadData(WIDGET_LAYOUT_KEY);
-                if (layout) {
-                    console.log("Dashboard widget layout loaded (placeholder).", layout);
-                    // In the future, apply this layout to the DOM.
-                    // For now, just return it.
+                if (layout && Array.isArray(layout)) {
+                    console.log("Dashboard widget layout loaded:", layout);
+                    // Placeholder: In the future, apply this layout to the DOM.
+                    // applyWidgetOrderToDOM(layout);
                     return layout;
                 } else {
-                    console.log("No saved dashboard widget layout found (placeholder).");
-                    return null; // Or return a default layout
+                    console.log("No saved dashboard widget layout found or layout is invalid. Using default order.");
+                    return null; // Or return a default layout array
                 }
             } else {
                 console.error("SecureStorage not available to load widget layout.");
@@ -174,23 +189,80 @@
             }
         }
 
-        // Example: Load layout when the page is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLayout = loadWidgetLayout();
-            if (savedLayout) {
-                // applyWidgetLayout(savedLayout); // Placeholder for function that would reorder widgets
-            } else {
-                // applyDefaultWidgetLayout(); // Placeholder for applying a default order
-                // And maybe save a default layout for the first time:
-                // saveWidgetLayout(['kpi-carbon', 'kpi-social', 'kpi-compliance', 'kpi-resource']); // Example default
-            }
+        /**
+         * Placeholder function to apply the loaded widget order to the DOM.
+         * This would be called after loading a saved layout.
+         * @param {Array<string>} widgetOrderArray - Array of widget IDs in desired order.
+         */
+        function applyWidgetOrderToDOM(widgetOrderArray) {
+            if (!kpiWidgetsContainer) return;
+            console.log("Placeholder: Applying widget order to DOM:", widgetOrderArray);
+            // Example logic (would need a robust implementation):
+            // widgetOrderArray.forEach(widgetId => {
+            //     const widgetElement = document.getElementById(widgetId);
+            //     if (widgetElement) {
+            //         kpiWidgetsContainer.appendChild(widgetElement); // This reorders the element
+            //     }
+            // });
+            ToastNotifications.showToast("Widget layout applied (placeholder).", "info");
+        }
 
-            // Initialize AOS (if not already done elsewhere, e.g. Alpine component)
+        /**
+         * Placeholder function for when a widget is dropped (drag-and-drop event).
+         * This would be called by the drag-and-drop library's onEnd/onUpdate event.
+         */
+        function handleWidgetDrop() {
+            if (!kpiWidgetsContainer) return;
+            const currentWidgetOrder = Array.from(kpiWidgetsContainer.children)
+                                          .map(el => el.id)
+                                          .filter(id => id.startsWith('widget-')); // Ensure only widget elements are mapped
+            console.log("Placeholder: Widget drop detected. New order:", currentWidgetOrder);
+            saveWidgetLayout(currentWidgetOrder);
+        }
+
+        // Update DOMContentLoaded listener:
+        document.addEventListener('DOMContentLoaded', () => {
             if (typeof AOS !== 'undefined' && !document.body.classList.contains('aos-initialized')) {
                  AOS.init();
             }
 
-            // Existing Chart.js and D3.js placeholder initializations should remain...
+            if (typeof Gamification !== 'undefined') {
+                Gamification.init();
+                Gamification.updateBadgesDisplay();
+            }
+
+            if (typeof VoiceCommands !== 'undefined' && typeof ToastNotifications !== 'undefined') {
+                // ... (VoiceCommands init as before) ...
+                 const vcInitialized = VoiceCommands.init('voiceCommandStatus');
+                 // ... (button listeners as before) ...
+                 const voiceButton = document.getElementById('activateVoiceButton'); // Re-declare for safety in this block
+                 const deactivateVoiceButton = document.getElementById('deactivateVoiceButton'); // Re-declare
+                 if (vcInitialized && voiceButton && deactivateVoiceButton) {
+                    voiceButton.addEventListener('click', () => {
+                        VoiceCommands.startListening();
+                        voiceButton.textContent = 'Listening...';
+                    });
+                    deactivateVoiceButton.addEventListener('click', () => {
+                        VoiceCommands.stopListening();
+                         voiceButton.textContent = 'Activate Voice Commands';
+                    });
+                } else if (voiceButton) {
+                    voiceButton.disabled = true;
+                    voiceButton.textContent = 'Voice Commands Not Supported';
+                    if(deactivateVoiceButton) deactivateVoiceButton.disabled = true;
+                }
+            }
+
+            const savedLayout = loadWidgetLayout();
+            if (savedLayout) {
+                applyWidgetOrderToDOM(savedLayout); // Call the placeholder applicator
+            } else {
+                // Could apply a default visual order if needed, then save it.
+                // For now, we assume HTML order is default.
+                // Example: saveWidgetLayout(['widget-carbon-footprint', 'widget-social-impact', 'widget-compliance-status', 'widget-resource-efficiency']);
+            }
+
+            // Chart.js and D3.js placeholder initializations should remain...
             var ctxTimeSeries = document.getElementById('timeSeriesChart')?.getContext('2d');
             if (ctxTimeSeries) {
                 // Basic placeholder chart

@@ -163,6 +163,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script src="assets/js/modules/toastNotifications.js"></script>
     <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
@@ -270,31 +272,173 @@
                 },
                 async loadLanguage() {
                     const langCode = this.preferences.language;
-                    if (languages[langCode]) {
-                        this.currentStrings = languages[langCode];
+                    const fallbackLang = 'en'; // Default fallback language
+                    const internalFallbackStrings = languages[langCode] || languages[fallbackLang]; // Use existing hardcoded as ultimate fallback
+
+                    try {
+                        const response = await fetch(`assets/lang/\${langCode}.json`);
+                        if (!response.ok) {
+                            // Throw an error to be caught by the catch block
+                            throw new Error(`HTTP error \${response.status} for \${langCode}.json`);
+                        }
+                        const fetchedStrings = await response.json();
+                        this.currentStrings = fetchedStrings;
                         console.log(this.getLocalizedText('languageLoaded', "Language file loaded: ") + langCode);
-                    } else {
-                        // Fallback to English if language file not found in our placeholder
-                        this.currentStrings = languages.en;
-                        console.error(this.getLocalizedText('languageLoadError', "Error loading language file: ") + langCode + ". Falling back to English.");
-                        // In a real app, you'd fetch from /assets/lang/${langCode}.json
-                        // try {
-                        //     const response = await fetch(\`assets/lang/\${langCode}.json\`);
-                        //     if (!response.ok) throw new Error('Network response was not ok');
-                        //     this.currentStrings = await response.json();
-                        // } catch (error) {
-                        //     console.error('Error loading language file:', error);
-                        //     this.currentStrings = languages.en; // Fallback
-                        // }
+                    } catch (error) {
+                        console.error(this.getLocalizedText('languageFileFetchError', "Could not fetch language file for ") + `\${langCode} (Error: \${error.message}). Falling back.`);
+                        // Fallback to hardcoded strings if fetch fails
+                        this.currentStrings = internalFallbackStrings;
+                        if (langCode !== fallbackLang && !languages[langCode]) { // If desired lang not even in hardcoded fallbacks
+                             console.warn(`No specific fallback strings for '\${langCode}', using English.`);
+                        }
                     }
-                    // Force Alpine to re-evaluate bindings that use getLocalizedText
-                    this.$forceUpdate(); // May not be needed if currentStrings is reactive enough.
+                    // It's good practice to ensure currentStrings is always an object.
+                    if (typeof this.currentStrings !== 'object' || this.currentStrings === null) {
+                        console.error("Critical error: currentStrings is not an object after language load attempt. Defaulting to English.");
+                        this.currentStrings = languages.en;
+                    }
+
+                    // Update direction attribute if language requires it (e.g. for RTL languages)
+                    // For now, all example languages are LTR.
+                    // document.documentElement.setAttribute('dir', this.isRTL(langCode) ? 'rtl' : 'ltr');
+
+                    // Alpine.js should react to changes in this.currentStrings automatically.
+                    // Explicit $forceUpdate might not be necessary if getLocalizedText is properly reactive.
+                    // this.$forceUpdate(); // Remove if not needed
                 },
+                // Optional: Add isRTL helper if planning RTL support
+                // isRTL(langCode) {
+                //    const rtlLanguages = ['ar', 'he', 'fa', 'ur']; // Example RTL language codes
+                //    return rtlLanguages.includes(langCode);
+                // },
                 getLocalizedText(key, fallback) {
                     return this.currentStrings[key] || fallback || `[${key}]`;
                 }
             }
         }
+
+// --- API Integration Examples (Placeholders for User Guidance) ---
+
+/*
+// Example: How to post a message to a Slack Webhook URL
+// This function would use the Slack Webhook URL entered in the configuration.
+function postToSlack(message) {
+    const prefs = SecureStorage.loadData('veridianUserPreferences');
+    const slackWebhookUrl = prefs?.apiHooks?.slackWebhookUrl;
+
+    if (!slackWebhookUrl) {
+        console.warn("Slack Webhook URL not configured.");
+        ToastNotifications.showToast("Slack Webhook URL not configured.", "warning");
+        return Promise.reject("Slack Webhook URL not configured.");
+    }
+
+    if (!message) {
+        console.warn("No message provided for Slack.");
+        return Promise.reject("No message provided for Slack.");
+    }
+
+    console.log("Attempting to post to Slack (example):", message);
+    ToastNotifications.showToast("Sending message to Slack (example)...", "info");
+
+    // return fetch(slackWebhookUrl, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ text: message }),
+    // })
+    // .then(response => {
+    //     if (!response.ok) {
+    //         throw new Error(`Slack API error: ${response.status} ${response.statusText}`);
+    //     }
+    //     console.log('Successfully posted to Slack (example).');
+    //     ToastNotifications.showToast("Message posted to Slack successfully (example)!", "success");
+    //     return response.json(); // Or response.text() if Slack API returns that
+    // })
+    // .catch(error => {
+    //     console.error('Error posting to Slack (example):', error);
+    //     ToastNotifications.showToast(`Error posting to Slack: ${error.message}`, "error");
+    //     throw error;
+    // });
+
+    // Simulated success for placeholder
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log('Simulated successful post to Slack (example).');
+            ToastNotifications.showToast("Message posted to Slack successfully (simulated example)!", "success");
+            resolve({ ok: true, message: "Simulated success" });
+        }, 1000);
+    });
+}
+
+// Example: How to create a Trello card (conceptual)
+// This function would use the Trello API Key and Token from configuration.
+// Note: Trello API usage is more complex than a simple webhook.
+// This usually involves more specific endpoint construction and query parameters.
+function createTrelloCard(listId, cardName, cardDescription = '') {
+    const prefs = SecureStorage.loadData('veridianUserPreferences');
+    const trelloApiKey = prefs?.apiHooks?.trelloApiKey;
+    const trelloToken = prefs?.apiHooks?.trelloToken;
+
+    if (!trelloApiKey || !trelloToken) {
+        console.warn("Trello API Key or Token not configured.");
+        ToastNotifications.showToast("Trello API Key or Token not configured.", "warning");
+        return Promise.reject("Trello API Key or Token not configured.");
+    }
+
+    if (!listId || !cardName) {
+        console.warn("Trello List ID and Card Name are required.");
+        return Promise.reject("Trello List ID and Card Name are required.");
+    }
+
+    console.log(`Attempting to create Trello card (example): Name: ${cardName}, List: ${listId}`);
+    ToastNotifications.showToast("Creating Trello card (example)...", "info");
+
+    // const trelloApiUrl = `https://api.trello.com/1/cards`;
+    // const params = new URLSearchParams({
+    //     key: trelloApiKey,
+    //     token: trelloToken,
+    //     idList: listId,
+    //     name: cardName,
+    //     desc: cardDescription
+    // });
+
+    // return fetch(`${trelloApiUrl}?${params.toString()}`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json'
+    //     }
+    // })
+    // .then(response => {
+    //     if (!response.ok) {
+    //         throw new Error(`Trello API error: ${response.status} ${response.statusText}`);
+    //     }
+    //     console.log('Successfully created Trello card (example).');
+    //     ToastNotifications.showToast("Trello card created successfully (example)!", "success");
+    //     return response.json();
+    // })
+    // .catch(error => {
+    //     console.error('Error creating Trello card (example):', error);
+    //     ToastNotifications.showToast(`Error creating Trello card: ${error.message}`, "error");
+    //     throw error;
+    // });
+
+    // Simulated success for placeholder
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log('Simulated successful Trello card creation (example).');
+            ToastNotifications.showToast("Trello card created successfully (simulated example)!", "success");
+            resolve({ ok: true, id: "simulatedCardId", name: cardName });
+        }, 1000);
+    });
+}
+
+// To make these available for user testing from console (if they uncomment them):
+// window.postToSlack = postToSlack;
+// window.createTrelloCard = createTrelloCard;
+
+*/
+// --- End API Integration Examples ---
     </script>
 </body>
 </html>

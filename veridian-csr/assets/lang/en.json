@@ -1,0 +1,21 @@
+{
+    "configTitle": "Configuration Panel",
+    "configSubtitle": "Manage application settings, preferences, and integrations.",
+    "themeSettingsTitle": "Theme Preferences",
+    "selectThemeLabel": "Select Theme:",
+    "themeNote": "Select your preferred visual theme for the application. More themes will be available.",
+    "languageSettingsTitle": "Language Settings",
+    "selectLanguageLabel": "Select Language:",
+    "languageNote": "Choose your preferred language for the UI. Requires corresponding JSON language files in /assets/lang/",
+    "dataSourceTitle": "Data Source Configuration (Placeholders)",
+    "dataSourceNote": "In a future version, you might connect to external data sources. These are currently placeholders.",
+    "apiHooksTitle": "API Hooks & Integrations (Placeholders)",
+    "apiHooksNote": "Enter API details for third-party integrations. Functions are placeholders and need to be implemented.",
+    "saveButton": "Save All Preferences",
+    "footerText": "© 2023 Veridian CSR",
+    "preferencesSaved": "Preferences saved successfully!",
+    "preferencesLoaded": "Preferences loaded.",
+    "languageLoaded": "Language file loaded: ",
+    "languageLoadError": "Error loading language file: ",
+    "languageFileFetchError": "Could not fetch language file for "
+}

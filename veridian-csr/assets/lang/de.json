@@ -1,0 +1,21 @@
+{
+    "configTitle": "Konfigurationspanel",
+    "configSubtitle": "Verwalten Sie Anwendungseinstellungen, Präferenzen und Integrationen.",
+    "themeSettingsTitle": "Theme-Einstellungen",
+    "selectThemeLabel": "Theme auswählen:",
+    "themeNote": "Wählen Sie Ihr bevorzugtes visuelles Theme für die Anwendung. Weitere Themes werden verfügbar sein.",
+    "languageSettingsTitle": "Spracheinstellungen",
+    "selectLanguageLabel": "Sprache auswählen:",
+    "languageNote": "Wählen Sie Ihre bevorzugte Sprache für die Benutzeroberfläche. Erfordert entsprechende JSON-Sprachdateien in /assets/lang/",
+    "dataSourceTitle": "Datenquellenkonfiguration (Platzhalter)",
+    "dataSourceNote": "In einer zukünftigen Version können Sie möglicherweise eine Verbindung zu externen Datenquellen herstellen. Dies sind derzeit Platzhalter.",
+    "apiHooksTitle": "API-Hooks & Integrationen (Platzhalter)",
+    "apiHooksNote": "Geben Sie API-Details für Integrationen von Drittanbietern ein. Funktionen sind Platzhalter und müssen implementiert werden.",
+    "saveButton": "Alle Einstellungen speichern",
+    "footerText": "© 2023 Veridian CSR",
+    "preferencesSaved": "Einstellungen erfolgreich gespeichert!",
+    "preferencesLoaded": "Einstellungen geladen.",
+    "languageLoaded": "Sprachdatei geladen: ",
+    "languageLoadError": "Fehler beim Laden der Sprachdatei: ",
+    "languageFileFetchError": "Sprachdatei konnte nicht geladen werden für "
+}
