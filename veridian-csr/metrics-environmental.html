@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Metrics - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Potential theme CSS -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tracker-carbon-footprint.html">Carbon Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="metrics-environmental.html">Environmental Metrics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="hub-social-impact.html">Social Impact Hub</a>
+                    </li>
+                    <!-- Add other nav links here later -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <header class="mb-4">
+            <h1 class="display-5">Environmental Metrics</h1>
+        </header>
+
+        <ul class="nav nav-tabs" id="environmentalMetricsTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="energy-tab" data-bs-toggle="tab" data-bs-target="#energy" type="button" role="tab" aria-controls="energy" aria-selected="true">Energy</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="waste-tab" data-bs-toggle="tab" data-bs-target="#waste" type="button" role="tab" aria-controls="waste" aria-selected="false">Waste Management</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="water-tab" data-bs-toggle="tab" data-bs-target="#water" type="button" role="tab" aria-controls="water" aria-selected="false">Water Usage</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="environmentalMetricsTabContent">
+            <!-- Energy Tab -->
+            <div class="tab-pane fade show active p-3 border border-top-0" id="energy" role="tabpanel" aria-labelledby="energy-tab">
+                <h4 class="mt-2">Energy Consumption</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Monthly Usage</h5>
+                        <canvas id="energyMonthlyChart"></canvas>
+                        <p class="text-center mt-2"><em>Bar chart (Chart.js) for monthly energy usage placeholder</em></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Data Table</h5>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr><th>Month</th><th>Usage (kWh)</th><th>Change</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>January</td><td>1200</td><td>+5%</td></tr>
+                                <tr><td>February</td><td>1150</td><td>-4.17%</td></tr>
+                                <!-- More data rows -->
+                            </tbody>
+                        </table>
+                        <p><em>Data table placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Waste Management Tab -->
+            <div class="tab-pane fade p-3 border border-top-0" id="waste" role="tabpanel" aria-labelledby="waste-tab">
+                <h4 class="mt-2">Waste Management</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Waste by Type (Monthly)</h5>
+                        <canvas id="wasteMonthlyChart"></canvas>
+                        <p class="text-center mt-2"><em>Bar chart (Chart.js) for monthly waste by type placeholder</em></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Data Table</h5>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr><th>Month</th><th>Recycled (kg)</th><th>Landfill (kg)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>January</td><td>500</td><td>150</td></tr>
+                                <tr><td>February</td><td>520</td><td>140</td></tr>
+                                <!-- More data rows -->
+                            </tbody>
+                        </table>
+                        <p><em>Data table placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Water Usage Tab -->
+            <div class="tab-pane fade p-3 border border-top-0" id="water" role="tabpanel" aria-labelledby="water-tab">
+                <h4 class="mt-2">Water Usage</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Monthly Consumption</h5>
+                        <canvas id="waterMonthlyChart"></canvas>
+                        <p class="text-center mt-2"><em>Bar chart (Chart.js) for monthly water consumption placeholder</em></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Data Table</h5>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr><th>Month</th><th>Usage (Liters)</th><th>Source</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>January</td><td>30000</td><td>Municipal</td></tr>
+                                <tr><td>February</td><td>28000</td><td>Municipal</td></tr>
+                                <!-- More data rows -->
+                            </tbody>
+                        </table>
+                        <p><em>Data table placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        // Placeholder for Chart.js initialization for Energy
+        var ctxEnergy = document.getElementById('energyMonthlyChart')?.getContext('2d');
+        if (ctxEnergy) {
+            new Chart(ctxEnergy, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Energy Usage', data: [1200, 1150] }] }});
+        }
+
+        // Placeholder for Chart.js initialization for Waste
+        var ctxWaste = document.getElementById('wasteMonthlyChart')?.getContext('2d');
+        if (ctxWaste) {
+            new Chart(ctxWaste, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Recycled', data: [500, 520] }, { label: 'Landfill', data: [150, 140] }] }});
+        }
+
+        // Placeholder for Chart.js initialization for Water
+        var ctxWater = document.getElementById('waterMonthlyChart')?.getContext('2d');
+        if (ctxWater) {
+            new Chart(ctxWater, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Water Usage', data: [30000, 28000] }] }});
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Panel - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Current theme will be dynamically linked here based on user preference -->
+    <link id="themeStylesheet" rel="stylesheet" href="">
+</head>
+<body x-data="configurationPanel()" x-init="loadPreferences()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <!-- Other nav links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics-insights.html">Analytics & Insights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="panel-configuration.html">Configuration</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <header class="mb-4">
+            <h1 class="display-5" x-text="getLocalizedText('configTitle', 'Configuration Panel')">Configuration Panel</h1>
+            <p class="lead" x-text="getLocalizedText('configSubtitle', 'Manage application settings, preferences, and integrations.')">Manage application settings, preferences, and integrations.</p>
+        </header>
+
+        <form @submit.prevent="savePreferences">
+            <!-- Theme Preferences -->
+            <section id="theme-settings" class="mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0" x-text="getLocalizedText('themeSettingsTitle', 'Theme Preferences')">Theme Preferences</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="themeSelection" class="form-label" x-text="getLocalizedText('selectThemeLabel', 'Select Theme:')">Select Theme:</label>
+                            <select class="form-select" id="themeSelection" x-model="preferences.theme" @change="applyTheme()">
+                                <option value="assets/css/style.css">Default Light</option>
+                                <option value="assets/css/themes/theme-corporate-dark.css">Corporate Dark</option>
+                                <option value="assets/css/themes/theme-oceanic.css">Oceanic</option>
+                                <option value="assets/css/themes/theme-forest.css">Forest</option>
+                                <!-- Add other theme options here as they are created -->
+                                <option value="assets/css/themes/theme-high-contrast.css">High Contrast</option>
+                            </select>
+                        </div>
+                        <p class="text-muted" x-text="getLocalizedText('themeNote', 'Select your preferred visual theme for the application. More themes will be available.')">Select your preferred visual theme for the application. More themes will be available.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Language Settings -->
+            <section id="language-settings" class="mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0" x-text="getLocalizedText('languageSettingsTitle', 'Language Settings')">Language Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="languageSelection" class="form-label" x-text="getLocalizedText('selectLanguageLabel', 'Select Language:')">Select Language:</label>
+                            <select class="form-select" id="languageSelection" x-model="preferences.language" @change="loadLanguage()">
+                                <option value="en">English (English)</option>
+                                <option value="de">Deutsch (German)</option>
+                                <option value="es">Español (Spanish)</option>
+                                <option value="fr">Français (French)</option>
+                                <!-- Add other language options here -->
+                            </select>
+                        </div>
+                        <p class="text-muted" x-text="getLocalizedText('languageNote', 'Choose your preferred language for the UI. Requires corresponding JSON language files in /assets/lang/')">Choose your preferred language for the UI. Requires corresponding JSON language files in /assets/lang/</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Source Placeholders -->
+            <section id="data-source-settings" class="mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0" x-text="getLocalizedText('dataSourceTitle', 'Data Source Configuration (Placeholders)')">Data Source Configuration (Placeholders)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p x-text="getLocalizedText('dataSourceNote', 'In a future version, you might connect to external data sources. These are currently placeholders.')">In a future version, you might connect to external data sources. These are currently placeholders.</p>
+                        <div class="mb-3">
+                            <label for="dataSource1" class="form-label">Example Data Source API URL:</label>
+                            <input type="url" class="form-control" id="dataSource1" placeholder="https://api.example.com/data_source_1" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dataSource1ApiKey" class="form-label">API Key:</label>
+                            <input type="password" class="form-control" id="dataSource1ApiKey" placeholder="************" disabled>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Hooks / Integrations -->
+            <section id="api-hooks" class="mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0" x-text="getLocalizedText('apiHooksTitle', 'API Hooks & Integrations (Placeholders)')">API Hooks & Integrations (Placeholders)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p x-text="getLocalizedText('apiHooksNote', 'Enter API details for third-party integrations. Functions are placeholders and need to be implemented.')">Enter API details for third-party integrations. Functions are placeholders and need to be implemented.</p>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="slackWebhookUrl" class="form-label">Slack Webhook URL:</label>
+                                <input type="url" class="form-control" id="slackWebhookUrl" x-model="preferences.apiHooks.slackWebhookUrl" placeholder="https://hooks.slack.com/services/...">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="trelloApiKey" class="form-label">Trello API Key:</label>
+                                <input type="text" class="form-control" id="trelloApiKey" x-model="preferences.apiHooks.trelloApiKey" placeholder="Your Trello API Key">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="trelloToken" class="form-label">Trello Token:</label>
+                                <input type="text" class="form-control" id="trelloToken" x-model="preferences.apiHooks.trelloToken" placeholder="Your Trello Token">
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <h6 class="text-muted">Example Usage (Developer Note):</h6>
+                            <pre class="bg-light p-2 rounded small"><code>// function postToSlack(message) {
+//   const webhookUrl = document.getElementById('slackWebhookUrl').value;
+//   if (!webhookUrl) return;
+//   fetch(webhookUrl, {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({ text: message })
+//   }).then(response => console.log('Slack notification sent:', response))
+//     .catch(error => console.error('Error sending Slack notification:', error));
+// }</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="mt-4 mb-5">
+                <button type="submit" class="btn btn-primary btn-lg w-100" x-text="getLocalizedText('saveButton', 'Save All Preferences')">Save All Preferences</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3" x-text="getLocalizedText('footerText', '© 2023 Veridian CSR')">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        // Placeholder language files (would be separate JSON files in /assets/lang/)
+        const languages = {
+            en: {
+                configTitle: "Configuration Panel",
+                configSubtitle: "Manage application settings, preferences, and integrations.",
+                themeSettingsTitle: "Theme Preferences",
+                selectThemeLabel: "Select Theme:",
+                themeNote: "Select your preferred visual theme for the application. More themes will be available.",
+                languageSettingsTitle: "Language Settings",
+                selectLanguageLabel: "Select Language:",
+                languageNote: "Choose your preferred language for the UI. Requires corresponding JSON language files in /assets/lang/",
+                dataSourceTitle: "Data Source Configuration (Placeholders)",
+                dataSourceNote: "In a future version, you might connect to external data sources. These are currently placeholders.",
+                apiHooksTitle: "API Hooks & Integrations (Placeholders)",
+                apiHooksNote: "Enter API details for third-party integrations. Functions are placeholders and need to be implemented.",
+                saveButton: "Save All Preferences",
+                footerText: "© 2023 Veridian CSR",
+                preferencesSaved: "Preferences saved successfully!",
+                preferencesLoaded: "Preferences loaded.",
+                languageLoaded: "Language file loaded: ",
+                languageLoadError: "Error loading language file: "
+            },
+            de: {
+                configTitle: "Konfigurationspanel",
+                configSubtitle: "Verwalten Sie Anwendungseinstellungen, Präferenzen und Integrationen.",
+                themeSettingsTitle: "Theme-Einstellungen",
+                selectThemeLabel: "Theme auswählen:",
+                themeNote: "Wählen Sie Ihr bevorzugtes visuelles Theme für die Anwendung. Weitere Themes werden verfügbar sein.",
+                languageSettingsTitle: "Spracheinstellungen",
+                selectLanguageLabel: "Sprache auswählen:",
+                languageNote: "Wählen Sie Ihre bevorzugte Sprache für die Benutzeroberfläche. Erfordert entsprechende JSON-Sprachdateien in /assets/lang/",
+                dataSourceTitle: "Datenquellenkonfiguration (Platzhalter)",
+                dataSourceNote: "In einer zukünftigen Version können Sie möglicherweise eine Verbindung zu externen Datenquellen herstellen. Dies sind derzeit Platzhalter.",
+                apiHooksTitle: "API-Hooks & Integrationen (Platzhalter)",
+                apiHooksNote: "Geben Sie API-Details für Integrationen von Drittanbietern ein. Funktionen sind Platzhalter und müssen implementiert werden.",
+                saveButton: "Alle Einstellungen speichern",
+                footerText: "© 2023 Veridian CSR",
+                preferencesSaved: "Einstellungen erfolgreich gespeichert!",
+                preferencesLoaded: "Einstellungen geladen.",
+                languageLoaded: "Sprachdatei geladen: ",
+                languageLoadError: "Fehler beim Laden der Sprachdatei: "
+            }
+            // Add other languages (es, fr) here similarly
+        };
+
+        function configurationPanel() {
+            return {
+                preferences: {
+                    theme: 'assets/css/style.css', // Default theme
+                    language: 'en', // Default language
+                    apiHooks: {
+                        slackWebhookUrl: '',
+                        trelloApiKey: '',
+                        trelloToken: ''
+                    }
+                    // Add other preferences as needed
+                },
+                currentStrings: languages.en, // Default to English strings
+
+                loadPreferences() {
+                    const savedPrefs = localStorage.getItem('veridianUserPreferences');
+                    if (savedPrefs) {
+                        this.preferences = JSON.parse(savedPrefs);
+                        console.log(this.getLocalizedText('preferencesLoaded', 'Preferences loaded.'));
+                    }
+                    this.applyTheme();
+                    this.loadLanguage(); // Load language based on saved or default preference
+                },
+                savePreferences() {
+                    localStorage.setItem('veridianUserPreferences', JSON.stringify(this.preferences));
+                    alert(this.getLocalizedText('preferencesSaved', 'Preferences saved successfully!'));
+                    // Potentially trigger other updates if needed, e.g., re-render parts of UI
+                },
+                applyTheme() {
+                    document.getElementById('themeStylesheet').setAttribute('href', this.preferences.theme);
+                    // If a theme is selected that is not the default, ensure the default is also loaded or its common styles are base
+                    // For now, assumes themes are self-contained or build upon a base included elsewhere.
+                },
+                async loadLanguage() {
+                    const langCode = this.preferences.language;
+                    if (languages[langCode]) {
+                        this.currentStrings = languages[langCode];
+                        console.log(this.getLocalizedText('languageLoaded', "Language file loaded: ") + langCode);
+                    } else {
+                        // Fallback to English if language file not found in our placeholder
+                        this.currentStrings = languages.en;
+                        console.error(this.getLocalizedText('languageLoadError', "Error loading language file: ") + langCode + ". Falling back to English.");
+                        // In a real app, you'd fetch from /assets/lang/${langCode}.json
+                        // try {
+                        //     const response = await fetch(\`assets/lang/\${langCode}.json\`);
+                        //     if (!response.ok) throw new Error('Network response was not ok');
+                        //     this.currentStrings = await response.json();
+                        // } catch (error) {
+                        //     console.error('Error loading language file:', error);
+                        //     this.currentStrings = languages.en; // Fallback
+                        // }
+                    }
+                    // Force Alpine to re-evaluate bindings that use getLocalizedText
+                    this.$forceUpdate(); // May not be needed if currentStrings is reactive enough.
+                },
+                getLocalizedText(key, fallback) {
+                    return this.currentStrings[key] || fallback || `[${key}]`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

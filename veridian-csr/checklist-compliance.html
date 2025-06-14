@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Checklist - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Potential theme CSS -->
+    <style>
+        .checklist-section .progress { height: 10px; margin-bottom: 0.5rem; }
+        .nested-checklist { padding-left: 2rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <!-- Other nav links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="builder-csr-report.html">Report Builder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="checklist-compliance.html">Compliance Checklist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="hub-data-io.html">Data I/O Hub</a>
+                    </li>
+                    <!-- Add other nav links here later -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4" x-data="complianceChecklist()">
+        <header class="mb-4">
+            <h1 class="display-5">Compliance Checklist</h1>
+            <p class="lead">Track adherence to standards like CSRD, SEC, GRI, etc.</p>
+        </header>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div id="accordionChecklist">
+                    <!-- Section 1: CSRD -->
+                    <div class="checklist-section card mb-3" x-data="checklistSection('csrd', 'CSRD - Corporate Sustainability Reporting Directive')">
+                        <div class="card-header" :id="'heading-' + id">
+                            <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-link text-decoration-none" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse-' + id" aria-expanded="true" :aria-controls="'collapse-' + id">
+                                    <span x-text="title"></span>
+                                </button>
+                                <span class="badge rounded-pill" :class="progressPercentage === 100 ? 'bg-success' : 'bg-primary'" x-text="progressPercentage + '%'"></span>
+                            </h5>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" :style="'width: ' + progressPercentage + '%'" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div :id="'collapse-' + id" class="collapse show" :aria-labelledby="'heading-' + id" data-bs-parent="#accordionChecklist">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <template x-for="(item, index) in items" :key="index">
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" :id="id + '-item-' + index" x-model="item.checked" @change="updateProgress()">
+                                                <label class="form-check-label" :for="id + '-item-' + index" x-text="item.label"></label>
+                                            </div>
+                                            <!-- Nested Checklist Example -->
+                                            <template x-if="item.subItems && item.subItems.length > 0">
+                                                <ul class="list-group list-group-flush mt-2 nested-checklist">
+                                                    <template x-for="(subItem, subIndex) in item.subItems" :key="subIndex">
+                                                        <li class="list-group-item">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" :id="id + '-item-' + index + '-sub-' + subIndex" x-model="subItem.checked" @change="updateProgress()">
+                                                                <label class="form-check-label" :for="id + '-item-' + index + '-sub-' + subIndex" x-text="subItem.label"></label>
+                                                            </div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </template>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: SEC Climate Disclosure (Example) -->
+                    <div class="checklist-section card mb-3" x-data="checklistSection('sec', 'SEC - Climate-Related Disclosures')">
+                         <div class="card-header" :id="'heading-' + id">
+                            <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-link text-decoration-none collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse-' + id" aria-expanded="false" :aria-controls="'collapse-' + id">
+                                    <span x-text="title"></span>
+                                </button>
+                                <span class="badge rounded-pill" :class="progressPercentage === 100 ? 'bg-success' : 'bg-primary'" x-text="progressPercentage + '%'"></span>
+                            </h5>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" :style="'width: ' + progressPercentage + '%'" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div :id="'collapse-' + id" class="collapse" :aria-labelledby="'heading-' + id" data-bs-parent="#accordionChecklist">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <template x-for="(item, index) in items" :key="index">
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" :id="id + '-item-' + index" x-model="item.checked" @change="updateProgress()">
+                                                <label class="form-check-label" :for="id + '-item-' + index" x-text="item.label"></label>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                                <p class="mt-2 text-muted"><em>Add more checklist items here.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more sections like GRI, SASB etc. -->
+                     <p class="text-muted"><em>More compliance sections (GRI, SASB) can be added here using the same Alpine.js component structure. State will be saved to localStorage.</em></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Overall Progress</h5>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="'width: ' + overallProgressPercentage() + '%'" :aria-valuenow="overallProgressPercentage()" aria-valuemin="0" aria-valuemax="100" x-text="overallProgressPercentage() + '%'"></div>
+                        </div>
+                        <p class="mt-3 text-muted">This progress bar reflects the average completion across all checklist sections.</p>
+                        <button class="btn btn-success w-100 mt-3" @click="saveAllProgress()">Save Progress</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2" @click="loadProgress()">Load Saved Progress</button>
+                         <button class="btn btn-outline-danger w-100 mt-2" @click="resetAllProgress()">Reset All</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        function complianceChecklist() {
+            return {
+                sections: [], // Will be populated by checklistSection instances
+                registerSection(section) {
+                    this.sections.push(section);
+                },
+                overallProgressPercentage() {
+                    if (this.sections.length === 0) return 0;
+                    const totalProgress = this.sections.reduce((sum, section) => sum + section.progressPercentage, 0);
+                    return Math.round(totalProgress / this.sections.length);
+                },
+                saveAllProgress() {
+                    const progressData = {};
+                    this.sections.forEach(section => {
+                        progressData[section.id] = section.items.map(item => ({
+                            label: item.label, // Keep label for potential re-hydration if structure changes
+                            checked: item.checked,
+                            subItems: item.subItems ? item.subItems.map(sub => ({ label: sub.label, checked: sub.checked })) : []
+                        }));
+                    });
+                    localStorage.setItem('complianceChecklistProgress', JSON.stringify(progressData));
+                    alert('Progress saved to localStorage!');
+                },
+                loadProgress() {
+                    const savedData = JSON.parse(localStorage.getItem('complianceChecklistProgress'));
+                    if (savedData) {
+                        this.sections.forEach(section => {
+                            if (savedData[section.id]) {
+                                section.items.forEach((item, index) => {
+                                    const savedItem = savedData[section.id].find(si => si.label === item.label) || savedData[section.id][index];
+                                    if (savedItem) {
+                                        item.checked = savedItem.checked;
+                                        if (item.subItems && savedItem.subItems) {
+                                            item.subItems.forEach((subItem, subIndex) => {
+                                                 const savedSubItem = savedItem.subItems.find(ssi => ssi.label === subItem.label) || savedItem.subItems[subIndex];
+                                                 if(savedSubItem) subItem.checked = savedSubItem.checked;
+                                            });
+                                        }
+                                    }
+                                });
+                                section.updateProgress(); // Recalculate progress for the section
+                            }
+                        });
+                        alert('Progress loaded from localStorage!');
+                    } else {
+                        alert('No saved progress found.');
+                    }
+                },
+                 resetAllProgress() {
+                    if(confirm('Are you sure you want to reset all checklist progress? This cannot be undone.')) {
+                        this.sections.forEach(section => {
+                            section.items.forEach(item => {
+                                item.checked = false;
+                                if (item.subItems) {
+                                    item.subItems.forEach(subItem => subItem.checked = false);
+                                }
+                            });
+                            section.updateProgress();
+                        });
+                        localStorage.removeItem('complianceChecklistProgress');
+                        alert('All progress has been reset.');
+                    }
+                },
+                init() {
+                    // Optionally load progress when the main component initializes
+                    // this.loadProgress();
+                    // Or let user click button. For now, manual load.
+                }
+            }
+        }
+
+        function checklistSection(id, title) {
+            return {
+                id: id,
+                title: title,
+                items: [], // Will be populated with actual checklist items
+                progressPercentage: 0,
+                init() {
+                    // Sample data for demonstration. In a real app, this might come from a config or API.
+                    if (this.id === 'csrd') {
+                        this.items = [
+                            { label: 'Double Materiality Assessment Conducted', checked: false, subItems: [
+                                { label: 'Impact Materiality Assessed', checked: false },
+                                { label: 'Financial Materiality Assessed', checked: false }
+                            ]},
+                            { label: 'ESRS E1 (Climate Change) Disclosures Prepared', checked: false },
+                            { label: 'ESRS S1 (Own Workforce) Disclosures Prepared', checked: false },
+                            { label: 'Independent Assurance Obtained', checked: false }
+                        ];
+                    } else if (this.id === 'sec') {
+                         this.items = [
+                            { label: 'Climate-Related Risks Identified and Assessed', checked: false },
+                            { label: 'GHG Emissions (Scope 1 & 2) Disclosed', checked: false },
+                            { label: 'Board Oversight of Climate Risks Described', checked: false }
+                        ];
+                    }
+                    this.updateProgress();
+                    // Register this section with the main component
+                    this.$dispatch('register-section', this);
+                    // Alpine's $dispatch doesn't work reliably for parent-child on init, so use $root if available or a global registry.
+                    // A simpler way for this example:
+                    if (this.$root && this.$root.registerSection) {
+                         this.$root.registerSection(this);
+                    } else {
+                        // Fallback if $root isn't the complianceChecklist instance directly (e.g. nested x-data)
+                        // This requires complianceChecklist() to be on a shared ancestor or window.
+                        // For this structure, it works as main is x-data="complianceChecklist()"
+                         Alpine.store('complianceChecklistInstance')?.registerSection(this); // Requires setting this up globally
+                    }
+
+                },
+                updateProgress() {
+                    let checkedCount = 0;
+                    let totalCheckableItems = 0;
+                    this.items.forEach(item => {
+                        totalCheckableItems++;
+                        if (item.checked) checkedCount++;
+                        if (item.subItems) {
+                            item.subItems.forEach(subItem => {
+                                totalCheckableItems++;
+                                if (subItem.checked) checkedCount++;
+                            });
+                        }
+                    });
+                    this.progressPercentage = totalCheckableItems > 0 ? Math.round((checkedCount / totalCheckableItems) * 100) : 0;
+                },
+
+            }
+        }
+        // A way to make the complianceChecklist instance accessible if needed globally or for complex interactions
+        document.addEventListener('alpine:initializing', () => {
+            Alpine.store('complianceChecklistInstance', null);
+        });
+        document.addEventListener('alpine:initialized', () => {
+            // Assuming the main x-data="complianceChecklist()" is on the <main> tag.
+            const mainElement = document.querySelector('main[x-data="complianceChecklist()"]');
+            if(mainElement && mainElement.__x) {
+                 Alpine.store('complianceChecklistInstance', mainElement.__x);
+            }
+        });
+
+
+    </script>
+</body>
+</html>

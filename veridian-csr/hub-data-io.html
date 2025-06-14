@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Import/Export Hub - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Potential theme CSS -->
+    <style>
+        .drop-zone {
+            border: 2px dashed #007bff;
+            border-radius: 5px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f8f9fa;
+        }
+        .drop-zone.dragover {
+            background-color: #e9ecef;
+            border-color: #0056b3;
+        }
+        #importValidationMessages ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <!-- Other nav links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="checklist-compliance.html">Compliance Checklist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="hub-data-io.html">Data I/O Hub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics-insights.html">Analytics & Insights</a>
+                    </li>
+                    <!-- Add other nav links here later -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <header class="mb-4">
+            <h1 class="display-5">Data Import/Export Hub</h1>
+            <p class="lead">Manage your application data using Excel or CSV files.</p>
+        </header>
+
+        <div class="row">
+            <!-- Import Section -->
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Import Data</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Import your entire dataset from an Excel (.xlsx) or CSV (.csv) file. This will overwrite existing data in the browser.</p>
+                        <div id="dropZone" class="drop-zone mb-3">
+                            <p>Drag & drop your file here, or click to select file.</p>
+                            <input type="file" id="fileInput" class="d-none" accept=".xlsx, .csv">
+                        </div>
+                        <button class="btn btn-primary w-100" id="importButton" disabled>Import Data</button>
+                        <div id="importFileName" class="mt-2 text-muted"></div>
+                        <div id="importValidationMessages" class="mt-3 alert alert-warning d-none">
+                            <h6>Validation Issues:</h6>
+                            <ul></ul>
+                        </div>
+                         <div id="importSuccessMessage" class="mt-3 alert alert-success d-none">
+                            Data imported successfully!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Section -->
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Export Data</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Export your entire current application dataset. This includes all entered metrics, checklist states, and configurations.</p>
+                        <button class="btn btn-success w-100 mb-2" id="exportXlsxButton">
+                            <i class="fas fa-file-excel me-2"></i>Export as Excel (.xlsx)
+                        </button>
+                        <button class="btn btn-info w-100 text-white" id="exportCsvButton">
+                            <i class="fas fa-file-csv me-2"></i>Export as CSV
+                        </button>
+                        <p class="mt-3 text-muted">The CSV export might be a simplified version of your data, suitable for quick checks or use in other systems. For a full backup, Excel is recommended.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-3">
+            <h5 class="alert-heading">Data Management Note:</h5>
+            <p>All data is stored locally in your browser's localStorage. The import/export functionality (using SheetJS) allows you to back up, transfer, or work with your data offline.</p>
+            <p>Imported data should be a single JSON object that was previously exported from this application or follows the exact same structure. The application will attempt to parse and validate the structure.</p>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const importButton = document.getElementById('importButton');
+        const importFileName = document.getElementById('importFileName');
+        const importValidationMessages = document.getElementById('importValidationMessages');
+        const importSuccessMessage = document.getElementById('importSuccessMessage');
+        let selectedFile = null;
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            selectedFile = file;
+            importFileName.textContent = `Selected file: \${file.name} (\${(file.size / 1024).toFixed(2)} KB)`;
+            importButton.disabled = false;
+            importValidationMessages.classList.add('d-none');
+            importValidationMessages.querySelector('ul').innerHTML = '';
+            importSuccessMessage.classList.add('d-none');
+        }
+
+        importButton.addEventListener('click', () => {
+            if (!selectedFile) {
+                alert('Please select a file first.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    let data;
+                    if (selectedFile.name.endsWith('.xlsx')) {
+                        const workbook = XLSX.read(e.target.result, { type: 'binary' });
+                        // Assuming data is in the first sheet, first cell as a JSON string
+                        const firstSheetName = workbook.SheetNames[0];
+                        const worksheet = workbook.Sheets[firstSheetName];
+                        // This expects the entire JSON blob to be in a single cell, typically A1.
+                        // Or, it could be structured data across cells/rows.
+                        // For this example, let's assume A1 holds the JSON string.
+                        const jsonDataCell = worksheet['A1'] ? worksheet['A1'].v : null;
+                        if (!jsonDataCell) throw new Error("XLSX file does not contain data in cell A1 or is not structured as expected.");
+                        data = JSON.parse(jsonDataCell);
+
+                    } else if (selectedFile.name.endsWith('.csv')) {
+                        // CSV might be tricky if it's a direct JSON string.
+                        // Typically CSV would represent tabular data.
+                        // For this example, let's assume the CSV contains a single cell with the JSON string.
+                        // This is a simplification; real CSV parsing would be more complex.
+                        const csvContent = e.target.result;
+                        // If CSV is just one line, one cell with JSON:
+                        try {
+                             data = JSON.parse(csvContent.trim());
+                        } catch (csvParseError) {
+                            // Fallback: try to read as a table and get A1
+                            const workbook = XLSX.read(e.target.result, { type: 'binary' });
+                            const firstSheetName = workbook.SheetNames[0];
+                            const worksheet = workbook.Sheets[firstSheetName];
+                            const jsonDataCell = worksheet['A1'] ? worksheet['A1'].v : null;
+                            if (!jsonDataCell) throw new Error("CSV file does not contain data in cell A1 or is not structured as expected.");
+                            data = JSON.parse(jsonDataCell);
+                        }
+
+                    } else {
+                        throw new Error("Unsupported file type.");
+                    }
+
+                    // --- Placeholder for Data Validation ---
+                    const validationErrors = [];
+                    if (typeof data !== 'object' || data === null) {
+                        validationErrors.push("Imported data is not a valid JSON object.");
+                    } else {
+                        // Example: Check for a specific key expected in Veridian CSR data
+                        if (!data.hasOwnProperty('veridianCSRVersion')) {
+                            validationErrors.push("Missing 'veridianCSRVersion' key. This might not be a Veridian CSR data file.");
+                        }
+                        if (!data.hasOwnProperty('userPreferences') || !data.hasOwnProperty('carbonData')) {
+                            validationErrors.push("Data is missing core components like 'userPreferences' or 'carbonData'.");
+                        }
+                        // Add more specific validation rules here based on your data structure
+                    }
+
+                    if (validationErrors.length > 0) {
+                        importValidationMessages.classList.remove('d-none');
+                        const ul = importValidationMessages.querySelector('ul');
+                        ul.innerHTML = ''; // Clear previous messages
+                        validationErrors.forEach(err => {
+                            const li = document.createElement('li');
+                            li.textContent = err;
+                            ul.appendChild(li);
+                        });
+                        importSuccessMessage.classList.add('d-none');
+                        return;
+                    }
+                    // --- End Data Validation ---
+
+
+                    // If validation passes:
+                    // This is where you'd take 'data' and update your application's localStorage.
+                    // For now, just a success message.
+                    // The actual encryption and saving to localStorage is a separate step.
+                    localStorage.setItem('veridianCSR_importedData_temp', JSON.stringify(data)); // Store temporarily
+                    console.log('Imported data:', data);
+                    importSuccessMessage.textContent = 'Data parsed and validated successfully! (Placeholder - data not yet fully integrated into app storage)';
+                    importSuccessMessage.classList.remove('d-none');
+                    importValidationMessages.classList.add('d-none');
+                    alert('Data imported successfully (placeholder)! It would now be processed and stored.');
+                    // Next step would be to encrypt and save this 'data' to the main localStorage key.
+
+                } catch (error) {
+                    console.error('Error importing data:', error);
+                    importValidationMessages.classList.remove('d-none');
+                    importValidationMessages.querySelector('ul').innerHTML = \`<li>Error processing file: \${error.message}</li>\`;
+                    importSuccessMessage.classList.add('d-none');
+                }
+            };
+
+            if (selectedFile.name.endsWith('.xlsx') || selectedFile.name.endsWith('.csv')) {
+                 reader.readAsBinaryString(selectedFile); // SheetJS works well with binary strings
+            } else {
+                reader.readAsText(selectedFile); // For other types if needed, though not primary for this
+            }
+        });
+
+        // --- Export Functionality ---
+        function getCurrentApplicationData() {
+            // Placeholder: In a real app, this function would gather all relevant data
+            // from localStorage (after decryption if necessary), various Alpine.js stores, etc.
+            // It should construct a single large JSON object.
+            const dummyData = {
+                veridianCSRVersion: "1.0.0",
+                exportTimestamp: new Date().toISOString(),
+                userPreferences: JSON.parse(localStorage.getItem('userPreferences')) || { theme: 'theme-corporate-dark.css', language: 'en' },
+                dashboardLayout: JSON.parse(localStorage.getItem('dashboardWidgetLayout')) || [],
+                carbonData: JSON.parse(localStorage.getItem('carbonFootprintData')) || { scope1: [], scope2: [], scope3: [] },
+                environmentalMetrics: JSON.parse(localStorage.getItem('environmentalMetricsData')) || { energy: [], waste: [], water: [] },
+                socialImpactData: JSON.parse(localStorage.getItem('socialImpactData')) || {},
+                governancePolicies: JSON.parse(localStorage.getItem('governancePolicies')) || [],
+                complianceChecklist: JSON.parse(localStorage.getItem('complianceChecklistProgress')) || {},
+                // ... add other data modules
+            };
+            // Simulate removing sensitive or large unencrypted items if needed before export
+            // For this placeholder, we assume the data is ready.
+            return dummyData;
+        }
+
+        document.getElementById('exportXlsxButton').addEventListener('click', () => {
+            const data = getCurrentApplicationData();
+            const jsonDataString = JSON.stringify(data, null, 2); // Pretty print for readability in cell
+
+            // Create a worksheet where cell A1 contains the entire JSON string
+            const ws = XLSX.utils.aoa_to_sheet([["Veridian CSR Data Export (JSON)"], [jsonDataString]]);
+            // Adjust column width for A to be quite wide to hold the JSON string
+            ws['!cols'] = [{ wch: 200 }];
+
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "VeridianCSRData");
+            XLSX.writeFile(wb, "veridian_csr_data_export.xlsx");
+            alert('Data exported as Excel! (JSON string in cell A1)');
+        });
+
+        document.getElementById('exportCsvButton').addEventListener('click', () => {
+            const data = getCurrentApplicationData();
+            const jsonDataString = JSON.stringify(data); // Compact for CSV
+
+            // Create CSV content: one header, one row with the JSON string.
+            // Quotes are important if JSON string contains commas.
+            const csvContent = "data:text/csv;charset=utf-8,"
+                + "VeridianCSR_JSON_Data
+"
+                + """ + jsonDataString.replace(/"/g, '""') + """; // Escape double quotes
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "veridian_csr_data_export.csv");
+            document.body.appendChild(link); // Required for Firefox
+            link.click();
+            document.body.removeChild(link);
+            alert('Data exported as CSV! (JSON string in the cell)');
+        });
+
+    </script>
+</body>
+</html>

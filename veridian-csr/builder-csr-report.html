@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSR Report Builder - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Potential theme CSS -->
+    <style>
+        .wizard-step { display: none; }
+        .wizard-step.active { display: block; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <!-- Other nav links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="center-governance.html">Governance Center</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="builder-csr-report.html">Report Builder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="checklist-compliance.html">Compliance Checklist</a>
+                    </li>
+                    <!-- Add other nav links here later -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <header class="mb-4">
+            <h1 class="display-5">CSR Report Builder</h1>
+            <p class="lead">Generate professional, board-ready CSR reports.</p>
+        </header>
+
+        <!-- Wizard Navigation -->
+        <ul class="nav nav-pills nav-fill mb-4" id="reportWizardNav">
+            <li class="nav-item">
+                <button class="nav-link active" data-step="1" type="button">Step 1: Data Range</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-step="2" type="button">Step 2: Sections</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-step="3" type="button">Step 3: Branding</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-step="4" type="button">Step 4: Preview & Download</button>
+            </li>
+        </ul>
+
+        <!-- Wizard Content -->
+        <div id="reportWizardContent">
+            <!-- Step 1: Select Data Range -->
+            <div id="step-1" class="wizard-step active card">
+                <div class="card-body">
+                    <h5 class="card-title">Step 1: Select Data Range</h5>
+                    <form id="step1Form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="reportStartDate" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="reportStartDate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="reportEndDate" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="reportEndDate" required>
+                            </div>
+                        </div>
+                        <p class="text-muted">Select the period for which you want to generate the report.</p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 2: Choose Sections to Include -->
+            <div id="step-2" class="wizard-step card">
+                <div class="card-body">
+                    <h5 class="card-title">Step 2: Choose Sections to Include</h5>
+                    <form id="step2Form">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="executiveSummary" id="includeExecutiveSummary" checked>
+                            <label class="form-check-label" for="includeExecutiveSummary">Executive Summary</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="carbonFootprint" id="includeCarbonFootprint" checked>
+                            <label class="form-check-label" for="includeCarbonFootprint">Carbon Footprint Analysis</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="environmentalMetrics" id="includeEnvironmentalMetrics" checked>
+                            <label class="form-check-label" for="includeEnvironmentalMetrics">Environmental Metrics (Energy, Waste, Water)</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="socialImpact" id="includeSocialImpact" checked>
+                            <label class="form-check-label" for="includeSocialImpact">Social Impact Initiatives</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="governance" id="includeGovernance" checked>
+                            <label class="form-check-label" for="includeGovernance">Governance & Compliance Overview</label>
+                        </div>
+                        <p class="text-muted mt-2">Select the sections you wish to include in the final report.</p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 3: Customize Branding -->
+            <div id="step-3" class="wizard-step card">
+                <div class="card-body">
+                    <h5 class="card-title">Step 3: Customize Branding</h5>
+                    <form id="step3Form">
+                        <div class="mb-3">
+                            <label for="companyLogo" class="form-label">Upload Company Logo</label>
+                            <input class="form-control" type="file" id="companyLogo" accept="image/png, image/jpeg">
+                        </div>
+                        <div class="mb-3">
+                            <label for="reportPrimaryColor" class="form-label">Report Primary Color</label>
+                            <input type="color" class="form-control form-control-color" id="reportPrimaryColor" value="#0D6EFD" title="Choose your color">
+                        </div>
+                        <div class="mb-3">
+                            <label for="reportHeaderFooter" class="form-label">Custom Header/Footer Text (Optional)</label>
+                            <textarea class="form-control" id="reportHeaderFooter" rows="2" placeholder="e.g., Confidential - For Internal Use Only"></textarea>
+                        </div>
+                        <p class="text-muted">Customize the appearance of your report.</p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 4: Preview & Download -->
+            <div id="step-4" class="wizard-step card">
+                <div class="card-body">
+                    <h5 class="card-title">Step 4: Preview & Download</h5>
+                    <div class="mb-3">
+                        <h6>Report Preview:</h6>
+                        <div id="reportPreviewArea" style="min-height: 200px; border: 1px dashed #ccc; padding: 15px; background-color: #f8f9fa;">
+                            <p class="text-center text-muted"><em>A dynamic preview of the report will be generated here based on your selections. (jsPDF integration)</em></p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success btn-lg" id="downloadPdfButton">
+                        <i class="fas fa-file-pdf me-2"></i>Download PDF Report
+                    </button>
+                    <p class="text-muted mt-2">Review the report preview and download it as a PDF.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wizard Navigation Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" id="prevStepButton" disabled>Previous</button>
+            <button type="button" class="btn btn-primary" id="nextStepButton">Next</button>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        let currentStep = 1;
+        const totalSteps = 4;
+        const wizardNavButtons = document.querySelectorAll('#reportWizardNav .nav-link');
+        const wizardSteps = document.querySelectorAll('.wizard-step');
+        const prevButton = document.getElementById('prevStepButton');
+        const nextButton = document.getElementById('nextStepButton');
+
+        function showStep(stepNumber) {
+            wizardSteps.forEach(step => step.classList.remove('active'));
+            document.getElementById(`step-\${stepNumber}`).classList.add('active');
+
+            wizardNavButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`#reportWizardNav .nav-link[data-step="\${stepNumber}"]`).classList.add('active');
+
+            prevButton.disabled = stepNumber === 1;
+            nextButton.disabled = stepNumber === totalSteps;
+            nextButton.textContent = stepNumber === totalSteps ? 'Generate Report' : 'Next';
+        }
+
+        wizardNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                currentStep = parseInt(button.getAttribute('data-step'));
+                showStep(currentStep);
+            });
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                // Final step: "Generate Report" button clicked
+                alert('Generate Report button clicked! jsPDF logic will run here.');
+                // Placeholder for jsPDF generation
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text("CSR Report (Placeholder)", 10, 10);
+                doc.text(\`Data Range: \${document.getElementById('reportStartDate').value} to \${document.getElementById('reportEndDate').value}\`, 10, 20);
+                // Add more content based on selections
+                document.getElementById('reportPreviewArea').innerHTML = '<p class="text-success">Report generated (placeholder). Click Download PDF.</p>';
+                // doc.save('Veridian_CSR_Report.pdf'); // Actual download on another button
+            }
+        });
+
+        document.getElementById('downloadPdfButton')?.addEventListener('click', () => {
+            alert('Download PDF button clicked! jsPDF generation and download will happen here.');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text("Veridian CSR Report", 10, 10);
+            doc.text("This is a placeholder PDF generated by jsPDF.", 10, 20);
+            // Add more content based on user selections from previous steps
+            // For example:
+            // const reportStartDate = document.getElementById('reportStartDate').value;
+            // doc.text(\`Report Period: \${reportStartDate}\`, 10, 30);
+            doc.save('Veridian_CSR_Report_Sample.pdf');
+        });
+
+        showStep(currentStep); // Initialize the first step
+    </script>
+</body>
+</html>

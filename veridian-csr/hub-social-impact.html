@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Impact Hub - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Potential theme CSS -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tracker-carbon-footprint.html">Carbon Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="metrics-environmental.html">Environmental Metrics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="hub-social-impact.html">Social Impact Hub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="center-governance.html">Governance Center</a>
+                    </li>
+                    <!-- Add other nav links here later -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <header class="mb-4">
+            <h1 class="display-5">Social Impact Hub</h1>
+        </header>
+
+        <section id="social-kpis" class="row">
+            <!-- Gauge Charts -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">Diversity & Inclusion %</div>
+                    <div class="card-body">
+                        <canvas id="diversityGauge"></canvas>
+                        <h4 class="mt-2"><span id="diversityValue">N/A</span>%</h4>
+                        <p><em>Gauge chart (Chart.js Doughnut) placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">Employee Safety Incidents</div>
+                    <div class="card-body">
+                        <canvas id="safetyGauge"></canvas>
+                        <h4 class="mt-2"><span id="safetyValue">N/A</span></h4>
+                        <p><em>Gauge chart (Chart.js Doughnut) placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">Training Completion Rate</div>
+                    <div class="card-body">
+                        <canvas id="trainingGauge"></canvas>
+                        <h4 class="mt-2"><span id="trainingValue">N/A</span>%</h4>
+                        <p><em>Gauge chart (Chart.js Doughnut) placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="social-cards" class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Community Volunteer Hours</h5>
+                        <p class="card-text display-4"><span id="volunteerHours">N/A</span></p>
+                        <p class="card-text"><small class="text-muted">Year to Date</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ethical Sourcing Score</h5>
+                        <p class="card-text display-4"><span id="ethicalSourcingScore">N/A</span>/100</p>
+                        <p class="card-text"><small class="text-muted">Latest Audit</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Employee Wellness Program Participation</h5>
+                        <p class="card-text display-4"><span id="wellnessParticipation">N/A</span>%</p>
+                        <p class="card-text"><small class="text-muted">This Quarter</small></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        // Helper function for gauge charts (doughnut)
+        function createGauge(canvasId, value, maxValue, label, color = 'rgb(75, 192, 192)') {
+            const ctx = document.getElementById(canvasId)?.getContext('2d');
+            if (!ctx) return;
+
+            const data = {
+                datasets: [{
+                    data: [value, maxValue - value],
+                    backgroundColor: [color, '#E0E0E0'],
+                    circumference: 180, // Half circle
+                    rotation: 270,      // Start from bottom
+                    borderWidth: 0
+                }]
+            };
+            new Chart(ctx, { type: 'doughnut', data: data, options: { responsive: true, maintainAspectRatio: true, cutout: '70%', plugins: { legend: { display: false }, tooltip: { enabled: false } } } });
+
+            // Update the text value if an element exists
+            const valueElementId = canvasId.replace('Gauge', 'Value');
+            const valueElement = document.getElementById(valueElementId);
+            if (valueElement) {
+                valueElement.textContent = value;
+            }
+        }
+
+        // Initialize Gauge Charts with placeholder values
+        createGauge('diversityGauge', 65, 100, 'Diversity %'); // Example: 65%
+        createGauge('safetyGauge', 5, 20, 'Safety Incidents'); // Example: 5 incidents (max could be an average or target)
+        createGauge('trainingGauge', 80, 100, 'Training Completion %'); // Example: 80%
+
+        // Placeholder values for cards
+        document.getElementById('volunteerHours').textContent = '1,240';
+        document.getElementById('ethicalSourcingScore').textContent = '85';
+        document.getElementById('wellnessParticipation').textContent = '60';
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Tracker - Veridian CSR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Potential theme CSS -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Veridian CSR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard-executive.html">Executive Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="tracker-carbon-footprint.html">Carbon Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="metrics-environmental.html">Environmental Metrics</a>
+                    </li>
+                    <!-- Add other nav links here later -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <header class="mb-4">
+            <h1 class="display-5">Carbon Footprint Tracker</h1>
+        </header>
+
+        <section id="emission-controls" class="row mb-4">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-header">Scope 1 Emissions</div>
+                    <div class="card-body">
+                        <p class="card-text">Direct emissions from owned or controlled sources.</p>
+                        <!-- Input fields for Scope 1 will go here -->
+                        <form>
+                            <div class="mb-3">
+                                <label for="naturalGas" class="form-label">Natural Gas (kWh)</label>
+                                <input type="number" class="form-control" id="naturalGas" placeholder="Enter usage">
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm">Calculate Scope 1</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-header">Scope 2 Emissions</div>
+                    <div class="card-body">
+                        <p class="card-text">Indirect emissions from the generation of purchased energy.</p>
+                        <!-- Input fields for Scope 2 will go here -->
+                        <form>
+                            <div class="mb-3">
+                                <label for="purchasedElectricity" class="form-label">Purchased Electricity (kWh)</label>
+                                <input type="number" class="form-control" id="purchasedElectricity" placeholder="Enter usage">
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm">Calculate Scope 2</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-header">Scope 3 Emissions</div>
+                    <div class="card-body">
+                        <p class="card-text">All other indirect emissions in the value chain.</p>
+                        <!-- Input fields for Scope 3 will go here -->
+                        <form>
+                            <div class="mb-3">
+                                <label for="businessTravel" class="form-label">Business Travel (km)</label>
+                                <input type="number" class="form-control" id="businessTravel" placeholder="Enter distance">
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm">Calculate Scope 3</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="map-visualization" class="mb-4">
+            <div class="card">
+                <div class="card-header">Emissions by Location</div>
+                <div class="card-body">
+                    <div id="carbonMap" style="min-height: 400px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                        <p><em>Map visualization (D3.js) placeholder</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="real-time-results" class="mb-4">
+            <div class="card">
+                <div class="card-header">Calculated Carbon Footprint</div>
+                <div class="card-body">
+                    <h4 class="card-title">Total CO2e: <span id="totalCO2e">N/A</span> tonnes</h4>
+                    <p><em>Results from CO2.js/Carbon.js calculations will appear here in real-time.</em></p>
+                    <ul>
+                        <li>Scope 1: <span id="scope1CO2e">N/A</span> tonnes</li>
+                        <li>Scope 2: <span id="scope2CO2e">N/A</span> tonnes</li>
+                        <li>Scope 3: <span id="scope3CO2e">N/A</span> tonnes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Veridian CSR
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Placeholder for CO2.js/Carbon.js - to be sourced and added to assets/js/ or via CDN if available -->
+    <!-- <script src="assets/js/co2.js"></script> -->
+    <!-- <script src="assets/js/carbon.js"></script> -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        // Placeholder for D3.js map initialization
+        var carbonMapContainer = document.getElementById('carbonMap');
+        if (carbonMapContainer) {
+            // D3.js map logic will go here
+        }
+
+        // Placeholder for CO2.js/Carbon.js calculations
+        // Example: function calculateEmissions() {
+        // const naturalGas = document.getElementById('naturalGas').value;
+        // Call CO2.js/Carbon.js functions here
+        // Update #totalCO2e, #scope1CO2e etc.
+        // }
+    </script>
+</body>
+</html>
