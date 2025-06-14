@@ -80,6 +80,7 @@
                             </select>
                         </div>
                         <p class="text-muted" x-text="getLocalizedText('themeNote', 'Select your preferred visual theme for the application. More themes will be available.')">Select your preferred visual theme for the application. More themes will be available.</p>
+                        <p class="mt-2"><strong>Current Active Theme:</strong> <span x-text="getActiveThemeName()"></span></p>
                     </div>
                 </div>
             </section>
@@ -330,6 +331,20 @@
                 // },
                 getLocalizedText(key, fallback) {
                     return this.currentStrings[key] || fallback || `[${key}]`;
+                },
+                getActiveThemeName: function() {
+                    const themePath = this.preferences.theme;
+                    if (!themePath || themePath === 'assets/css/style.css') {
+                        return 'Default Light';
+                    }
+                    // Extract theme name from path, e.g., "assets/css/themes/theme-oceanic.css" -> "Oceanic"
+                    const parts = themePath.split('/');
+                    const fileName = parts[parts.length - 1]; // e.g., theme-oceanic.css
+                    if (fileName.startsWith('theme-')) {
+                        const namePart = fileName.substring(6, fileName.lastIndexOf('.css')); // oceanic
+                        return namePart.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Oceanic
+                    }
+                    return 'Unknown'; // Fallback
                 }
             }
         }
