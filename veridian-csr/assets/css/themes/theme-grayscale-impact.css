@@ -27,23 +27,53 @@
     --font-family-headings: 'Archivo Black', sans-serif; /* Bold, impactful heading font */
     --h1-font-size: calc(1.5rem + 2vw); /* Larger headings for impact */
     --h2-font-size: calc(1.4rem + 1.2vw);
+    --headings-color: #000000; /* Black headings */
+    --card-header-bg: #E9ECEF; /* Light gray for card headers */
+    --card-header-color: #000000;
+    --card-footer-bg: #E9ECEF;
+
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
-.navbar.bg-light { /* Keep navbar light to contrast with dark text/primary */
-    background-color: #FFFFFF !important;
-    border-bottom: 1px solid #DDDDDD;
+
+.top-navbar {
+    background-color: #FFFFFF;
+    border-bottom: 2px solid #000000; /* Strong border */
 }
-.navbar.bg-light .navbar-brand,
-.navbar.bg-light .nav-link {
-    color: var(--primary-color) !important; /* Dark text on light navbar */
+.top-navbar .navbar-brand,
+.top-navbar .nav-link-pills,
+.top-navbar .action-icon {
+    color: var(--primary-color); /* Dark text on light navbar */
 }
-.navbar.bg-light .nav-link:hover,
-.navbar.bg-light .nav-link.active {
-    color: #000000 !important;
+.top-navbar .navbar-brand i {
+    color: var(--primary-color);
 }
-.navbar.bg-light .navbar-toggler {
-    border-color: var(--primary-color);
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.top-navbar .nav-link-pills:hover,
+.top-navbar .nav-link-pills.active {
+    background-color: var(--primary-color); /* Black background */
+    color: var(--primary-text-color); /* White text */
 }
+.top-navbar .nav-link-pills.active i {
+    color: var(--primary-text-color);
+}
+.top-navbar .navbar-toggler-btn {
+    color: var(--primary-color);
+}
+
+.submenu {
+    background-color: #FFFFFF;
+    border-color: #000000;
+    border-width: 2px;
+}
+.submenu-link {
+    color: #000000;
+    font-weight: var(--font-weight-bold);
+}
+.submenu-link:hover,
+.submenu-link.active {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+}
+
 .btn-primary { /* Primary buttons are dark */
     background-color: var(--primary-color);
     border-color: var(--primary-color);

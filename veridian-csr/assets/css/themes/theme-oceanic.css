@@ -23,35 +23,76 @@
     --card-bg: #FFFFFF;
     --card-border-color: #CDE8EF; /* Lighter blue-gray border */
     --card-box-shadow: 0 2px 5px rgba(11, 114, 133, 0.1); /* Subtle shadow with primary color tint */
+    --card-hover-box-shadow: 0 4px 10px rgba(11, 114, 133, 0.15);
     --link-color: var(--primary-color);
     --link-hover-color: var(--primary-color-dark);
+    --headings-color: var(--primary-color-dark);
+    --card-header-bg: rgba(var(--primary-color-rgb), 0.05); /* Light tint of primary for card headers */
+    --card-header-color: var(--primary-color-dark);
+    --card-header-border-color: rgba(var(--primary-color-rgb), 0.1);
 
     /* Typography (can be adjusted for themes, but keeping defaults for now) */
     /* --font-family-sans-serif: 'Lato', sans-serif; /* Example: Different font */
     /* --font-family-headings: 'Merriweather', serif; */
 
     /* Specific component adjustments for Oceanic theme */
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* Example of a more specific override if needed beyond root variables */
-.navbar {
-    background-color: var(--primary-color); /* Make navbar use primary color */
+/* Navbar for Oceanic Theme */
+.top-navbar {
+    background-color: var(--primary-color);
+    border-bottom-color: var(--primary-color-dark);
+}
+.top-navbar .navbar-brand,
+.top-navbar .nav-link-pills,
+.top-navbar .action-icon {
     color: var(--primary-text-color);
 }
-.navbar .navbar-brand,
-.navbar .nav-link {
-    color: var(--primary-text-color) !important; /* Important to override Bootstrap specificity if needed */
+.top-navbar .navbar-brand i {
+    color: var(--primary-text-color);
 }
-.navbar .nav-link:hover {
-    color: rgba(255,255,255,0.85) !important;
+.top-navbar .nav-link-pills:hover,
+.top-navbar .nav-link-pills.active {
+    background-color: var(--primary-color-dark);
+    color: var(--primary-text-color);
 }
-.navbar .navbar-toggler {
-    border-color: rgba(255,255,255,0.5);
+.top-navbar .nav-link-pills.active i {
+    color: var(--primary-text-color);
+}
+.top-navbar .navbar-toggler-btn {
+    color: var(--primary-text-color);
 }
 
-/* Card header specific for this theme */
-.card-header {
-    background-color: rgba(var(--primary-color-rgb), 0.05); /* Light tint of primary for card headers */
-    color: var(--primary-color-dark);
+.submenu {
+    background-color: var(--primary-color-light); /* Lighter shade for submenu */
+    border-color: var(--primary-color);
+}
+.submenu-link {
+    color: var(--primary-text-color);
+}
+.submenu-link:hover,
+.submenu-link.active {
+    background-color: var(--primary-color-dark);
+    color: var(--primary-text-color);
+}
+
+/* Button adjustments if needed */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+}
+.btn-secondary { /* Making secondary button more distinct if needed */
+    background-color: var(--accent-color); /* Using accent for secondary button */
+    border-color: var(--accent-color);
+    color: var(--accent-text-color);
+}
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    border-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    color: var(--accent-text-color);
 }

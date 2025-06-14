@@ -19,21 +19,62 @@
     --card-bg: #FFFFFF;
     --card-border-color: #CFD8DC; /* Blue Grey Lighten-4 */
     --card-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --card-hover-box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     --link-color: var(--primary-color);
     --link-hover-color: var(--primary-color-dark);
+    --headings-color: var(--primary-color-dark);
+    --card-header-bg: #FFFFFF; /* Keep card headers white for this theme */
+    --card-header-color: var(--primary-color-dark);
+    --card-header-border-color: #E0E0E0; /* Slightly darker than default card border */
+
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
+
 /* Navbar for Arctic Dawn */
-.navbar.bg-light {
-    background-color: var(--primary-color-dark) !important; /* Darker navbar */
+.top-navbar {
+    background-color: var(--primary-color-dark); /* Darker navbar */
+    border-bottom-color: color-mix(in srgb, var(--primary-color-dark) 80%, black);
 }
-.navbar.bg-light .navbar-brand,
-.navbar.bg-light .nav-link {
-    color: var(--primary-text-color) !important;
+.top-navbar .navbar-brand,
+.top-navbar .nav-link-pills,
+.top-navbar .action-icon {
+    color: var(--primary-text-color);
 }
-.navbar.bg-light .nav-link:hover {
-    color: rgba(255,255,255,0.85) !important;
+.top-navbar .navbar-brand i {
+    color: var(--accent-color); /* Accent color for brand icon */
 }
-.navbar.bg-light .navbar-toggler {
-    border-color: rgba(255,255,255,0.5);
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.top-navbar .nav-link-pills:hover,
+.top-navbar .nav-link-pills.active {
+    background-color: var(--primary-color); /* Lighter indigo for active/hover */
+    color: var(--primary-text-color);
+}
+.top-navbar .nav-link-pills.active i {
+    color: var(--primary-text-color);
+}
+.top-navbar .navbar-toggler-btn {
+    color: var(--primary-text-color);
+}
+
+.submenu {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color-dark);
+}
+.submenu-link {
+    color: var(--primary-text-color);
+}
+.submenu-link:hover,
+.submenu-link.active {
+    background-color: var(--primary-color-dark);
+    color: var(--primary-text-color);
+}
+
+.btn-secondary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--accent-text-color);
+}
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    border-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    color: var(--accent-text-color);
 }

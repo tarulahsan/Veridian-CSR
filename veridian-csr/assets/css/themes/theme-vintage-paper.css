@@ -26,20 +26,72 @@
     --font-family-sans-serif: 'Open Sans', sans-serif;
     --font-family-headings: 'Lora', serif; /* Serif for headings */
     --border-radius: 0.2rem; /* Sharper edges */
+    --card-border-radius: 0.2rem;
+    --card-box-shadow: 0 1px 2px rgba(84,110,122,0.2); /* Use accent color for shadow */
+    --card-hover-box-shadow: 0 2px 5px rgba(84,110,122,0.3);
+    --headings-color: var(--primary-color-dark);
+    --card-header-bg: #E0DACE; /* Slightly darker than card-bg for header */
+    --card-header-color: var(--primary-color-dark);
+    --card-header-border-color: #C7BDB7;
+
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
+
 /* Navbar for Vintage Paper */
-.navbar.bg-light {
-    background-color: var(--primary-color-dark) !important;
+.top-navbar {
+    background-color: var(--primary-color-dark); /* Dark brown navbar */
+    border-bottom: 1px solid color-mix(in srgb, var(--primary-color-dark) 80%, black);
 }
-.navbar.bg-light .navbar-brand,
-.navbar.bg-light .nav-link {
-    color: var(--primary-text-color) !important;
+.top-navbar .navbar-brand,
+.top-navbar .nav-link-pills,
+.top-navbar .action-icon {
+    color: var(--primary-text-color);
     font-family: var(--font-family-sans-serif); /* Use sans-serif for nav */
 }
-.navbar.bg-light .nav-link:hover {
-    color: rgba(255,255,255,0.85) !important;
+.top-navbar .navbar-brand i {
+    color: var(--primary-text-color);
 }
-.navbar.bg-light .navbar-toggler {
-    border-color: rgba(255,255,255,0.5);
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.top-navbar .nav-link-pills:hover,
+.top-navbar .nav-link-pills.active {
+    background-color: var(--primary-color); /* Lighter brown for active/hover */
+    color: var(--primary-text-color);
+}
+.top-navbar .nav-link-pills.active i {
+    color: var(--primary-text-color);
+}
+.top-navbar .navbar-toggler-btn {
+    color: var(--primary-text-color);
+}
+
+.submenu {
+    background-color: var(--card-bg);
+    border-color: var(--card-border-color);
+    box-shadow: var(--card-box-shadow);
+}
+.submenu-link {
+    color: var(--body-color);
+    font-family: var(--font-family-sans-serif);
+}
+.submenu-link:hover,
+.submenu-link.active {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+}
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--primary-color-dark) 80%, black);
+    border-color: color-mix(in srgb, var(--primary-color-dark) 70%, black);
+}
+
+.form-control, .form-select {
+    background-color: #FAF8F5; /* Slightly off-white for inputs */
+    border-color: var(--card-border-color);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    background-color: #FFFFFF;
 }

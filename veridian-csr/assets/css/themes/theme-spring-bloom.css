@@ -19,20 +19,60 @@
     --card-bg: #FFFFFF;
     --card-border-color: #DCEDC8; /* Light Green border */
     --card-box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    --card-hover-box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     --link-color: var(--primary-color-dark);
     --link-hover-color: var(--accent-color);
+    --headings-color: var(--primary-color-dark);
+    --card-header-bg: rgba(var(--primary-color-rgb), 0.05);
+    --card-header-color: var(--primary-color-dark);
+
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
-.navbar.bg-light {
-    background-color: var(--primary-color) !important;
+
+.top-navbar {
+    background-color: var(--primary-color);
+    border-bottom-color: var(--primary-color-dark);
 }
-.navbar.bg-light .navbar-brand,
-.navbar.bg-light .nav-link {
-    color: var(--primary-text-color) !important;
+.top-navbar .navbar-brand,
+.top-navbar .nav-link-pills,
+.top-navbar .action-icon {
+    color: var(--primary-text-color);
 }
-.navbar.bg-light .nav-link:hover {
-    color: rgba(255,255,255,0.85) !important;
+.top-navbar .navbar-brand i {
+    color: var(--secondary-color); /* Yellow flower for brand icon */
 }
-.navbar.bg-light .navbar-toggler {
-    border-color: rgba(255,255,255,0.5);
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.top-navbar .nav-link-pills:hover,
+.top-navbar .nav-link-pills.active {
+    background-color: var(--primary-color-dark);
+    color: var(--primary-text-color);
+}
+.top-navbar .nav-link-pills.active i {
+    color: var(--primary-text-color);
+}
+.top-navbar .navbar-toggler-btn {
+    color: var(--primary-text-color);
+}
+
+.submenu {
+    background-color: var(--primary-color-light);
+    border-color: var(--primary-color);
+}
+.submenu-link {
+    color: var(--primary-text-color);
+}
+.submenu-link:hover,
+.submenu-link.active {
+    background-color: var(--primary-color-dark);
+    color: var(--primary-text-color);
+}
+
+.btn-secondary { /* Making secondary button use accent (pink) */
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--accent-text-color);
+}
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    border-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    color: var(--accent-text-color);
 }

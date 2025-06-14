@@ -27,72 +27,131 @@
     --font-family-sans-serif: 'Arial', sans-serif; /* Standard high contrast font */
     --font-family-headings: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
     --font-weight-base: 700; /* Bolder base weight */
+    --font-weight-bold: 700; /* Ensure buttons also use this */
+    --font-weight-links: 700;
+    --headings-color: #FFFFFF;
+    --card-header-color: #FFFFFF;
+    --card-header-bg: #000000;
+    --card-footer-bg: #000000;
 
     --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28255,255,0%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 /* Ensure high contrast for components */
-.navbar.bg-light { /* Override default light navbar */
+.top-navbar {
     background-color: #000000 !important;
-    border-bottom: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color) !important;
 }
-.navbar.bg-light .navbar-brand,
-.navbar.bg-light .nav-link {
+.top-navbar .navbar-brand,
+.top-navbar .nav-link-pills,
+.top-navbar .action-icon {
+    color: var(--secondary-color) !important; /* Yellow text on black navbar */
+    text-shadow: none !important;
+}
+.top-navbar .navbar-brand i {
     color: var(--secondary-color) !important;
 }
-.navbar.bg-light .nav-link:hover,
-.navbar.bg-light .nav-link.active {
+.top-navbar .nav-link-pills:hover,
+.top-navbar .nav-link-pills.active {
+    color: #000000 !important; /* Black text */
+    background-color: var(--secondary-color) !important; /* Yellow background */
+}
+.top-navbar .nav-link-pills.active i {
+    color: #000000 !important;
+}
+.top-navbar .navbar-toggler-btn {
+    color: var(--secondary-color) !important;
+    border: 1px solid var(--secondary-color) !important;
+}
+.submenu {
+    background-color: #000000 !important;
+    border: 2px solid var(--secondary-color) !important;
+}
+.submenu-link {
+    color: var(--secondary-color) !important;
+}
+.submenu-link:hover,
+.submenu-link.active {
     color: #000000 !important;
     background-color: var(--secondary-color) !important;
 }
- .navbar.bg-light .navbar-toggler {
-    border-color: var(--secondary-color);
+
+.card {
+    border-width: 2px !important;
+    box-shadow: none !important; /* Remove shadows for HC */
+}
+.card:hover {
+    transform: none !important; /* No lift effect */
 }
 
-
+.btn {
+    border-width: 2px !important;
+    box-shadow: none !important;
+}
+.btn:hover, .btn:active {
+    box-shadow: none !important;
+    transform: none !important;
+}
 .btn-primary {
-    background-color: var(--primary-color);
-    border: 2px solid var(--secondary-color);
-    color: var(--primary-text-color);
+    background-color: var(--primary-color) !important;
+    border: 2px solid var(--secondary-color) !important; /* Yellow border */
+    color: var(--primary-text-color) !important; /* White text on blue */
 }
 .btn-primary:hover {
-    background-color: var(--primary-color-dark);
-    border-color: var(--secondary-color);
-    color: var(--primary-text-color);
+    background-color: var(--primary-color-dark) !important;
+    border-color: var(--secondary-color) !important;
+    color: var(--primary-text-color) !important;
 }
 .btn-secondary {
-     background-color: var(--secondary-color);
-     border: 2px solid var(--primary-text-color); /* White border on yellow */
-     color: var(--secondary-text-color);
+     background-color: var(--secondary-color) !important; /* Yellow background */
+     border: 2px solid var(--primary-text-color) !important; /* White border */
+     color: var(--secondary-text-color) !important; /* Black text */
 }
 .btn-secondary:hover {
-    background-color: #FFFF33; /* Lighter yellow */
-    border-color: var(--primary-text-color);
-    color: var(--secondary-text-color);
+    background-color: #FFFF33 !important; /* Lighter yellow */
+    border-color: var(--primary-text-color) !important;
+    color: var(--secondary-text-color) !important;
 }
 
 
 .form-control, .form-select {
-    background-color: #000000;
-    color: #FFFFFF;
-    border: 2px solid var(--secondary-color);
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border: 2px solid var(--secondary-color) !important;
+    border-radius: 0 !important; /* Sharp edges for HC */
 }
 .form-control:focus, .form-select:focus {
-    background-color: #000000;
-    color: #FFFFFF;
-    border-color: var(--accent-color); /* Magenta focus */
-    box-shadow: 0 0 0 0.25rem rgba(var(--accent-color-rgb),0.5);
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border-color: var(--accent-color) !important; /* Magenta focus */
+    box-shadow: 0 0 0 0.2rem rgba(var(--accent-color-rgb),0.75) !important;
+}
+.form-label {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
 }
 
 .progress {
-    border: 1px solid var(--secondary-color);
-    background-color: #333;
+    border: 2px solid var(--secondary-color) !important;
+    background-color: #333 !important;
+    border-radius: 0 !important;
 }
 .progress-bar {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color) !important;
 }
 
-/* Ensure all text has enough contrast or uses these variables */
-* {
-    border-color: var(--secondary-color) !important; /* For visibility of borders */
+/* General border override for visibility, if not covered by component specific */
+/* *:not(.progress):not(.btn):not(.form-control):not(.form-select):not(.card):not(.top-navbar):not(.submenu) {
+    border-color: var(--secondary-color) !important;
+} */
+
+/* Ensure text muted is still visible */
+.text-muted {
+    color: #AAAAAA !important; /* Lighter gray for muted text on black bg */
+}
+
+.code-block-example {
+    background-color: #111111 !important;
+    border-color: var(--secondary-color) !important;
+    color: #FFFFFF !important;
 }
