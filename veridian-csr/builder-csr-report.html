@@ -186,7 +186,7 @@
                     <h5 class="card-title">Step 4: Preview & Download</h5>
                     <div class="mb-3">
                         <h6>Report Preview:</h6>
-                        <div id="reportPreviewArea" style="min-height: 200px; border: 1px dashed #ccc; padding: 15px; background-color: #f8f9fa;">
+                        <div id="reportPreviewArea" style="min-height: 200px; border: 1px dashed var(--form-input-border-color, #ced4da); padding: var(--spacer, 1rem); background-color: var(--bs-gray-100, #f8f9fa);">
                             <p class="text-center text-muted"><em>A dynamic preview of the report will be generated here based on your selections. (jsPDF integration)</em></p>
                         </div>
                     </div>
@@ -207,7 +207,8 @@
 
     <footer class="bg-light text-center text-lg-start mt-5">
         <div class="text-center p-3">
-            © 2023 Veridian CSR
+            © <span id="currentYear">2024</span> Veridian CSR. All Rights Reserved.
+            <a class="text-dark" href="index.html">VeridianCSR.com</a>
         </div>
     </footer>
 
@@ -219,10 +220,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') { AOS.init({ once: true }); }
 
-        let currentStep = 1;
-        const totalSteps = 4;
+            // Dynamic Year for Footer
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            let currentStep = 1;
+            const totalSteps = 4;
         const wizardNavButtons = document.querySelectorAll('#reportWizardNav .nav-link');
         const wizardSteps = document.querySelectorAll('.wizard-step');
         const prevButton = document.getElementById('prevStepButton');
@@ -286,8 +294,17 @@
         });
 
         showStep(currentStep); // Initialize the first step
+    }); // End DOMContentLoaded
 
     // --- New Global Navigation JS ---
+    // This script should be outside DOMContentLoaded if it manipulates DOM elements directly
+    // upon script load, or if functions it defines are globally accessed.
+    // However, it's finding elements, so it's safer inside or after DOM is ready.
+    // For consistency with other pages, let's assume its current placement after DOMContentLoaded scripts is fine,
+    // or it could be part of a global script file loaded defer.
+    // Let's ensure its own DOM queries are safe.
+    // The nav JS is self-contained and queries DOM on its own.
+    // The current structure has it after the page specific DOMContentLoaded.
     const navbarTogglerBtn = document.querySelector('.navbar-toggler-btn');
     const mainNavigation = document.querySelector('.main-navigation');
     const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');

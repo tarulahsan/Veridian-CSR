@@ -76,6 +76,7 @@ on your new brand.
     /* General UI Colors */
     --body-bg: #FFFFFF;
     --body-color: #212529; /* Bootstrap default body color */
+    --body-color-rgb: 33, 37, 41; /* Added for JS color functions */
     --link-color: var(--primary-color);
     --link-hover-color: var(--primary-color-dark);
     --border-radius: 0.375rem; /* Bootstrap default border-radius */
@@ -130,9 +131,13 @@ on your new brand.
 
     /* Alert Colors (Examples if not using Bootstrap's own CSS vars directly for full customization) */
     --success-color: #198754;
+    --success-color-rgb: 25, 135, 84;
     --info-color: #0dcaf0;
+    --info-color-rgb: 13, 202, 240;
     --warning-color: #ffc107;
+    --warning-color-rgb: 255, 193, 7;
     --danger-color: #dc3545;
+    --danger-color-rgb: 220, 53, 69;
 
     /* Spacing */
     --spacer: 1rem; /* Base spacer unit */
@@ -312,6 +317,20 @@ img, svg {
     font-weight: var(--font-weight-links, 500); /* Consistent link weight */
 }
 
+/* Enhanced Table Header Styling */
+.table > thead {
+    color: var(--headings-color); /* Use heading color variable */
+    background-color: rgba(var(--body-color-rgb), 0.03); /* Subtle background tint */
+    border-bottom: 2px solid var(--card-border-color); /* Stronger separator, use card border color */
+}
+
+.table > thead th {
+    font-weight: var(--font-weight-bold, 600); /* Ensure headers are bold */
+    padding-top: calc(var(--spacer) * 0.85); /* Consistent padding with card headers */
+    padding-bottom: calc(var(--spacer) * 0.85);
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
 /* Alerts */
 .alert {
     border-radius: var(--border-radius-sm);
@@ -323,12 +342,23 @@ img, svg {
     /* border-color: rgba(var(--primary-color-rgb), 0.2); */ /* Border can be removed if bg is distinct */
     color: var(--primary-color-dark);
 }
-/* For other alerts (success, info, warning, danger), ensure they use corresponding variables or have good contrast */
+
 .alert-success {
-    background-color: rgba(var(--success-color-rgb, 25, 135, 84), 0.1); /* Assuming --success-color-rgb is defined */
-    color: var(--success-color, #198754);
+    background-color: rgba(var(--success-color-rgb), 0.1);
+    color: var(--success-color);
 }
-/* ... etc. for other alert types. Requires --info-color-rgb, --warning-color-rgb, --danger-color-rgb in :root */
+.alert-info {
+    background-color: rgba(var(--info-color-rgb), 0.1);
+    color: color-mix(in srgb, var(--info-color) 80%, black);
+}
+.alert-warning {
+    background-color: rgba(var(--warning-color-rgb), 0.1);
+    color: color-mix(in srgb, var(--warning-color) 80%, black);
+}
+.alert-danger {
+    background-color: rgba(var(--danger-color-rgb), 0.1);
+    color: var(--danger-color);
+}
 
 
 /* Utilities */
@@ -354,6 +384,25 @@ img, svg {
 /* ==========================================================================
    New Global Navigation System
    ========================================================================== */
+
+/* Custom styling for Drop Zone in Data I/O Hub */
+.drop-zone {
+    border: 2px dashed var(--primary-color, #007bff);
+    border-radius: var(--form-input-border-radius, 0.25rem);
+    padding: 2.5rem 1.5rem; /* More padding */
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--bs-gray-100, #f8f9fa); /* Light background */
+    transition: background-color 0.2s ease-in-out;
+    color: var(--body-color);
+}
+.drop-zone.dragover {
+    background-color: rgba(var(--primary-color-rgb), 0.1); /* Use primary color tint */
+    border-color: var(--primary-color-dark, #0056b3);
+}
+.drop-zone p {
+    margin-bottom: 0;
+}
 
 /* Code Block Styling for Examples */
 .code-block-example {

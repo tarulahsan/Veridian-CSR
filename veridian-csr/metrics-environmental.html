@@ -99,7 +99,8 @@
 
         <div class="tab-content" id="environmentalMetricsTabContent">
             <!-- Energy Tab -->
-            <div class="tab-pane fade show active p-3 border border-top-0" id="energy" role="tabpanel" aria-labelledby="energy-tab">
+            <div class="tab-pane fade show active card-body border border-top-0" id="energy" role="tabpanel" aria-labelledby="energy-tab">
+                <!-- Replaced p-3 with card-body for consistent padding -->
                 <h4 class="mt-2">Energy Consumption</h4>
                 <div class="row">
                     <div class="col-md-8">
@@ -125,7 +126,8 @@
             </div>
 
             <!-- Waste Management Tab -->
-            <div class="tab-pane fade p-3 border border-top-0" id="waste" role="tabpanel" aria-labelledby="waste-tab">
+            <div class="tab-pane fade card-body border border-top-0" id="waste" role="tabpanel" aria-labelledby="waste-tab">
+                <!-- Replaced p-3 with card-body for consistent padding -->
                 <h4 class="mt-2">Waste Management</h4>
                 <div class="row">
                     <div class="col-md-8">
@@ -151,7 +153,8 @@
             </div>
 
             <!-- Water Usage Tab -->
-            <div class="tab-pane fade p-3 border border-top-0" id="water" role="tabpanel" aria-labelledby="water-tab">
+            <div class="tab-pane fade card-body border border-top-0" id="water" role="tabpanel" aria-labelledby="water-tab">
+                <!-- Replaced p-3 with card-body for consistent padding -->
                 <h4 class="mt-2">Water Usage</h4>
                 <div class="row">
                     <div class="col-md-8">
@@ -180,7 +183,8 @@
 
     <footer class="bg-light text-center text-lg-start mt-5">
         <div class="text-center p-3">
-            © 2023 Veridian CSR
+            © <span id="currentYearMetricsEnv">2024</span> Veridian CSR. All Rights Reserved.
+            <a class="text-dark" href="index.html">VeridianCSR.com</a>
         </div>
     </footer>
 
@@ -190,25 +194,33 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') { AOS.init({ once: true }); }
 
-        // Placeholder for Chart.js initialization for Energy
-        var ctxEnergy = document.getElementById('energyMonthlyChart')?.getContext('2d');
-        if (ctxEnergy) {
-            new Chart(ctxEnergy, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Energy Usage', data: [1200, 1150] }] }});
-        }
+            // Dynamic Year for Footer
+            const currentYearSpan = document.getElementById('currentYearMetricsEnv');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
 
-        // Placeholder for Chart.js initialization for Waste
-        var ctxWaste = document.getElementById('wasteMonthlyChart')?.getContext('2d');
-        if (ctxWaste) {
-            new Chart(ctxWaste, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Recycled', data: [500, 520] }, { label: 'Landfill', data: [150, 140] }] }});
-        }
+            // Placeholder for Chart.js initialization for Energy
+            var ctxEnergy = document.getElementById('energyMonthlyChart')?.getContext('2d');
+            if (ctxEnergy) {
+                new Chart(ctxEnergy, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Energy Usage', data: [1200, 1150] }] }});
+            }
 
-        // Placeholder for Chart.js initialization for Water
-        var ctxWater = document.getElementById('waterMonthlyChart')?.getContext('2d');
-        if (ctxWater) {
-            new Chart(ctxWater, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Water Usage', data: [30000, 28000] }] }});
-        }
+            // Placeholder for Chart.js initialization for Waste
+            var ctxWaste = document.getElementById('wasteMonthlyChart')?.getContext('2d');
+            if (ctxWaste) {
+                new Chart(ctxWaste, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Recycled', data: [500, 520] }, { label: 'Landfill', data: [150, 140] }] }});
+            }
+
+            // Placeholder for Chart.js initialization for Water
+            var ctxWater = document.getElementById('waterMonthlyChart')?.getContext('2d');
+            if (ctxWater) {
+                new Chart(ctxWater, { type: 'bar', data: { labels: ['Jan', 'Feb'], datasets: [{ label: 'Water Usage', data: [30000, 28000] }] }});
+            }
+        });
 
     // --- New Global Navigation JS ---
     const navbarTogglerBtn = document.querySelector('.navbar-toggler-btn');

@@ -128,7 +128,7 @@
                             <p x-show="forecastedValues.length === 0 && forecastAttempted" class="text-muted">
                                 Enter historical data and click "Run Forecast".
                             </p>
-                            <div id="forecastChartContainer" class="mt-3" style="min-height: 200px; background-color: #f8f9fa;">
+                            <div id="forecastChartContainer" class="mt-3" style="min-height: 200px; background-color: var(--bs-gray-100, #f8f9fa); border: 1px solid var(--card-border-color, #dee2e6); border-radius: var(--border-radius-sm, 0.25rem); padding: var(--spacer, 1rem);">
                                 <canvas id="forecastChart"></canvas>
                                 <p class="text-center text-muted" x-show="!forecastChartInstance"><em>Forecast chart will appear here.</em></p>
                             </div>
@@ -182,7 +182,8 @@
 
     <footer class="bg-light text-center text-lg-start mt-5">
         <div class="text-center p-3">
-            © 2023 Veridian CSR
+            © <span id="currentYear">2024</span> Veridian CSR. All Rights Reserved.
+            <a class="text-dark" href="index.html">VeridianCSR.com</a>
         </div>
     </footer>
 
@@ -227,7 +228,15 @@
         };
     </script>
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') { AOS.init({ once: true }); }
+
+            // Dynamic Year for Footer
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
 
         function analyticsInsights() {
             return {

@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags -->
     <title>Social Impact Hub - People Metrics Tracking | Veridian CSR</title>
     <meta name="description" content="Track people-focused metrics such as diversity & inclusion, employee safety, and community volunteer hours with Veridian CSR's Social Impact Hub.">
-    <meta name="keywords" content="sustainability, CSR, corporate, environmental, dashboard, analytics, carbon-footprint, responsive, bootstrap, D3.js, enterprise, data-visualization, PDF-export, Excel-import, compliance, white-label, multi-language, modern, accessibility, gamification, eco, ESG">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://example.com/veridian-csr/hub-social-impact.html">
+    <meta name="keywords" content="sustainability, CSR, corporate, environmental, social impact, governance, dashboard, analytics, carbon-footprint, responsive, bootstrap, D3.js, Chart.js, enterprise, data-visualization, PDF-export, Excel-import, compliance, white-label, multi-language, modern, accessibility, gamification, eco, ESG">
     <meta property="og:title" content="Social Impact Hub - People Metrics Tracking | Veridian CSR">
     <meta property="og:description" content="Track people-focused metrics such as diversity & inclusion, employee safety, and community volunteer hours with Veridian CSR's Social Impact Hub.">
-    <meta property="og:image" content="https://example.com/veridian-csr/assets/images/og-image-placeholder.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/veridian-csr/hub-social-impact.html"> <!-- Placeholder URL -->
+    <meta property="og:image" content="https://example.com/veridian-csr/assets/images/og-image-placeholder.jpg"> <!-- Placeholder Image -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Social Impact Hub - People Metrics Tracking | Veridian CSR">
     <meta name="twitter:description" content="Track people-focused metrics such as diversity & inclusion, employee safety, and community volunteer hours with Veridian CSR's Social Impact Hub.">
-    <meta name="twitter:image" content="https://example.com/veridian-csr/assets/images/twitter-image-placeholder.jpg">
+    <meta name="twitter:image" content="https://example.com/veridian-csr/assets/images/twitter-image-placeholder.jpg"> <!-- Placeholder Image -->
+
+    <!-- CSS Includes -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/necolas/normalize.css/normalize.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Potential theme CSS -->
+
+    <!-- Font Awesome & CryptoJS -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+
     <header class="top-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
@@ -80,20 +86,19 @@
     </header>
     <div class="mobile-menu-overlay"></div>
 
-    <main class="container mt-5 pt-4"> <!-- Adjusted spacing -->
+    <main class="container mt-5 pt-4">
         <header class="mb-4">
             <h1 class="display-5">Social Impact Hub</h1>
         </header>
 
         <section id="social-kpis" class="row">
-            <!-- Gauge Charts -->
             <div class="col-md-4 mb-4">
                 <div class="card text-center">
                     <div class="card-header">Diversity & Inclusion %</div>
                     <div class="card-body">
-                        <canvas id="diversityGauge"></canvas>
-                        <h4 class="mt-2"><span id="diversityValue">N/A</span>%</h4>
-                        <p><em>Gauge chart (Chart.js Doughnut) placeholder</em></p>
+                        <canvas id="diversityGauge" style="max-height: 150px;"></canvas>
+                        <h4 class="mt-3 mb-0"><span id="diversityValue">N/A</span></h4>
+                        <p class="text-muted small"><em>Target: 50% Women, 30% Minorities</em></p>
                     </div>
                 </div>
             </div>
@@ -101,9 +106,9 @@
                 <div class="card text-center">
                     <div class="card-header">Employee Safety Incidents</div>
                     <div class="card-body">
-                        <canvas id="safetyGauge"></canvas>
-                        <h4 class="mt-2"><span id="safetyValue">N/A</span></h4>
-                        <p><em>Gauge chart (Chart.js Doughnut) placeholder</em></p>
+                        <canvas id="safetyGauge" style="max-height: 150px;"></canvas>
+                        <h4 class="mt-3 mb-0"><span id="safetyValue">N/A</span></h4>
+                        <p class="text-muted small"><em>Recordable incidents this year</em></p>
                     </div>
                 </div>
             </div>
@@ -111,9 +116,9 @@
                 <div class="card text-center">
                     <div class="card-header">Training Completion Rate</div>
                     <div class="card-body">
-                        <canvas id="trainingGauge"></canvas>
-                        <h4 class="mt-2"><span id="trainingValue">N/A</span>%</h4>
-                        <p><em>Gauge chart (Chart.js Doughnut) placeholder</em></p>
+                        <canvas id="trainingGauge" style="max-height: 150px;"></canvas>
+                        <h4 class="mt-3 mb-0"><span id="trainingValue">N/A</span></h4>
+                        <p class="text-muted small"><em>Mandatory compliance training</em></p>
                     </div>
                 </div>
             </div>
@@ -122,27 +127,27 @@
         <section id="social-cards" class="row">
             <div class="col-md-4 mb-3">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Community Volunteer Hours</h5>
-                        <p class="card-text display-4"><span id="volunteerHours">N/A</span></p>
+                    <div class="card-header">Community Volunteer Hours</div>
+                    <div class="card-body text-center">
+                        <p class="display-4 fw-bold mb-0"><span id="volunteerHours">N/A</span></p>
                         <p class="card-text"><small class="text-muted">Year to Date</small></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Ethical Sourcing Score</h5>
-                        <p class="card-text display-4"><span id="ethicalSourcingScore">N/A</span>/100</p>
-                        <p class="card-text"><small class="text-muted">Latest Audit</small></p>
+                    <div class="card-header">Ethical Sourcing Score</div>
+                    <div class="card-body text-center">
+                        <p class="display-4 fw-bold mb-0"><span id="ethicalSourcingScore">N/A</span>/100</p>
+                        <p class="card-text"><small class="text-muted">Latest Audit Average</small></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Employee Wellness Program Participation</h5>
-                        <p class="card-text display-4"><span id="wellnessParticipation">N/A</span>%</p>
+                     <div class="card-header">Employee Wellness Program Participation</div>
+                    <div class="card-body text-center">
+                        <p class="display-4 fw-bold mb-0"><span id="wellnessParticipation">N/A</span>%</p>
                         <p class="card-text"><small class="text-muted">This Quarter</small></p>
                     </div>
                 </div>
@@ -152,86 +157,119 @@
 
     <footer class="bg-light text-center text-lg-start mt-5">
         <div class="text-center p-3">
-            © 2023 Veridian CSR
+            © <span id="currentYear">2024</span> Veridian CSR. All Rights Reserved.
+            <a class="text-dark" href="index.html">VeridianCSR.com</a>
         </div>
     </footer>
 
+    <!-- JavaScript Includes -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script> <!-- Specific Chart.js version for stability -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        AOS.init();
 
-        // Helper function for gauge charts (doughnut)
-        function createGauge(canvasId, value, maxValue, label, color = 'rgb(75, 192, 192)') {
+    <script src="assets/js/modules/secureStorage.js"></script>
+    <script src="assets/js/modules/toastNotifications.js"></script>
+    <script src="assets/js/modules/gamification.js"></script>
+    <script src="assets/js/modules/voiceCommands.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof AOS !== 'undefined') { AOS.init({ once: true }); } // Initialize AOS once
+        if (typeof Gamification !== 'undefined') { Gamification.init(); }
+
+        // Dynamic Year for Footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Navbar JS
+        const navbarTogglerBtn = document.querySelector('.navbar-toggler-btn');
+        const mainNavigation = document.querySelector('.main-navigation');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const submenuToggles = document.querySelectorAll('.toggle-submenu');
+
+        if (navbarTogglerBtn && mainNavigation && mobileMenuOverlay) {
+            navbarTogglerBtn.addEventListener('click', () => {
+                mainNavigation.classList.toggle('open');
+                mobileMenuOverlay.classList.toggle('open');
+                // Optional: Prevent body scroll when mobile menu is open
+                // document.body.style.overflow = mainNavigation.classList.contains('open') ? 'hidden' : '';
+            });
+            mobileMenuOverlay.addEventListener('click', () => {
+                mainNavigation.classList.remove('open');
+                mobileMenuOverlay.classList.remove('open');
+                // document.body.style.overflow = '';
+            });
+        }
+        submenuToggles.forEach(toggle => {
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                const parentNavItem = toggle.closest('.nav-item-pills');
+                if (parentNavItem) {
+                    parentNavItem.classList.toggle('open');
+                    // Accordion behavior for mobile submenus
+                    if (window.innerWidth < 992 && parentNavItem.classList.contains('open')) {
+                        submenuToggles.forEach(otherToggle => {
+                            const otherParent = otherToggle.closest('.nav-item-pills');
+                            if (otherParent && otherParent !== parentNavItem && otherParent.classList.contains('open')) {
+                                otherParent.classList.remove('open');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        // Helper function for gauge charts
+        function createGauge(canvasId, value, maxValue, suffix = '', color = `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--primary-color-rgb').trim() || '13, 110, 253'})` ) {
             const ctx = document.getElementById(canvasId)?.getContext('2d');
             if (!ctx) return;
+
+            const trackColor = `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--body-color-rgb').trim() || '33, 37, 41'}, 0.1)`;
 
             const data = {
                 datasets: [{
                     data: [value, maxValue - value],
-                    backgroundColor: [color, '#E0E0E0'],
-                    circumference: 180, // Half circle
-                    rotation: 270,      // Start from bottom
-                    borderWidth: 0
+                    backgroundColor: [color, trackColor],
+                    circumference: 180,
+                    rotation: 270,
+                    borderWidth: 0,
+                    borderRadius: 5
                 }]
             };
-            new Chart(ctx, { type: 'doughnut', data: data, options: { responsive: true, maintainAspectRatio: true, cutout: '70%', plugins: { legend: { display: false }, tooltip: { enabled: false } } } });
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Allow canvas to shrink if container is small
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    animation: {
+                        animateRotate: true // Keep some animation
+                    }
+                }
+            });
 
-            // Update the text value if an element exists
             const valueElementId = canvasId.replace('Gauge', 'Value');
             const valueElement = document.getElementById(valueElementId);
             if (valueElement) {
-                valueElement.textContent = value;
+                valueElement.textContent = value + suffix;
             }
         }
 
-        // Initialize Gauge Charts with placeholder values
-        createGauge('diversityGauge', 65, 100, 'Diversity %'); // Example: 65%
-        createGauge('safetyGauge', 5, 20, 'Safety Incidents'); // Example: 5 incidents (max could be an average or target)
-        createGauge('trainingGauge', 80, 100, 'Training Completion %'); // Example: 80%
+        // Initialize Gauge Charts
+        createGauge('diversityGauge', 65, 100, '%');
+        createGauge('safetyGauge', 5, 20, ' incidents');
+        createGauge('trainingGauge', 80, 100, '%');
 
         // Placeholder values for cards
         document.getElementById('volunteerHours').textContent = '1,240';
         document.getElementById('ethicalSourcingScore').textContent = '85';
         document.getElementById('wellnessParticipation').textContent = '60';
-
-    // --- New Global Navigation JS ---
-    const navbarTogglerBtn = document.querySelector('.navbar-toggler-btn');
-    const mainNavigation = document.querySelector('.main-navigation');
-    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-    const submenuToggles = document.querySelectorAll('.toggle-submenu');
-
-    if (navbarTogglerBtn && mainNavigation && mobileMenuOverlay) {
-        navbarTogglerBtn.addEventListener('click', () => {
-            mainNavigation.classList.toggle('open');
-            mobileMenuOverlay.classList.toggle('open');
-        });
-
-        mobileMenuOverlay.addEventListener('click', () => {
-            mainNavigation.classList.remove('open');
-            mobileMenuOverlay.classList.remove('open');
-        });
-    }
-
-    submenuToggles.forEach(toggle => {
-        toggle.addEventListener('click', (event) => {
-            event.preventDefault();
-            const parentNavItem = toggle.closest('.nav-item-pills');
-            if (parentNavItem) {
-                parentNavItem.classList.toggle('open');
-                if (window.innerWidth < 992) {
-                    submenuToggles.forEach(otherToggle => {
-                        const otherParent = otherToggle.closest('.nav-item-pills');
-                        if (otherParent && otherParent !== parentNavItem && otherParent.classList.contains('open')) {
-                            otherParent.classList.remove('open');
-                        }
-                    });
-                }
-            }
-        });
     });
     </script>
 </body>

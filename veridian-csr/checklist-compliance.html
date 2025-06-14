@@ -188,7 +188,8 @@
 
     <footer class="bg-light text-center text-lg-start mt-5">
         <div class="text-center p-3">
-            © 2023 Veridian CSR
+            © <span id="currentYear">2024</span> Veridian CSR. All Rights Reserved.
+            <a class="text-dark" href="index.html">VeridianCSR.com</a>
         </div>
     </footer>
 
@@ -199,7 +200,31 @@
     <script src="assets/js/modules/secureStorage.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') { AOS.init({ once: true }); }
+
+            // Dynamic Year for Footer
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Setup Alpine store for complianceChecklistInstance
+            // Alpine itself initializes when it sees x-data, so its own init() methods run then.
+            Alpine.store('complianceChecklistInstance', null);
+            const mainElement = document.querySelector('main[x-data="complianceChecklist()"]');
+            if (mainElement && mainElement.__x) { // Check if Alpine has initialized on mainElement
+                Alpine.store('complianceChecklistInstance', mainElement.__x);
+            } else {
+                // Fallback if mainElement.__x is not immediately available
+                document.addEventListener('alpine:initialized', () => {
+                    const mainElementRetry = document.querySelector('main[x-data="complianceChecklist()"]');
+                    if (mainElementRetry && mainElementRetry.__x) {
+                        Alpine.store('complianceChecklistInstance', mainElementRetry.__x);
+                    }
+                });
+            }
+        });
 
         function complianceChecklist() {
             return {
@@ -334,17 +359,7 @@
 
             }
         }
-        // A way to make the complianceChecklist instance accessible if needed globally or for complex interactions
-        document.addEventListener('alpine:initializing', () => {
-            Alpine.store('complianceChecklistInstance', null);
-        });
-        document.addEventListener('alpine:initialized', () => {
-            // Assuming the main x-data="complianceChecklist()" is on the <main> tag.
-            const mainElement = document.querySelector('main[x-data="complianceChecklist()"]');
-            if(mainElement && mainElement.__x) {
-                 Alpine.store('complianceChecklistInstance', mainElement.__x);
-            }
-        });
+        // Alpine function definitions (checklistSection) remain here, outside DOMContentLoaded
 
     // --- New Global Navigation JS ---
     const navbarTogglerBtn = document.querySelector('.navbar-toggler-btn');
