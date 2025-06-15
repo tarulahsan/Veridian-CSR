@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Add any theme-specific CSS files here later, e.g., assets/css/themes/theme-corporate-dark.css -->
+    <link id="themeStylesheet" rel="stylesheet" href="assets/css/themes/theme-corporate-dark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDAGA+XYi8KMMFED5lBXGcUBwmhvcg4AiOcLGEN7BW5g3EXGpptnZzFJOhEQGLQLCV1r好評Cpk4jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script> <!-- Added Font Awesome -->
     <script type="application/ld+json">
@@ -111,16 +111,17 @@
             <h1 class="display-5">Executive Dashboard</h1>
         </header>
 
-        <section id="voice-command-controls" class="mb-4 p-3 card card-body shadow-sm">
-            <!-- Made it a card with shadow-sm for subtlety -->
-            <div class="d-flex flex-wrap align-items-center">
-                <h5 class="mb-0 me-3">Voice Commands <small class="text-muted fw-normal">(Experimental)</small></h5>
+        <section id="voice-command-controls" class="mb-4 card">
+            <div class="card-body p-3"> <!-- Added card-body and kept p-3 for potentially different padding -->
+                <div class="d-flex flex-wrap align-items-center">
+                    <h5 class="mb-0 me-3">Voice Commands <small class="text-muted fw-normal">(Experimental)</small></h5>
                 <div class="me-auto">
                     <button id="activateVoiceButton" class="btn btn-primary btn-sm me-2 mb-2 mb-md-0">Activate Voice Commands</button>
                     <button id="deactivateVoiceButton" class="btn btn-outline-secondary btn-sm mb-2 mb-md-0">Deactivate Voice Commands</button>
                 </div>
                 <span id="voiceCommandStatus" class="ms-md-2 fst-italic text-muted">Status: Inactive</span>
             </div>
+            </div> <!-- Closing card-body -->
         </section>
 
         <section id="kpi-widgets" class="row mb-4">

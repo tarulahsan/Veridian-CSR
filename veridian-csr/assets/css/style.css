@@ -447,13 +447,28 @@ img, svg {
     color: inherit; /* Inherit color from pre */
 }
 
+/* Ensure .container-fluid within .top-navbar is the flex container */
+.top-navbar > .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Ensure it spans full width */
+    /* Assuming .top-navbar provides the main horizontal padding,
+       remove default .container-fluid padding if it causes double padding.
+       Bootstrap's .container-fluid usually has its own padding.
+       If .top-navbar's padding (0.75rem 1.5rem) is meant to be the outermost, then this is fine.
+       If not, adjust as needed or use a plain div instead of .container-fluid.
+       For now, let's assume this is okay and doesn't need padding reset.
+       Consider reset if visual inspection shows too much space:
+       padding-left: 0;
+       padding-right: 0;
+    */
+}
 
 .top-navbar {
     background-color: var(--card-bg, #FFFFFF); /* Use a theme variable */
     padding: 0.75rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    /* display: flex; align-items: center; justify-content: space-between; */ /* Moved to .container-fluid child */
     border-bottom: 1px solid var(--card-border-color, #EEE);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: sticky;
@@ -570,11 +585,10 @@ img, svg {
     text-decoration: none;
 }
 
-
 .navbar-actions {
     display: flex;
-    align-items: center;
-    margin-left: auto; /* Push actions to the right */
+    align-items: center; /* Vertically center items within .navbar-actions */
+    /* margin-left: auto; */ /* This might not be needed if .container-fluid justify-content handles it */
 }
 .navbar-actions .action-icon {
     color: var(--secondary-color, #6C757D);

@@ -1,131 +1,258 @@
-/* Veridian CSR - Corporate Dark Theme */
+/* Veridian CSR - Corporate Dark Theme (Inspired by modern, sleek aesthetics like trae.ai) */
 :root {
-    --primary-color: #0A84FF; /* Brighter blue for dark mode */
-    --primary-color-rgb: 10, 132, 255;
-    --primary-color-dark: #0060E0;
-    --primary-color-darker: #004DB3; /* For borders */
-    --primary-color-light: #50A5FF; /* Adjusted light shade */
+    /* Core Palette - Dark Mode */
+    --body-bg: #1A1D21; /* Very dark, slightly desaturated blue/grey */
+    --body-color: #E0E5EA; /* Light grey for body text, good contrast */
+    --body-color-rgb: 224, 229, 234; /* For JS use if needed */
+    --headings-color: #FFFFFF; /* White for headings */
+
+    /* Primary Color - Tech Blue */
+    --primary-color: #007BFF; /* Vibrant Blue (similar to new style.css default but can be specific) */
+    --primary-color-rgb: 0, 123, 255;
+    --primary-color-dark: #0069D9;
+    --primary-color-darker: #0056B3; /* For borders on hover */
+    --primary-color-light: #3395FF;
     --primary-text-color: #FFFFFF;
 
-    --secondary-color: #FF9F0A; /* Brighter orange accent */
-    --secondary-color-rgb: 255, 159, 10;
-    --secondary-color-dark: #D98600;
-    --secondary-color-darker: #B36E00; /* For borders */
-    --secondary-text-color: #000000; /* Black text on bright orange */
+    /* Secondary Color - Energetic Accent (e.g., Gold/Amber) */
+    --secondary-color: #FFC107; /* Amber/Gold */
+    --secondary-color-rgb: 255, 193, 7;
+    --secondary-color-dark: #D9A400;
+    --secondary-color-darker: #B38B00;
+    --secondary-text-color: #212529; /* Dark text on amber */
 
-    --accent-color: #30D158; /* Vibrant Green for dark mode */
-    --accent-color-rgb: 48, 209, 88;
-    --accent-text-color: #FFFFFF; /* White text on green */
+    /* Accent Color (can be same as secondary or a different one) */
+    --accent-color: var(--secondary-color); /* Using secondary as accent for now */
+    --accent-color-rgb: var(--secondary-color-rgb);
+    --accent-text-color: var(--secondary-text-color);
 
-    --body-bg: #212529; /* Dark Background */
-    --body-color: #dee2e6; /* Light Text */
-    /* Ensure body-color-rgb is defined if base style.css doesn't provide a fallback for dark themes */
-    --body-color-rgb: 222, 226, 230;
+    /* Component Backgrounds & Borders with Glassy Effect */
+    --card-bg-rgba: rgba(44, 48, 52, 0.75); /* Dark grey, semi-transparent for glass effect */
+    --card-bg: var(--card-bg-rgba); /* Apply to cards */
+    --card-border-color: rgba(73, 80, 87, 0.75); /* Semi-transparent border */
+    --card-header-bg: rgba(52, 58, 64, 0.75); /* Slightly different shade for header, also glassy */
+    --card-header-color: var(--headings-color);
+    --card-footer-bg: var(--card-header-bg);
+    --card-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow for dark */
+    --card-hover-box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 
+    /* Navbar specific (can also have glassy effect) */
+    --navbar-bg-rgba: rgba(33, 37, 41, 0.85); /* Darker, more transparent for navbar */
+    --navbar-border-color: rgba(73, 80, 87, 0.5);
 
-    --card-bg: #2c3034; /* Slightly Lighter Dark for Cards */
-    --card-border-color: #3e444a;
-    --card-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
-    --card-header-bg: #343a40; /* Darker header for cards */
-    --card-header-color: var(--primary-text-color); /* Should be a light color like #E0E3E7 or var(--headings-color) */
-    --card-header-border-color: #495057;
-
-
+    /* Links */
     --link-color: var(--primary-color-light);
-    --link-hover-color: #79BFFF; /* Adjusted hover */
-    --headings-color: #E0E3E7; /* Lighter headings for dark bg */
+    --link-hover-color: #80BBFF; /* Even lighter blue for hover */
 
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28222, 226, 230, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-
-    /* Form specific overrides for dark theme */
-    --form-input-bg: #272b30;
-    --form-input-border-color: #495057;
+    /* Forms */
+    --form-input-bg-rgba: rgba(52, 58, 64, 0.7); /* Glassy form inputs */
+    --form-input-bg: var(--form-input-bg-rgba);
     --form-input-color: var(--body-color);
-    --form-input-focus-bg: #2a2e33;
+    --form-input-border-color: rgba(80, 85, 90, 0.8);
+    --form-input-focus-bg: rgba(52, 58, 64, 0.9);
     --form-input-focus-color: var(--body-color);
-    --form-label-color: var(--body-color);
+    --form-input-placeholder-color: #8A939B; /* Specific placeholder color for dark inputs */
+
+    /* Toggler icon for dark theme */
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(224, 229, 234, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* Global Navbar for Corporate Dark Theme */
-.top-navbar {
-    background-color: #1c1f23; /* Even darker for navbar */
-    border-bottom-color: #30353a;
+/* Apply Glassmorphism to key components */
+.card,
+.modal-content, /* If modals should also be glassy */
+.top-navbar { /* Apply to navbar */
+    background-color: var(--card-bg-rgba); /* Fallback if backdrop-filter not supported */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
+
+.top-navbar {
+    background-color: var(--navbar-bg-rgba) !important; /* Specific glassy bg for navbar, important to override generic .top-navbar */
+    border-bottom: 1px solid var(--navbar-border-color) !important;
+}
+
+ /* Ensure navbar text colors are set for dark mode */
 .top-navbar .navbar-brand,
 .top-navbar .nav-link-pills,
-.top-navbar .action-icon {
-    color: #e9ecef; /* Slightly brighter than body-color for emphasis */
+.top-navbar .action-icon,
+.top-navbar .navbar-toggler-btn {
+    color: var(--primary-text-color, #E0E5EA) !important; /* Light text for dark navbar */
 }
-.top-navbar .navbar-brand i {
-    color: var(--primary-color-light); /* Brand icon color */
+.top-navbar .navbar-brand i { /* Ensure icon matches text color or uses a specific theme accent */
+    color: var(--secondary-color, var(--primary-text-color)) !important; /* Example: Use secondary color for brand icon */
 }
 .top-navbar .nav-link-pills:hover,
 .top-navbar .nav-link-pills.active {
-    background-color: var(--primary-color);
-    color: var(--primary-text-color);
+    background-color: var(--primary-color) !important;
+    color: var(--primary-text-color) !important;
 }
-.top-navbar .nav-link-pills.active i {
-    color: var(--primary-text-color);
-}
-.top-navbar .navbar-toggler-btn {
-    color: #e9ecef;
+.top-navbar .nav-link-pills.active i { /* Ensure icon color changes too */
+    color: var(--primary-text-color) !important;
 }
 
-/* Submenu for dark theme */
 .submenu {
-    background-color: #272b30; /* Slightly lighter than navbar, matches form inputs */
-    border-color: #3e444a;
+    background-color: var(--card-bg-rgba) !important; /* Glassy submenus */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-color: var(--card-border-color) !important;
 }
 .submenu-link {
-    color: #adb5bd; /* Lighter gray for submenu items */
+    color: var(--body-color) !important;
 }
 .submenu-link:hover,
 .submenu-link.active {
-    background-color: var(--primary-color);
-    color: var(--primary-text-color);
+    background-color: var(--primary-color) !important;
+    color: var(--primary-text-color) !important;
+}
+
+/* Form inputs specific styling for dark mode if needed beyond vars */
+.form-control, .form-select {
+    background-color: var(--form-input-bg) !important; /* Uses the RGBA var */
+    color: var(--form-input-color) !important;
+    border-color: var(--form-input-border-color) !important;
+}
+.form-control::placeholder,
+.form-select::placeholder { /* Standard way to style placeholder */
+    color: var(--form-input-placeholder-color, #8A939B) !important;
+    opacity: 1 !important; /* Firefox */
+}
+.form-control:-ms-input-placeholder, /* Edge */
+.form-select:-ms-input-placeholder {
+    color: var(--form-input-placeholder-color, #8A939B) !important;
+}
+.form-control::-ms-input-placeholder, /* IE */
+.form-select::-ms-input-placeholder {
+    color: var(--form-input-placeholder-color, #8A939B) !important;
+}
+.form-control:focus, .form-select:focus {
+    background-color: var(--form-input-focus-bg) !important;
+    border-color: var(--primary-color) !important; /* Focus border to primary */
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25) !important; /* Focus shadow to primary */
 }
 
 
+/* Table styling for dark theme */
 .table {
-    color: var(--body-color); /* Ensure table text is readable */
-    border-color: var(--card-border-color);
+    color: var(--body-color) !important;
+    border-color: var(--card-border-color) !important; /* Ensure table borders match card borders */
 }
-.table > :not(caption) > * > * { /* More specific to override Bootstrap's dark table defaults if needed */
-    background-color: transparent; /* Ensure table cells use card bg or body bg */
-    border-bottom-width: 1px;
-    box-shadow: inset 0 0 0 9999px transparent; /* Reset BS shadow */
+.table > :not(caption) > * > * {
+    background-color: transparent !important;
+    border-bottom-width: 1px !important;
+    box-shadow: inset 0 0 0 9999px transparent !important;
 }
-.table-striped > tbody > tr:nth-of-type(odd) > * {
-    --bs-table-accent-bg: rgba(255, 255, 255, 0.03); /* Subtle striping for dark theme */
-     color: var(--body-color);
+.table-striped tbody tr:nth-of-type(odd) > *,
+.table-striped tbody tr:nth-of-type(odd) { /* Ensure full row for BS5.3+ */
+    background-color: rgba(var(--body-color-rgb), 0.03) !important; /* Very subtle striping */
+    color: var(--body-color) !important;
 }
-.table-hover > tbody > tr:hover > * {
-    --bs-table-accent-bg: rgba(255, 255, 255, 0.05);
-    color: var(--body-color);
+.table thead th { /* Match new global thead style but ensure colors fit dark theme */
+    background-color: rgba(var(--body-color-rgb), 0.05) !important;
+    border-bottom-color: var(--card-border-color) !important;
+    color: var(--headings-color) !important;
+}
+.table-hover tbody tr:hover > *,
+.table-hover tbody tr:hover {  /* Ensure full row for BS5.3+ */
+    background-color: rgba(var(--body-color-rgb), 0.07) !important;
+    color: var(--body-color) !important;
 }
 
-/* Adjust progress bar for dark theme */
+/* Alert styling for dark theme */
+.alert-primary {
+    background-color: rgba(var(--primary-color-rgb), 0.15) !important;
+    border-left: 4px solid var(--primary-color) !important; /* Accent border */
+    color: var(--primary-color-light) !important;
+    border-width: 0 0 0 4px !important; /* Remove other borders */
+}
+.alert-secondary {
+    background-color: rgba(var(--secondary-color-rgb), 0.15) !important;
+    border-left: 4px solid var(--secondary-color) !important;
+    color: var(--secondary-color-light, var(--secondary-color)) !important; /* Define --secondary-color-light if needed */
+    border-width: 0 0 0 4px !important;
+}
+.alert-success {
+    background-color: rgba(var(--success-color-rgb), 0.1) !important; /* Using success from base style.css */
+    border-left: 4px solid var(--success-color) !important;
+    color: var(--success-color) !important;
+    border-width: 0 0 0 4px !important;
+}
+.alert-info {
+    background-color: rgba(var(--info-color-rgb), 0.1) !important; /* Using info from base style.css */
+    border-left: 4px solid var(--info-color) !important;
+    color: color-mix(in srgb, var(--info-color) 90%, #FFF) !important; /* Adjusted for dark bg */
+    border-width: 0 0 0 4px !important;
+}
+.alert-warning {
+    background-color: rgba(var(--warning-color-rgb), 0.1) !important; /* Using warning from base style.css */
+    border-left: 4px solid var(--warning-color) !important;
+    color: color-mix(in srgb, var(--warning-color) 90%, #000) !important; /* Ensure text is dark enough */
+    border-width: 0 0 0 4px !important;
+}
+.alert-danger {
+    background-color: rgba(var(--danger-color-rgb), 0.1) !important; /* Using danger from base style.css */
+    border-left: 4px solid var(--danger-color) !important;
+    color: var(--danger-color) !important;
+    border-width: 0 0 0 4px !important;
+}
+
+/* Ensure body background is applied */
+body {
+    background-color: var(--body-bg) !important; /* Important to override base if needed */
+    color: var(--body-color) !important;
+}
+
+/* Progress bar specific for dark theme */
 .progress {
-    background-color: #495057; /* Darker background for progress track */
+    background-color: rgba(var(--body-color-rgb), 0.15) !important; /* Darker track */
+}
+
+/* Code block example styling for dark mode */
+.code-block-example {
+    background-color: rgba(0,0,0,0.3) !important; /* Darker than card, less glassy */
+    border-color: var(--card-border-color) !important;
+    color: var(--body-color) !important; /* Use body color for code text */
+}
+.code-block-example code {
+    background: none !important;
+    color: inherit !important;
 }
 
 /* Ensure .bg-light for sections like landing page themes preview is dark-theme compatible */
 .bg-light {
     background-color: var(--card-bg) !important; /* Use card bg for elements marked as bg-light */
-    color: var(--body-color);
+    color: var(--body-color) !important;
 }
 /* Ensure .text-dark for badges on light backgrounds is readable on dark cards */
-.badge.bg-warning.text-dark {
-    color: #000 !important; /* Keep black text on yellow badge, it's usually fine */
+.badge.bg-warning.text-dark { /* text-dark is from Bootstrap for yellow badges */
+    color: #000 !important;
 }
-.badge.bg-light.text-dark {
-    background-color: #495057 !important; /* Darker badge bg */
-    color: #FFF !important; /* Light text on this specific badge */
+.badge.bg-light.text-dark { /* This combination needs specific override for dark themes */
+    background-color: #495057 !important;
+    color: #FFF !important;
 }
 
-/* Code block example styling for dark mode */
-.code-block-example {
-    background-color: #1c1f23;
-    border-color: var(--card-border-color);
-    color: #abb2bf; /* Common light-on-dark code color */
+.text-muted {
+    color: rgba(var(--body-color-rgb), 0.7) !important; /* Lighter than default muted for dark themes */
 }
+
+/* Modal content specific for glassmorphism */
+.modal-content {
+    border: 1px solid var(--card-border-color); /* Match card border */
+    box-shadow: var(--card-box-shadow); /* Match card shadow */
+}
+.modal-header {
+    background-color: var(--card-header-bg); /* Glassy header */
+    border-bottom-color: var(--card-border-color); /* Consistent border */
+    color: var(--headings-color);
+}
+.modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Make close button white */
+}
+.modal-body {
+    background-color: transparent; /* Allow card-bg-rgba from .modal-content to show */
+}
+.modal-footer {
+    background-color: var(--card-header-bg); /* Glassy footer */
+    border-top-color: var(--card-border-color); /* Consistent border */
+}
+```
