@@ -1,58 +1,59 @@
-/* Veridian CSR - Corporate Dark Theme (Inspired by modern, sleek aesthetics like trae.ai) */
+/* Veridian CSR - Corporate Dark Theme (Orange Primary) */
 :root {
     /* Core Palette - Dark Mode */
-    --body-bg: #1A1D21;
-    --body-color: #E0E5EA; /* ENSURE THIS IS A LIGHT COLOR */
-    --body-color-rgb: 224, 229, 234; /* UPDATE RGB TO MATCH --body-color */
-    --headings-color: #FFFFFF; /* ENSURE THIS IS WHITE OR VERY LIGHT */
+    --body-bg: #1A1D21; /* Very dark, slightly desaturated blue/grey */
+    --body-color: #E0E5EA;
+    --body-color-rgb: 224, 229, 234;
+    --headings-color: #FFFFFF;
 
-    /* Primary Color - Tech Blue */
-    --primary-color: #007BFF;
-    --primary-color-rgb: 0, 123, 255;
-    --primary-color-dark: #0069D9;
-    --primary-color-darker: #0056B3;
-    --primary-color-light: #3395FF;
-    --primary-text-color: #FFFFFF; /* Primary button text color */
+    /* Primary Color - Vibrant Orange */
+    --primary-color: #FF8C00;       /* DarkOrange */
+    --primary-color-rgb: 255, 140, 0;
+    --primary-color-dark: #E07B00;   /* Approx 10-15% darker */
+    --primary-color-darker: #C26A00; /* Approx 20-25% darker (for borders on hover) */
+    --primary-color-light: #FFA533;  /* Approx 10-15% lighter */
+    --primary-text-color: #FFFFFF;   /* White text on orange */
 
-    /* Secondary Color - Energetic Accent (e.g., Gold/Amber) */
-    --secondary-color: #FFC107;
-    --secondary-color-rgb: 255, 193, 7;
-    --secondary-color-dark: #D9A400;
-    --secondary-color-darker: #B38B00;
-    --secondary-text-color: #212529; /* This should be correct for yellow button */
+    /* Secondary Color - Vibrant Blue (Previous Primary) */
+    --secondary-color: #007BFF;
+    --secondary-color-rgb: 0, 123, 255;
+    --secondary-color-dark: #0069D9;
+    --secondary-color-darker: #0056B3;
+    --secondary-color-light: #3395FF; /* Added for consistency */
+    --secondary-text-color: #FFFFFF;
 
-    /* Accent Color (can be same as secondary or a different one) */
+    /* Accent Color (Using the new Secondary Blue as Accent) */
     --accent-color: var(--secondary-color);
     --accent-color-rgb: var(--secondary-color-rgb);
-    --accent-text-color: var(--secondary-text-color); /* Correct for current accent */
+    --accent-text-color: var(--secondary-text-color);
 
     /* Component Backgrounds & Borders with Glassy Effect */
     --card-bg-rgba: rgba(44, 48, 52, 0.75);
     --card-bg: var(--card-bg-rgba);
     --card-border-color: rgba(73, 80, 87, 0.75);
     --card-header-bg: rgba(52, 58, 64, 0.75);
-    --card-header-color: var(--headings-color); /* Card header text must be light */
+    --card-header-color: var(--headings-color);
     --card-footer-bg: var(--card-header-bg);
-    --card-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Softer, more diffused shadow */
-    --card-hover-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Adjusted hover shadow */
+    --card-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    --card-hover-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 
-    /* Navbar specific (can also have glassy effect) */
+    /* Navbar specific (glassy effect) */
     --navbar-bg-rgba: rgba(33, 37, 41, 0.85);
     --navbar-border-color: rgba(73, 80, 87, 0.5);
 
-    /* Links */
-    --link-color: var(--primary-color-light, #3395FF); /* Ensure this is light and vibrant */
-    --link-hover-color: #80BBFF; /* Ensure this is also light */
+    /* Links - Now using secondary color (blue) for primary link appearance for contrast/separation */
+    --link-color: var(--secondary-color-light); /* Light Blue links */
+    --link-hover-color: #80BBFF; /* Even lighter blue for hover */
 
     /* Forms */
     --form-input-bg-rgba: rgba(52, 58, 64, 0.7);
     --form-input-bg: var(--form-input-bg-rgba);
-    --form-input-color: var(--body-color); /* Input text must be light */
+    --form-input-color: var(--body-color);
     --form-input-border-color: rgba(80, 85, 90, 0.8);
     --form-input-focus-bg: rgba(52, 58, 64, 0.9);
     --form-input-focus-color: var(--body-color);
-    --form-label-color: var(--body-color); /* Ensure form labels are light */
-    --form-input-placeholder-color: #9098A0; /* Adjusted for visibility */
+    --form-input-placeholder-color: #9098A0;
+    --form-label-color: var(--body-color);
 
     /* Toggler icon for dark theme */
     --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(224, 229, 234, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -76,15 +77,16 @@
 .top-navbar .nav-link-pills,
 .top-navbar .action-icon,
 .top-navbar .navbar-toggler-btn {
-    color: var(--body-color) !important; /* Use main light body text color */
+    color: var(--body-color) !important;
 }
+/* Navbar brand icon now uses the new --secondary-color (Blue) */
 .top-navbar .navbar-brand i {
     color: var(--secondary-color) !important;
 }
 .top-navbar .nav-link-pills:hover,
 .top-navbar .nav-link-pills.active {
-    background-color: var(--primary-color) !important;
-    color: var(--primary-text-color) !important;
+    background-color: var(--primary-color) !important; /* Orange background */
+    color: var(--primary-text-color) !important; /* White text */
 }
 .top-navbar .nav-link-pills.active i {
     color: var(--primary-text-color) !important;
@@ -97,11 +99,11 @@
     border-color: var(--card-border-color) !important;
 }
 .submenu-link {
-    color: var(--body-color) !important; /* Submenu link text light */
+    color: var(--body-color) !important;
 }
 .submenu-link:hover,
 .submenu-link.active {
-    background-color: var(--primary-color) !important;
+    background-color: var(--primary-color) !important; /* Orange background */
     color: var(--primary-text-color) !important;
 }
 
@@ -112,7 +114,7 @@
 }
 .form-control::placeholder,
 .form-select::placeholder {
-    color: var(--form-input-placeholder-color, #9098A0) !important; /* Ensure correct placeholder color */
+    color: var(--form-input-placeholder-color, #9098A0) !important;
     opacity: 1 !important;
 }
 .form-control:-ms-input-placeholder,
@@ -123,6 +125,7 @@
 .form-select::-ms-input-placeholder {
     color: var(--form-input-placeholder-color, #9098A0) !important;
 }
+/* Form focus ring will now be orange due to --primary-color change in style.css */
 .form-control:focus, .form-select:focus {
     background-color: var(--form-input-focus-bg) !important;
     border-color: var(--primary-color) !important;
@@ -130,7 +133,7 @@
 }
 
 .table {
-    color: var(--body-color) !important; /* Table text light */
+    color: var(--body-color) !important;
     border-color: var(--card-border-color) !important;
 }
 .table > :not(caption) > * > * {
@@ -146,7 +149,7 @@
 .table thead th {
     background-color: rgba(var(--body-color-rgb), 0.05) !important;
     border-bottom-color: var(--card-border-color) !important;
-    color: var(--headings-color) !important; /* Table header text light */
+    color: var(--headings-color) !important;
 }
 .table-hover tbody tr:hover > *,
 .table-hover tbody tr:hover {
@@ -154,16 +157,17 @@
     color: var(--body-color) !important;
 }
 
+/* Alert styling - primary and secondary alerts will change based on new palette */
 .alert-primary {
-    background-color: rgba(var(--primary-color-rgb), 0.15) !important;
+    background-color: rgba(var(--primary-color-rgb), 0.15) !important; /* Orange tint */
     border-left: 4px solid var(--primary-color) !important;
-    color: var(--primary-color-light) !important;
+    color: var(--primary-color-light) !important; /* Light orange text */
     border-width: 0 0 0 4px !important;
 }
 .alert-secondary {
-    background-color: rgba(var(--secondary-color-rgb), 0.15) !important;
+    background-color: rgba(var(--secondary-color-rgb), 0.15) !important; /* Blue tint */
     border-left: 4px solid var(--secondary-color) !important;
-    color: var(--secondary-color-dark) !important; /* Darker text for amber/gold */
+    color: var(--secondary-color-light) !important; /* Light blue text */
     border-width: 0 0 0 4px !important;
 }
 .alert-success {
@@ -246,11 +250,11 @@ body {
     border-top-color: var(--card-border-color);
 }
 
-.card, .card-body, .card-footer { /* Explicitly set card text color if not inheriting properly */
+.card, .card-body, .card-footer {
     color: var(--body-color);
 }
 .card-header, .card-title, .card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
-    color: var(--headings-color) !important; /* Ensure headings in cards are light */
+    color: var(--headings-color) !important;
 }
 .card .nav-link {
     color: var(--link-color);
