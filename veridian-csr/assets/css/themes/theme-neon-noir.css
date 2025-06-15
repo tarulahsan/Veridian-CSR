@@ -1,33 +1,37 @@
 /* Veridian CSR - Neon Noir Theme */
 :root {
-    --primary-color: #00FFFF; /* Cyan Neon */
-    --primary-color-rgb: 0, 255, 255;
-    --primary-color-dark: #00E0E0;
-    --primary-color-light: #33FFFF;
-    --primary-text-color: #000000; /* Black text on bright cyan */
+    --primary-color: #00BFFF; /* DeepSkyBlue (Electric Blue) */
+    --primary-color-rgb: 0, 191, 255;
+    --primary-color-dark: #009ACD; /* Darker DeepSkyBlue */
+    --primary-color-darker: #00739C; /* Even darker for borders */
+    --primary-color-light: #38B6FF; /* Lighter shade */
+    --primary-text-color: #FFFFFF; /* White text on electric blue */
 
-    --secondary-color: #FF00FF; /* Magenta Neon */
-    --secondary-color-rgb: 255, 0, 255;
+    --secondary-color: #FF007F; /* Rose/Hot Pink */
+    --secondary-color-rgb: 255, 0, 127;
+    --secondary-color-dark: #CC0066; /* Darker Pink */
+    --secondary-color-darker: #A30052; /* Even darker for borders */
     --secondary-text-color: #FFFFFF;
 
-    --accent-color: #FFFF00; /* Yellow Neon */
-    --accent-color-rgb: 255, 255, 0;
-    --accent-text-color: #000000;
+    --accent-color: #39FF14; /* Neon Green */
+    --accent-color-rgb: 57, 255, 20;
+    --accent-text-color: #000000; /* Black text on neon green */
 
-    --body-bg: #1A1A1A; /* Very Dark Grey/Black */
+    --body-bg: #121212; /* Very dark, near black */
     --body-color: #E0E0E0; /* Light Grey text */
-    --card-bg: #2C2C2C; /* Darker Grey for cards */
-    --card-border-color: var(--primary-color); /* Cyan border */
-    --card-box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.3);
+    --body-color-rgb: 224, 224, 224; /* For this theme's body-color */
+    --card-bg: #1E1E1E; /* Slightly off-black for cards */
+    --card-border-color: var(--primary-color-dark); /* Darker primary for border */
+    --card-box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.25), 0 0 20px rgba(var(--primary-color-rgb), 0.15); /* Enhanced neon glow */
     --link-color: var(--primary-color);
     --link-hover-color: var(--secondary-color);
     --border-radius: 0.125rem; /* Sharp edges */
     --headings-color: var(--primary-color-light);
-    --card-header-bg: #1a1a1a; /* Match body for a flatter card header */
+    --card-header-bg: #121212; /* Match body for a flatter card header */
     --card-header-color: var(--primary-color);
-    --card-header-border-color: var(--primary-color);
+    --card-header-border-color: var(--primary-color-dark); /* Darker primary for border */
 
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%280,255,255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(0,191,255)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .top-navbar {

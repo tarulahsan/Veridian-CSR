@@ -1,0 +1,232 @@
+/* ==========================================================================
+   New Global Navigation System
+   ========================================================================== */
+
+.top-navbar {
+    background-color: var(--card-bg, #FFFFFF); /* Use a theme variable */
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--card-border-color, #EEE);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1030; /* Above most content, Bootstrap's fixed navbar is 1030 */
+}
+
+.top-navbar .navbar-brand {
+    font-family: var(--font-family-headings, 'Poppins', sans-serif);
+    font-size: 1.5rem; /* Adjust as needed */
+    font-weight: 600;
+    color: var(--primary-color, #0D6EFD); /* Theme variable */
+    display: flex;
+    align-items: center;
+}
+.top-navbar .navbar-brand i {
+    color: var(--secondary-color, #6C757D); /* Or primary, adjust */
+}
+
+.main-navigation {
+    display: flex;
+}
+
+.navbar-nav-pills {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item-pills {
+    position: relative;
+    margin-left: 0.5rem; /* Spacing between top-level items */
+}
+
+.nav-link-pills {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: var(--body-color, #212529); /* Theme variable */
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm, 0.25rem);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.nav-link-pills i.me-1 { /* Icon spacing */
+    margin-right: 0.4em !important;
+}
+.nav-link-pills:hover,
+.nav-link-pills.active { /* 'active' class needs to be set by JS or on page */
+    background-color: var(--primary-color, #0D6EFD);
+    color: var(--primary-text-color, #FFFFFF);
+    text-decoration: none !important; /* Ensure no underline */
+}
+.nav-link-pills.active i { /* Ensure icon color changes too */
+    color: var(--primary-text-color, #FFFFFF);
+}
+.nav-link-pills .submenu-arrow {
+    font-size: 0.7em;
+    margin-left: 0.3em;
+    transition: transform 0.2s ease;
+}
+.nav-item-pills.open > .nav-link-pills .submenu-arrow { /* For JS-driven open state */
+    transform: rotate(180deg);
+}
+
+
+.submenu {
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--card-bg, #FFFFFF);
+    min-width: 220px;
+    border: 1px solid var(--card-border-color, #EEE);
+    border-top: none; /* Assuming it attaches to bottom of parent link */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 0 0 var(--border-radius, 0.375rem) var(--border-radius, 0.375rem);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    z-index: 1001; /* Above navbar actions if they overlap */
+}
+.nav-item-pills:hover > .submenu,
+.nav-item-pills.open > .submenu { /* Show on hover or JS-driven 'open' class */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.submenu-link {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    color: var(--body-color, #212529);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+.submenu-link:hover,
+.submenu-link.active {
+    background-color: var(--primary-color-light, #408cfd); /* Lighter primary for submenu hover */
+    color: var(--primary-text-color, #FFFFFF); /* Or a specific text color for submenu hover */
+    text-decoration: none !important; /* Ensure no underline */
+}
+
+/* General link hover - keep underline for accessibility for non-nav links in main content */
+/* a:hover { text-decoration: underline; } is the default, this is fine */
+
+/* For general links if they are inside a nav-like structure but are not .nav-link-pills etc. */
+.top-navbar a:not(.btn):hover, .main-navigation a:not(.btn):hover { /* Be specific to avoid affecting buttons in nav */
+    text-decoration: none;
+}
+
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push actions to the right */
+}
+.navbar-actions .action-icon {
+    color: var(--secondary-color, #6C757D);
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    text-decoration: none;
+}
+.navbar-actions .action-icon:hover {
+    color: var(--primary-color, #0D6EFD);
+}
+
+/* Mobile Menu Styles */
+.navbar-toggler-btn {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary-color, #0D6EFD);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1020; /* Below navbar, above content */
+}
+
+@media (max-width: 991.98px) { /* Standard Bootstrap lg breakpoint */
+    .main-navigation {
+        position: fixed;
+        top: 0;
+        left: -280px; /* Hidden off-screen */
+        width: 280px;
+        height: 100vh;
+        background-color: var(--card-bg, #FFFFFF); /* Theme variable */
+        padding-top: 3.5rem; /* Space for navbar brand/close button */
+        box-shadow: 3px 0 15px rgba(0,0,0,0.1);
+        transition: left 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 1030; /* Same as desktop navbar to overlap correctly */
+    }
+    .main-navigation.open {
+        left: 0;
+    }
+    .mobile-menu-overlay.open {
+        display: block;
+    }
+
+    .navbar-nav-pills {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    .nav-item-pills {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 0.25rem;
+    }
+    .nav-link-pills {
+        width: 100%;
+        justify-content: space-between; /* For arrow alignment */
+        display: flex; /* For arrow alignment */
+    }
+    .submenu { /* Submenus in mobile */
+        position: static; /* No absolute positioning */
+        box-shadow: none;
+        border: none;
+        border-top: 1px solid var(--card-border-color, #EEE); /* Separator */
+        width: 100%;
+        padding-left: 1rem; /* Indent submenu items */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none; /* Hidden by default, shown by JS */
+        background-color: transparent; /* Inherit from parent or slight tint */
+    }
+    .nav-item-pills.open > .submenu {
+        display: block;
+    }
+    .submenu-link {
+        padding: 0.75rem 1rem;
+    }
+    .navbar-toggler-btn {
+        display: block;
+        order: -1; /* Move toggler to the left of brand on mobile if needed, or adjust flex order */
+        margin-right: 1rem;
+    }
+    .top-navbar .navbar-brand { /* Ensure brand is visible */
+        flex-grow: 1;
+    }
+    .navbar-actions { /* Hide or re-evaluate actions for mobile */
+        /* display: none; */
+        margin-left: 0.5rem; /* Reduce margin if kept */
+    }
+}

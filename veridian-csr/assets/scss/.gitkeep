@@ -1,0 +1,8 @@
+create_file_with_block
+veridian-csr/assets/scss/base/.gitkeep
+
+create_file_with_block
+veridian-csr/assets/scss/components/.gitkeep
+
+create_file_with_block
+veridian-csr/assets/scss/layout/.gitkeep

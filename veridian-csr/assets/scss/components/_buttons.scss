@@ -1,0 +1,54 @@
+/* Button Styling */
+.btn {
+    font-weight: var(--font-weight-bold, 600);
+    border-radius: var(--button-border-radius, 0.3rem); /* Slightly more rounded */
+    padding: 0.65rem 1.3rem; /* Adjusted padding */
+    transition: all 0.25s ease-in-out; /* Refined transition for all properties */
+    text-transform: none;
+    letter-spacing: 0.025em;
+    border-width: var(--button-border-width, 2px); /* Make border more prominent */
+    border-style: solid;
+    border-color: transparent; /* Default: border color same as background or transparent */
+}
+.btn:hover {
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: var(--button-hover-shadow, 0 4px 10px rgba(0,0,0,0.15));
+}
+.btn:active, .btn.active {
+    transform: translateY(0px);
+    box-shadow: var(--button-active-shadow, inset 0 2px 4px rgba(0,0,0,0.1));
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color); /* Initial border matches background */
+    color: var(--primary-text-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-darker, var(--primary-color-dark)); /* Use a new var for even darker border or same as bg */
+    color: var(--primary-text-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--secondary-text-color);
+}
+.btn-secondary:hover {
+    background-color: var(--secondary-color-dark, color-mix(in srgb, var(--secondary-color) 85%, black));
+    border-color: var(--secondary-color-darker, color-mix(in srgb, var(--secondary-color) 70%, black));
+    color: var(--secondary-text-color);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    border-width: var(--button-border-width, 2px);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-color);
+}
+/* Ensure other outline buttons (secondary, success etc.) are styled similarly if used extensively */

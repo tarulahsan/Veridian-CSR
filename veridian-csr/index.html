@@ -84,6 +84,10 @@
             text-align: center;
             border-top: 1px solid var(--card-border-color, #3e444a);
         }
+        /* Ensure landing page navbar links also don't underline on hover for consistency */
+        #landingNavbar .nav-link:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -110,9 +114,9 @@
     <!-- Hero Section -->
     <header class="hero-section animate__animated animate__fadeIn">
         <div class="container">
-            <h1 class="display-4 animate__animated animate__fadeInDown animate__delay-0.5s">Empower Your Enterprise Sustainability</h1>
+            <h1 class="display-4 animate__animated animate__fadeInDown animate__delay-0.5s">Navigate Your CSR Journey with Confidence</h1>
             <p class="lead animate__animated animate__fadeInUp animate__delay-1s">
-                Veridian CSR is the all-in-one HTML5 toolkit for managing, tracking, and reporting on your Corporate Social Responsibility and Environmental Sustainability initiatives. Purely client-side, incredibly powerful.
+                Understand your impact, meet stakeholder expectations, and build a more sustainable future. Veridian CSR provides the tools you need, right in your browser.
             </p>
             <a href="dashboard-executive.html" class="btn btn-lg btn-light animate__animated animate__pulse animate__delay-1.5s animate__infinite" style="color: var(--primary-color-dark); font-weight: 600;">
                 <i class="fas fa-rocket me-2"></i>Explore the Dashboard
@@ -120,51 +124,112 @@
         </div>
     </header>
 
-    <!-- Key Features Section -->
-    <section id="features" class="section">
+    <!-- New Section: Why CSR & Sustainability Matter -->
+    <section id="why-csr" class="section">
         <div class="container">
-            <h2 class="section-title">Key Features</h2>
+            <h2 class="section-title animate__animated animate__fadeInUp">Why Prioritize CSR & Sustainability?</h2>
             <div class="row">
                 <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up">
-                    <div class="feature-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h5>Comprehensive Dashboards</h5>
-                        <p>Visualize key metrics for carbon, environmental, social, and governance performance.</p>
+                    <div class="feature-card h-100">
+                        <i class="fas fa-building-shield"></i>
+                        <h5>Enhance Reputation & Trust</h5>
+                        <p>Demonstrate your commitment to ethical practices and environmental stewardship, building stronger brand loyalty.</p>
                     </div>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-card">
-                        <i class="fas fa-cogs"></i>
-                        <h5>Advanced Calculation Engines</h5>
-                        <p>Track Scope 1, 2, 3 emissions, forecast trends, and run 'what-if' scenarios.</p>
+                    <div class="feature-card h-100">
+                        <i class="fas fa-arrow-trend-up"></i>
+                        <h5>Meet Investor & Stakeholder Demands</h5>
+                        <p>Address the growing importance of ESG (Environmental, Social, Governance) factors for investors and consumers.</p>
                     </div>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-card">
-                        <i class="fas fa-file-pdf"></i>
-                        <h5>Professional PDF Reporting</h5>
-                        <p>Generate board-ready CSR reports with custom branding and data selection.</p>
+                    <div class="feature-card h-100">
+                        <i class="fas fa-leaf-heart"></i>
+                        <h5>Drive Positive Environmental Impact</h5>
+                        <p>Identify opportunities to reduce your carbon footprint, conserve resources, and contribute to a healthier planet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section: Understanding Your Carbon Footprint -->
+    <section id="understand-carbon" class="section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeInUp">Understanding Your Carbon Footprint</h2>
+            <p class="lead text-center mb-4 animate__animated animate__fadeInUp" data-aos="fade-up">Calculating your carbon footprint is the first step towards effective environmental management. It involves assessing emissions across different scopes:</p>
+            <div class="row text-center">
+                <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="50">
+                    <div class="feature-card h-100">
+                        <i class="fas fa-fire"></i>
+                        <h5>Scope 1: Direct Emissions</h5>
+                        <p>Emissions from sources your company owns or controls directly (e.g., fuel combustion in owned vehicles, on-site furnaces).</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="150">
+                    <div class="feature-card h-100">
+                        <i class="fas fa-bolt"></i>
+                        <h5>Scope 2: Indirect Emissions - Purchased Energy</h5>
+                        <p>Emissions from the generation of purchased electricity, steam, heating, and cooling consumed by your company.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="250">
+                    <div class="feature-card h-100">
+                        <i class="fas fa-industry"></i>
+                        <h5>Scope 3: Indirect Emissions - Value Chain</h5>
+                        <p>All other indirect emissions in your value chain (e.g., purchased goods, business travel, waste disposal, employee commuting).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Veridian CSR Empowers You Section (was Key Features) -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">How Veridian CSR Empowers You</h2>
+            <div class="row">
+                <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up">
+                    <div class="feature-card h-100">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h5>Gain Clear Insights Instantly</h5>
+                        <p>Our <strong>Executive Dashboard</strong> provides an at-a-glance overview of all key CSR metrics, helping you make informed decisions quickly.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card h-100">
+                        <i class="fas fa-calculator"></i>
+                        <h5>Master Your Emissions Data</h5>
+                        <p>The integrated <strong>Carbon Tracker</strong> allows detailed accounting of Scope 1, 2, and 3 emissions, with robust calculation engines.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card h-100">
+                        <i class="fas fa-file-signature"></i>
+                        <h5>Communicate Your Impact Effectively</h5>
+                        <p>Use the <strong>CSR Report Builder</strong> to generate professional, board-ready PDF reports tailored to your audience.</p>
                     </div>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-card">
-                        <i class="fas fa-shield-alt"></i>
-                        <h5>Secure Client-Side Data</h5>
-                        <p>All data stored locally in your browser with AES encryption. No server dependencies.</p>
+                    <div class="feature-card h-100">
+                        <i class="fas fa-lock"></i>
+                        <h5>Own Your Data with Confidence</h5>
+                        <p>All data is stored locally in your browser with strong AES encryption. Veridian CSR is serverless by design.</p>
                     </div>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-card">
-                        <i class="fas fa-palette"></i>
-                        <h5>10 Unique Themes</h5>
-                        <p>Highly customizable with 10 pre-built themes and easy white-labeling options.</p>
+                    <div class="feature-card h-100">
+                        <i class="fas fa-paint-brush"></i>
+                        <h5>Reflect Your Brand Identity</h5>
+                        <p>Choose from <strong>10 unique themes</strong> or easily white-label the application to match your corporate branding perfectly.</p>
                     </div>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="500">
-                    <div class="feature-card">
-                        <i class="fas fa-gamepad"></i>
-                        <h5>Engaging Gamification</h5>
-                        <p>Unlock achievements and badges as you reach your sustainability goals.</p>
+                    <div class="feature-card h-100">
+                        <i class="fas fa-trophy"></i>
+                        <h5>Drive Engagement & Progress</h5>
+                        <p>Our <strong>gamification features</strong>, including achievements and badges, encourage positive reinforcement and continuous improvement.</p>
                     </div>
                 </div>
             </div>
@@ -172,11 +237,13 @@
     </section>
 
     <!-- Themes Preview Section (Static) -->
-    <section id="themes" class="section bg-light"> <!-- bg-light from Bootstrap, might need theme var override -->
+    <section id="themes" class="section">
         <div class="container">
-            <h2 class="section-title">Discover Our Themes</h2>
+            <h2 class="section-title">Flexible & Professional Design</h2>
             <div class="themes-preview-static">
-                <p class="lead text-center">Veridian CSR comes with 10 stunning, professionally designed themes to match your corporate identity or preferred aesthetic. From "Corporate Dark" and "Oceanic" to "Solar Flare" and "High Contrast," find the perfect look. All themes are easily switchable via the Configuration Panel.</p>
+                <p class="lead text-center mb-4 animate__animated animate__fadeInUp" data-aos="fade-up">
+                    Present your CSR data with clarity and professionalism. Veridian CSR offers 10 distinct themes, from "Corporate Dark" to vibrant "Solar Flare" and accessible "High Contrast". Easily switch themes or customize further to perfectly match your brand identity.
+                </p>
                 <p class="text-center mt-3"><em>(Placeholder: A carousel or grid of theme thumbnail images would go here in a live demo)</em></p>
             </div>
         </div>
@@ -185,8 +252,10 @@
     <!-- Call to Action Section -->
     <section id="get-started" class="section text-center">
         <div class="container">
-            <h2 class="section-title">Ready to Transform Your CSR Management?</h2>
-            <p class="lead mb-4">Take control of your sustainability journey with Veridian CSR.</p>
+            <h2 class="section-title animate__animated animate__fadeInUp">Start Your Sustainable Transformation Today</h2>
+            <p class="lead mb-4 animate__animated animate__fadeInUp" data-aos="fade-up">
+                Veridian CSR provides the tools and insights you need to effectively manage and report on your sustainability initiatives.
+            </p>
             <a href="dashboard-executive.html" class="btn btn-primary btn-lg" style="font-size: 1.2rem; padding: 0.8rem 2rem;">
                 <i class="fas fa-arrow-right me-2"></i>Go to Application Dashboard
             </a>

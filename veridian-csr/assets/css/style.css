@@ -57,29 +57,32 @@ on your new brand.
 /* -------------------------------------------------------------------------- */
 :root {
     /* Primary Color Palette */
-    --primary-color: #0D6EFD; /* Bootstrap Blue as a starting point */
-    --primary-color-rgb: 13, 110, 253;
-    --primary-color-dark: #0A58CA;
-    --primary-color-light: #408cfd;
-    --primary-text-color: #FFFFFF; /* Text color on primary backgrounds */
+    --primary-color: #007AFF; /* Vibrant Blue */
+    --primary-color-rgb: 0, 122, 255;
+    --primary-color-dark: #0062CC; /* Darker vibrant blue */
+    --primary-color-darker: #0050A3; /* Even darker for borders */
+    --primary-color-light: #409CFF;
+    --primary-text-color: #FFFFFF;
 
     /* Secondary Color Palette */
-    --secondary-color: #6C757D; /* Bootstrap Secondary */
-    --secondary-color-rgb: 108, 117, 125;
+    --secondary-color: #FF9500; /* Vibrant Orange */
+    --secondary-color-rgb: 255, 149, 0;
+    --secondary-color-dark: #CC7A00;
+    --secondary-color-darker: #A36200;
     --secondary-text-color: #FFFFFF;
 
     /* Accent Color Palette */
-    --accent-color: #FFC107; /* Bootstrap Warning Yellow as an accent */
-    --accent-color-rgb: 255, 193, 7;
-    --accent-text-color: #000000;
+    --accent-color: #34C759; /* Vibrant Green */
+    --accent-color-rgb: 52, 199, 89;
+    --accent-text-color: #FFFFFF;
 
     /* General UI Colors */
-    --body-bg: #FFFFFF;
-    --body-color: #212529; /* Bootstrap default body color */
-    --body-color-rgb: 33, 37, 41; /* Added for JS color functions */
+    --body-bg: #F8F9FA; /* Keep body relatively neutral */
+    --body-color: #212529;
+    --body-color-rgb: 33, 37, 41;
     --link-color: var(--primary-color);
     --link-hover-color: var(--primary-color-dark);
-    --border-radius: 0.375rem; /* Bootstrap default border-radius */
+    --border-radius: 0.375rem;
     --border-radius-sm: 0.25rem;
     --border-radius-lg: 0.5rem;
 
@@ -88,14 +91,14 @@ on your new brand.
     --font-family-headings: 'Poppins', var(--font-family-sans-serif);
     --font-size-base: 1rem;
     --font-weight-base: 400;
-    --font-weight-bold: 600; /* General bold weight */
+    --font-weight-bold: 600;
     --font-weight-links: 500;
     --font-weight-headings: 600;
     --font-weight-card-header: 500;
     --font-weight-label: 500;
-    --line-height-base: 1.65; /* Adjusted */
-    --headings-color: var(--body-color); /* Default, can be overridden by themes */
-    --h1-font-size: calc(1.375rem + 1.5vw); /* Responsive H1 */
+    --line-height-base: 1.65;
+    --headings-color: #182A3F; /* Darker, slightly desaturated blue for headings */
+    --h1-font-size: calc(1.375rem + 1.5vw);
     --h2-font-size: calc(1.325rem + 0.9vw);
     --h3-font-size: calc(1.275rem + 0.3vw);
     --h4-font-size: 1.25rem;
@@ -115,10 +118,10 @@ on your new brand.
     --card-footer-border-color: var(--card-header-border-color);
 
     /* Button Specific Variables */
-    --button-border-radius: var(--border-radius-sm);
-    --button-border-width: 1px;
-    --button-hover-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    --button-active-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+    --button-border-radius: 0.3rem; /* Slightly more rounded */
+    --button-border-width: 2px;
+    --button-hover-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    --button-active-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 
     /* Form Input Specific Variables */
     --form-input-border-radius: var(--border-radius-sm);
@@ -247,46 +250,68 @@ img, svg {
 
 /* Button Styling */
 .btn {
-    font-weight: var(--font-weight-bold, 600); /* Bolder buttons */
-    border-radius: var(--button-border-radius, var(--border-radius-sm, 0.25rem)); /* New var */
-    padding: 0.6rem 1.2rem; /* Slightly more padding */
-    transition: var(--transition-base), transform 0.1s ease, box-shadow 0.1s ease; /* Refined transition */
+    font-weight: var(--font-weight-bold, 600);
+    border-radius: var(--button-border-radius, 0.3rem); /* Slightly more rounded */
+    padding: 0.65rem 1.3rem; /* Adjusted padding */
+    transition: all 0.25s ease-in-out; /* Refined transition for all properties */
     text-transform: none;
-    letter-spacing: 0.02em; /* Subtle letter spacing */
-    border-width: var(--button-border-width, 1px); /* New var */
+    letter-spacing: 0.025em;
+    border-width: var(--button-border-width, 2px); /* Make border more prominent */
+    border-style: solid;
+    border-color: transparent; /* Default: border color same as background or transparent */
 }
 .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--button-hover-shadow, 0 2px 5px rgba(0,0,0,0.1)); /* New var */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: var(--button-hover-shadow, 0 4px 10px rgba(0,0,0,0.15));
 }
-.btn:active, .btn.active { /* Added .active for persistent state */
+.btn:active, .btn.active {
     transform: translateY(0px);
-    box-shadow: var(--button-active-shadow, inset 0 1px 3px rgba(0,0,0,0.15)); /* New var */
+    box-shadow: var(--button-active-shadow, inset 0 2px 4px rgba(0,0,0,0.1));
 }
 
 .btn-primary {
     background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    border-color: var(--primary-color); /* Initial border matches background */
     color: var(--primary-text-color);
-    /* Optional: subtle gradient */
-    /* background-image: linear-gradient(to bottom, color-mix(in srgb, var(--primary-color) 100%, white 10%), var(--primary-color)); */
 }
 .btn-primary:hover {
     background-color: var(--primary-color-dark);
-    border-color: var(--primary-color-dark);
+    border-color: var(--primary-color-darker, var(--primary-color-dark)); /* Use a new var for even darker border or same as bg */
     color: var(--primary-text-color);
 }
+
 .btn-secondary {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
     color: var(--secondary-text-color);
 }
 .btn-secondary:hover {
-    background-color: color-mix(in srgb, var(--secondary-color) 85%, black); /* Adjusted mix */
-    border-color: color-mix(in srgb, var(--secondary-color) 85%, black);   /* Adjusted mix */
+    background-color: var(--secondary-color-dark, color-mix(in srgb, var(--secondary-color) 85%, black));
+    border-color: var(--secondary-color-darker, color-mix(in srgb, var(--secondary-color) 70%, black));
     color: var(--secondary-text-color);
 }
-/* Add more button types (success, info, warning, danger) if needed, using their respective CSS vars */
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    border-width: var(--button-border-width, 2px);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-secondary {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    border-width: var(--button-border-width, 2px);
+}
+.btn-outline-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--secondary-text-color);
+    border-color: var(--secondary-color);
+}
+/* Ensure other outline buttons (success etc.) are styled similarly if used extensively */
 
 /* Forms Styling */
 .form-control, .form-select {
@@ -481,6 +506,7 @@ img, svg {
 .nav-link-pills.active { /* 'active' class needs to be set by JS or on page */
     background-color: var(--primary-color, #0D6EFD);
     color: var(--primary-text-color, #FFFFFF);
+    text-decoration: none !important; /* Ensure no underline */
 }
 .nav-link-pills.active i { /* Ensure icon color changes too */
     color: var(--primary-text-color, #FFFFFF);
@@ -532,8 +558,18 @@ img, svg {
 .submenu-link:hover,
 .submenu-link.active {
     background-color: var(--primary-color-light, #408cfd); /* Lighter primary for submenu hover */
-    color: var(--primary-text-color, #FFFFFF);
+    color: var(--primary-text-color, #FFFFFF); /* Or a specific text color for submenu hover */
+    text-decoration: none !important; /* Ensure no underline */
 }
+
+/* General link hover - keep underline for accessibility for non-nav links in main content */
+/* a:hover { text-decoration: underline; } is the default, this is fine */
+
+/* For general links if they are inside a nav-like structure but are not .nav-link-pills etc. */
+.top-navbar a:not(.btn):hover, .main-navigation a:not(.btn):hover { /* Be specific to avoid affecting buttons in nav */
+    text-decoration: none;
+}
+
 
 .navbar-actions {
     display: flex;

@@ -1,0 +1,56 @@
+/* Utilities */
+.display-4, .display-5, .display-6 {
+    font-family: var(--font-family-headings);
+    font-weight: 700;
+}
+
+/* Accessibility: Focus visible */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.2); /* Adjusted shadow for consistency */
+}
+/* Remove default outline when :focus-visible is supported and used */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Custom styling for Drop Zone in Data I/O Hub */
+.drop-zone {
+    border: 2px dashed var(--primary-color, #007bff);
+    border-radius: var(--form-input-border-radius, 0.25rem);
+    padding: 2.5rem 1.5rem; /* More padding */
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--bs-gray-100, #f8f9fa); /* Light background */
+    transition: background-color 0.2s ease-in-out;
+    color: var(--body-color);
+}
+.drop-zone.dragover {
+    background-color: rgba(var(--primary-color-rgb), 0.1); /* Use primary color tint */
+    border-color: var(--primary-color-dark, #0056b3);
+}
+.drop-zone p {
+    margin-bottom: 0;
+}
+
+/* Code Block Styling for Examples */
+.code-block-example {
+    background-color: var(--bs-gray-100, #f8f9fa); /* Using a Bootstrap variable or fallback */
+    border: 1px solid var(--bs-gray-300, #dee2e6);
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875em; /* Slightly smaller than default */
+    color: var(--bs-dark, #212529); /* Ensure good contrast */
+    overflow: auto; /* Add scrollbars if content overflows */
+    max-height: 300px; /* Optional: limit height */
+}
+.code-block-example code {
+    white-space: pre; /* Ensure preformatted text wrapping is handled by the pre tag */
+    background: none; /* Remove any background from inline code tags if present */
+    padding: 0;
+    font-size: inherit; /* Inherit font size from pre */
+    color: inherit; /* Inherit color from pre */
+}
+
+/* Add more base styles as the theme develops */
+/* The above comment was from the original file, can be removed or kept if more base styles are anticipated */

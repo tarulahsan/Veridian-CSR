@@ -1,36 +1,39 @@
 /* Veridian CSR - Forest Theme */
 :root {
     /* Primary Color Palette - Deep Greens */
-    --primary-color: #2F633F; /* Forest Green */
-    --primary-color-rgb: 47, 99, 63;
-    --primary-color-dark: #1E4229;
-    --primary-color-light: #4A855B;
+    --primary-color: #28A745; /* Vibrant Bootstrap Green */
+    --primary-color-rgb: 40, 167, 69;
+    --primary-color-dark: #1E7E34;
+    --primary-color-darker: #155724; /* For borders */
+    --primary-color-light: #5CB85C; /* Lighter, friendly green */
     --primary-text-color: #FFFFFF;
 
-    /* Secondary Color Palette - Earthy Brown */
-    --secondary-color: #795548; /* Brown */
-    --secondary-color-rgb: 121, 85, 72;
+    /* Secondary Color Palette - Rich Brown */
+    --secondary-color: #8B4513; /* Saddle Brown */
+    --secondary-color-rgb: 139, 69, 19;
+    --secondary-color-dark: #6A350F;
+    --secondary-color-darker: #4A230A; /* For borders */
     --secondary-text-color: #FFFFFF;
 
-    /* Accent Color Palette - Amber/Gold */
-    --accent-color: #FFB300; /* Amber */
-    --accent-color-rgb: 255, 179, 0;
-    --accent-text-color: #000000;
+    /* Accent Color Palette - Golden Leaf Yellow */
+    --accent-color: #FFD700; /* Gold */
+    --accent-color-rgb: 255, 215, 0;
+    --accent-text-color: #212529; /* Dark text on Gold */
 
     /* General UI Colors */
-    --body-bg: #F5F5F5; /* Light Gray, almost white */
-    --body-color: #333333; /* Dark Gray */
+    --body-bg: #F4FBF4; /* Very light, slightly green-tinted white */
+    --body-color: #212529; /* Standard dark text */
+    --body-color-rgb: 33, 37, 41; /* Matching base style.css */
     --card-bg: #FFFFFF;
-    --card-border-color: #D4CCC5; /* Light brownish gray border */
-    --card-box-shadow: 0 2px 5px rgba(47, 99, 63, 0.1); /* Subtle shadow with primary green tint */
-    --card-hover-box-shadow: 0 4px 10px rgba(47, 99, 63, 0.15);
+    --card-border-color: #C8E6C9; /* Light green tint border */
+    --card-box-shadow: 0 2px 5px rgba(var(--primary-color-rgb), 0.08); /* Subtle shadow with primary green tint */
+    --card-hover-box-shadow: 0 4px 10px rgba(var(--primary-color-rgb), 0.12);
     --link-color: var(--primary-color);
     --link-hover-color: var(--primary-color-dark);
-    --headings-color: var(--primary-color-dark);
-    --card-header-bg: rgba(var(--primary-color-rgb), 0.07);
-    --card-header-color: var(--primary-color-dark);
-    --card-header-border-color: rgba(var(--primary-color-rgb), 0.2);
-
+    --headings-color: #1E4229; /* Original primary-dark, a deep forest green */
+    --card-header-bg: rgba(var(--primary-color-rgb), 0.06);
+    --card-header-color: var(--headings-color); /* Use the defined headings color */
+    --card-header-border-color: rgba(var(--primary-color-rgb), 0.15);
 
     /* Typography (keeping defaults for now) */
 
@@ -76,19 +79,23 @@
 }
 
 .btn-primary {
-    box-shadow: 0 2px 3px rgba(0,0,0,0.15); /* Add a little depth to buttons */
+    /* box-shadow is now handled globally by .btn in style.css */
     background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    border-color: var(--primary-color); /* Will be overridden by new global .btn style for initial border */
+    color: var(--primary-text-color);
 }
 .btn-primary:hover {
     background-color: var(--primary-color-dark);
-    border-color: var(--primary-color-dark);
+    border-color: var(--primary-color-darker, var(--primary-color-dark)); /* Use new -darker var */
+    color: var(--primary-text-color);
 }
 .btn-secondary {
     background-color: var(--secondary-color); /* Earthy brown */
-    border-color: var(--secondary-color);
+    border-color: var(--secondary-color); /* Will be overridden by new global .btn style for initial border */
+    color: var(--secondary-text-color);
 }
 .btn-secondary:hover {
-    background-color: color-mix(in srgb, var(--secondary-color) 85%, black);
-    border-color: color-mix(in srgb, var(--secondary-color) 85%, black);
+    background-color: var(--secondary-color-dark, color-mix(in srgb, var(--secondary-color) 85%, black));
+    border-color: var(--secondary-color-darker, color-mix(in srgb, var(--secondary-color) 70%, black));  /* Use new -darker var */
+    color: var(--secondary-text-color);
 }

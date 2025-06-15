@@ -1,0 +1,20 @@
+/* Forms Styling */
+.form-control, .form-select {
+    border-radius: var(--form-input-border-radius, var(--border-radius-sm)); /* New var */
+    border-color: var(--form-input-border-color, #ced4da); /* New var */
+    padding: 0.5rem 0.85rem; /* Adjusted padding */
+    transition: var(--transition-base);
+    background-color: var(--form-input-bg, #FFFFFF); /* New var */
+    color: var(--form-input-color, var(--body-color)); /* New var */
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color); /* Sharper focus color */
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.2); /* Softer shadow */
+    background-color: var(--form-input-focus-bg, var(--form-input-bg)); /* New var */
+    color: var(--form-input-focus-color, var(--form-input-color)); /* New var */
+}
+.form-label {
+    font-weight: var(--font-weight-label, 500); /* New var */
+    margin-bottom: 0.5rem;
+    color: var(--form-label-color, var(--body-color)); /* New var */
+}

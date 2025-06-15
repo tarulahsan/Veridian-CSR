@@ -1,30 +1,34 @@
 /* Veridian CSR - Solar Flare Theme */
 :root {
-    --primary-color: #FF6F00; /* Bright Orange */
-    --primary-color-rgb: 255, 111, 0;
-    --primary-color-dark: #E65100; /* Darker Orange */
-    --primary-color-light: #FF8F00; /* Lighter Orange */
+    --primary-color: #FF4500; /* OrangeRed */
+    --primary-color-rgb: 255, 69, 0;
+    --primary-color-dark: #E03E00; /* Darker OrangeRed */
+    --primary-color-darker: #C03000; /* Even darker for borders */
+    --primary-color-light: #FF6A33; /* Lighter OrangeRed */
     --primary-text-color: #FFFFFF;
 
-    --secondary-color: #FFD600; /* Bright Yellow */
-    --secondary-color-rgb: 255, 214, 0;
-    --secondary-text-color: #000000;
+    --secondary-color: #FFC107; /* Amber/Gold */
+    --secondary-color-rgb: 255, 193, 7;
+    --secondary-color-dark: #E0A800; /* Darker Amber */
+    --secondary-color-darker: #C09000; /* Even darker for borders */
+    --secondary-text-color: #000000; /* Dark text on yellow/gold */
 
-    --accent-color: #D32F2F; /* Red Accent */
-    --accent-color-rgb: 211, 47, 47;
+    --accent-color: #DC143C; /* Crimson */
+    --accent-color-rgb: 220, 20, 60;
     --accent-text-color: #FFFFFF;
 
-    --body-bg: #FFF8E1; /* Pale Yellow / Cream */
+    --body-bg: #FFF3E0; /* Lighter, warm cream */
     --body-color: #4E342E; /* Dark Brown for text */
+    --body-color-rgb: 78, 52, 46; /* For this theme's body-color */
     --card-bg: #FFFFFF;
-    --card-border-color: #FFECB3; /* Light yellow border */
-    --card-box-shadow: 0 2px 8px rgba(255, 111, 0, 0.15);
-    --card-hover-box-shadow: 0 4px 12px rgba(255, 111, 0, 0.2);
+    --card-border-color: #FFE0B2; /* Light orange-tint border */
+    --card-box-shadow: 0 2px 8px rgba(var(--primary-color-rgb), 0.12); /* Adjusted shadow */
+    --card-hover-box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.18); /* Adjusted shadow */
     --link-color: var(--primary-color-dark);
     --link-hover-color: var(--accent-color);
-    --headings-color: var(--primary-color-dark);
-    --card-header-bg: rgba(var(--primary-color-rgb),0.05);
-    --card-header-color: var(--primary-color-dark);
+    --headings-color: #C03000; /* Using primary-darker for strong headings */
+    --card-header-bg: rgba(var(--primary-color-rgb),0.07); /* Adjusted opacity */
+    --card-header-color: var(--headings-color);
 
     --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }

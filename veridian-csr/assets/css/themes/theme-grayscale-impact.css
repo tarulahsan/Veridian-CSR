@@ -1,38 +1,42 @@
 /* Veridian CSR - Grayscale Impact Theme */
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@400;700&display=swap');
 :root {
-    --primary-color: #212529; /* Nearly Black */
-    --primary-color-rgb: 33, 37, 41;
+    --primary-color: #111111; /* Very Dark Gray, almost Black */
+    --primary-color-rgb: 17, 17, 17;
     --primary-color-dark: #000000; /* Black */
-    --primary-color-light: #495057; /* Dark Gray */
+    --primary-color-darker: #000000; /* Stays Black for borders */
+    --primary-color-light: #333333; /* Dark Gray */
     --primary-text-color: #FFFFFF;
 
-    --secondary-color: #6C757D; /* Mid Gray */
-    --secondary-color-rgb: 108, 117, 125;
-    --secondary-text-color: #FFFFFF;
+    --secondary-color: #CCCCCC; /* Light Gray */
+    --secondary-color-rgb: 204, 204, 204;
+    --secondary-color-dark: #B3B3B3; /* Darker Light Gray */
+    --secondary-color-darker: #999999; /* Even darker for borders */
+    --secondary-text-color: #000000; /* Black text on light gray */
 
     --accent-color: #FFFFFF; /* White as accent on dark backgrounds */
     --accent-color-rgb: 255, 255, 255;
     --accent-text-color: #000000; /* Black text on white accent */
 
     --body-bg: #FFFFFF; /* White */
-    --body-color: #212529; /* Nearly Black text */
-    --card-bg: #F8F9FA; /* Very Light Gray */
-    --card-border-color: #DEE2E6; /* Light Gray border */
-    --card-box-shadow: 0 2px 4px rgba(0,0,0,0.075);
+    --body-color: #111111; /* Matching new primary for strong text */
+    --body-color-rgb: 17, 17, 17; /* For this theme's body-color */
+    --card-bg: #F0F0F0; /* Slightly off-white/very light gray */
+    --card-border-color: #BBBBBB; /* Stronger border */
+    --card-box-shadow: 0 2px 4px rgba(0,0,0,0.075); /* Kept subtle as HC often reduces shadows */
     --link-color: #000000; /* Black links */
-    --link-hover-color: #555555; /* Dark gray hover */
+    --link-hover-color: #444444; /* Darker gray hover */
 
     --font-family-sans-serif: 'Roboto', sans-serif;
     --font-family-headings: 'Archivo Black', sans-serif; /* Bold, impactful heading font */
     --h1-font-size: calc(1.5rem + 2vw); /* Larger headings for impact */
     --h2-font-size: calc(1.4rem + 1.2vw);
-    --headings-color: #000000; /* Black headings */
-    --card-header-bg: #E9ECEF; /* Light gray for card headers */
+    --headings-color: #000000; /* Pure Black headings */
+    --card-header-bg: #E0E0E0; /* Slightly darker than card for header */
     --card-header-color: #000000;
-    --card-footer-bg: #E9ECEF;
+    --card-footer-bg: #E0E0E0; /* Consistent with header */
 
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 17, 17, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .top-navbar {

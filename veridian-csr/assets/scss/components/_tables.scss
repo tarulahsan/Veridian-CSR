@@ -1,0 +1,21 @@
+/* Tables */
+.table {
+    /* General table styling can go here if Bootstrap defaults need overrides */
+}
+.table a {
+    font-weight: var(--font-weight-links, 500); /* Consistent link weight */
+}
+
+/* Enhanced Table Header Styling */
+.table > thead {
+    color: var(--headings-color); /* Use heading color variable */
+    background-color: rgba(var(--body-color-rgb), 0.03); /* Subtle background tint */
+    border-bottom: 2px solid var(--card-border-color); /* Stronger separator, use card border color */
+}
+
+.table > thead th {
+    font-weight: var(--font-weight-bold, 600); /* Ensure headers are bold */
+    padding-top: calc(var(--spacer) * 0.85); /* Consistent padding with card headers */
+    padding-bottom: calc(var(--spacer) * 0.85);
+    vertical-align: middle; /* Ensure vertical alignment */
+}

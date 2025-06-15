@@ -1,0 +1,26 @@
+// Veridian CSR - Main SCSS File
+// -----------------------------------------------------------------------------
+// This file imports all SCSS partials.
+// To generate style.css, compile this file using a SASS compiler.
+// Example command: sass veridian-csr/assets/scss/style.scss veridian-csr/assets/css/style.css
+// -----------------------------------------------------------------------------
+
+// 1. Base Styles & Variables
+@import 'base/variables';    // CSS Custom Properties, Font imports
+@import 'base/typography';   // Body, headings, links, paragraphs
+@import 'base/utilities';    // Focus styles, other utilities like code-block, drop-zone
+
+// 2. Layout Specific Styles
+@import 'layout/navigation'; // Main navigation styles
+
+// 3. Component Styles
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/alerts';
+@import 'components/forms';
+@import 'components/tables';
+// Add more component imports as needed
+
+// Note: The actual style.css in /assets/css/ will not be automatically updated by this subtask.
+// It will remain as the last version before this SCSS structuring.
+// The developer using the theme source would need to compile this SCSS.

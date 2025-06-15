@@ -1,35 +1,39 @@
 /* Veridian CSR - Oceanic Theme */
 :root {
     /* Primary Color Palette - Oceanic Blues */
-    --primary-color: #0B7285; /* Deep Teal */
-    --primary-color-rgb: 11, 114, 133;
-    --primary-color-dark: #085C6A;
-    --primary-color-light: #1193AB;
+    --primary-color: #0096C7; /* Vibrant Teal/Blue */
+    --primary-color-rgb: 0, 150, 199;
+    --primary-color-dark: #0077A0;
+    --primary-color-darker: #005A7A; /* For borders */
+    --primary-color-light: #4FC3F7; /* Sky blue accent */
     --primary-text-color: #FFFFFF;
 
-    /* Secondary Color Palette - Sandy Beige / Light Gray */
-    --secondary-color: #A9A9A9; /* Light Gray - was #E0F7FA (Light Cyan) but too light for text */
-    --secondary-color-rgb: 169, 169, 169;
-    --secondary-text-color: #000000; /* Black text on light gray */
+    /* Secondary Color Palette - Sandy/Coral Accent */
+    --secondary-color: #FFAB73; /* Warm Coral/Sandy Orange */
+    --secondary-color-rgb: 255, 171, 115;
+    --secondary-color-dark: #FF8A4D; /* Darker Coral */
+    --secondary-color-darker: #E67030; /* Even darker for borders */
+    --secondary-text-color: #000000; /* Dark text for contrast */
 
-    /* Accent Color Palette - Coral */
-    --accent-color: #FF7F50; /* Coral */
-    --accent-color-rgb: 255, 127, 80;
-    --accent-text-color: #FFFFFF;
+    /* Accent Color Palette - Seafoam Green/Turquoise */
+    --accent-color: #48D1CC; /* Medium Turquoise */
+    --accent-color-rgb: 72, 209, 204;
+    --accent-text-color: #000000; /* Dark text for contrast */
 
     /* General UI Colors */
-    --body-bg: #F0F8FF; /* Alice Blue - very light blue */
-    --body-color: #2A3B47; /* Dark Slate Gray */
+    --body-bg: #E0F7FA; /* Very light cyan */
+    --body-color: #1A2E3B; /* Darker, desaturated blue */
+    --body-color-rgb: 26, 46, 59; /* For this theme's body-color */
     --card-bg: #FFFFFF;
-    --card-border-color: #CDE8EF; /* Lighter blue-gray border */
-    --card-box-shadow: 0 2px 5px rgba(11, 114, 133, 0.1); /* Subtle shadow with primary color tint */
-    --card-hover-box-shadow: 0 4px 10px rgba(11, 114, 133, 0.15);
+    --card-border-color: #B2EBF2; /* Light cyan border */
+    --card-box-shadow: 0 2px 5px rgba(var(--primary-color-rgb), 0.08); /* Subtle shadow with primary color tint */
+    --card-hover-box-shadow: 0 4px 10px rgba(var(--primary-color-rgb), 0.12);
     --link-color: var(--primary-color);
     --link-hover-color: var(--primary-color-dark);
-    --headings-color: var(--primary-color-dark);
-    --card-header-bg: rgba(var(--primary-color-rgb), 0.05); /* Light tint of primary for card headers */
-    --card-header-color: var(--primary-color-dark);
-    --card-header-border-color: rgba(var(--primary-color-rgb), 0.1);
+    --headings-color: var(--primary-color-darker); /* Use new primary-darker for strong headings */
+    --card-header-bg: rgba(var(--primary-color-rgb), 0.08); /* Light tint of primary for card headers */
+    --card-header-color: var(--primary-color-darker);
+    --card-header-border-color: rgba(var(--primary-color-rgb), 0.12);
 
     /* Typography (can be adjusted for themes, but keeping defaults for now) */
     /* --font-family-sans-serif: 'Lato', sans-serif; /* Example: Different font */

@@ -1,0 +1,28 @@
+/* Alerts */
+.alert {
+    border-radius: var(--border-radius-sm);
+    border-width: 0; /* Remove border if using colored backgrounds */
+    padding: var(--spacer) calc(var(--spacer) * 1.25); /* Consistent padding */
+}
+.alert-primary { /* Example for primary, repeat for others if needed */
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    /* border-color: rgba(var(--primary-color-rgb), 0.2); */ /* Border can be removed if bg is distinct */
+    color: var(--primary-color-dark);
+}
+
+.alert-success {
+    background-color: rgba(var(--success-color-rgb), 0.1);
+    color: var(--success-color);
+}
+.alert-info {
+    background-color: rgba(var(--info-color-rgb), 0.1);
+    color: color-mix(in srgb, var(--info-color) 80%, black);
+}
+.alert-warning {
+    background-color: rgba(var(--warning-color-rgb), 0.1);
+    color: color-mix(in srgb, var(--warning-color) 80%, black);
+}
+.alert-danger {
+    background-color: rgba(var(--danger-color-rgb), 0.1);
+    color: var(--danger-color);
+}

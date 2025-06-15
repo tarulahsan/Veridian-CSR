@@ -1,35 +1,41 @@
 /* Veridian CSR - Corporate Dark Theme */
 :root {
-    --primary-color: #007bff; /* Bootstrap Blue */
-    --primary-color-rgb: 0, 123, 255;
-    --primary-color-dark: #0069d9;
-    --primary-color-light: #3395ff;
+    --primary-color: #0A84FF; /* Brighter blue for dark mode */
+    --primary-color-rgb: 10, 132, 255;
+    --primary-color-dark: #0060E0;
+    --primary-color-darker: #004DB3; /* For borders */
+    --primary-color-light: #50A5FF; /* Adjusted light shade */
     --primary-text-color: #FFFFFF;
 
-    --secondary-color: #495057; /* Darker Gray */
-    --secondary-color-rgb: 73, 80, 87;
-    --secondary-text-color: #FFFFFF;
+    --secondary-color: #FF9F0A; /* Brighter orange accent */
+    --secondary-color-rgb: 255, 159, 10;
+    --secondary-color-dark: #D98600;
+    --secondary-color-darker: #B36E00; /* For borders */
+    --secondary-text-color: #000000; /* Black text on bright orange */
 
-    --accent-color: #ffc107; /* Yellow */
-    --accent-color-rgb: 255, 193, 7;
-    --accent-text-color: #212529;
+    --accent-color: #30D158; /* Vibrant Green for dark mode */
+    --accent-color-rgb: 48, 209, 88;
+    --accent-text-color: #FFFFFF; /* White text on green */
 
     --body-bg: #212529; /* Dark Background */
     --body-color: #dee2e6; /* Light Text */
+    /* Ensure body-color-rgb is defined if base style.css doesn't provide a fallback for dark themes */
+    --body-color-rgb: 222, 226, 230;
+
 
     --card-bg: #2c3034; /* Slightly Lighter Dark for Cards */
     --card-border-color: #3e444a;
     --card-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
     --card-header-bg: #343a40; /* Darker header for cards */
-    --card-header-color: var(--primary-text-color);
+    --card-header-color: var(--primary-text-color); /* Should be a light color like #E0E3E7 or var(--headings-color) */
     --card-header-border-color: #495057;
 
 
     --link-color: var(--primary-color-light);
-    --link-hover-color: #66b0ff;
-    --headings-color: #f8f9fa; /* Lighter headings for dark mode */
+    --link-hover-color: #79BFFF; /* Adjusted hover */
+    --headings-color: #E0E3E7; /* Lighter headings for dark bg */
 
-    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28222, 226, 230, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28222, 226, 230, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
     /* Form specific overrides for dark theme */
     --form-input-bg: #272b30;

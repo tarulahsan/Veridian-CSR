@@ -3,11 +3,14 @@
     --primary-color: #0000FF; /* Bright Blue */
     --primary-color-rgb: 0,0,255;
     --primary-color-dark: #0000CC;
+    --primary-color-darker: #0000A3; /* For borders */
     --primary-color-light: #3333FF;
     --primary-text-color: #FFFFFF;
 
     --secondary-color: #FFFF00; /* Bright Yellow */
     --secondary-color-rgb: 255,255,0;
+    --secondary-color-dark: #CCCC00; /* Darker Yellow */
+    --secondary-color-darker: #A3A300; /* Even Darker Yellow */
     --secondary-text-color: #000000; /* Black text on yellow */
 
     --accent-color: #FF00FF; /* Bright Magenta */
@@ -16,6 +19,7 @@
 
     --body-bg: #000000; /* Black Background */
     --body-color: #FFFFFF; /* White Text */
+    --body-color-rgb: 255,255,255; /* For this theme's body-color */
 
     --card-bg: #1A1A1A; /* Very dark gray for cards */
     --card-border-color: var(--secondary-color); /* Yellow border */
